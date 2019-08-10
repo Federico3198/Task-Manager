@@ -21,6 +21,9 @@
     <ClInclude Include="DateTime.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Comment.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -30,6 +33,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="DateTime.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Comment.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
