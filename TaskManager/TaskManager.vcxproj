@@ -154,6 +154,8 @@
     <ClInclude Include="Comment.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="ToDoList.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Comment.cpp" />
@@ -164,7 +166,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RepetitionType.cpp" />
+    <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="ToDoList.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

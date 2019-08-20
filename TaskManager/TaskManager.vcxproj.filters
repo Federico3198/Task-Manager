@@ -24,6 +24,12 @@
     <ClInclude Include="Comment.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="ToDoList.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -36,6 +42,15 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="Comment.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="RepetitionType.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="ToDoList.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
