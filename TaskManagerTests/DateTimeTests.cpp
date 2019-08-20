@@ -113,3 +113,98 @@ TEST(DateTime, SetYear_year_12020_Assert_year_12020)
 
 #pragma endregion
 
+#pragma region SetHours
+
+TEST(DateTime, SetHours_hour_16_Assert_hour_16)
+{
+	int expectedHour = 16;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetHours(expectedHour);
+
+	EXPECT_EQ(expectedHour, dt->GetHours());
+}
+
+TEST(DateTime, SetHours_hour_negative12_Assert_hour_12)
+{
+	int expectedHour = 12;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetHours(-12);
+
+	EXPECT_EQ(expectedHour, dt->GetHours());
+}
+
+TEST(DateTime, SetHours_hour_27_Assert_hour_23)
+{
+	int expectedHour = 23;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetHours(27);
+
+	EXPECT_EQ(expectedHour, dt->GetHours());
+}
+
+TEST(DateTime, SetHours_hour_negative27_Assert_hour_23)
+{
+	int expectedHour = 23;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetHours(-27);
+
+	EXPECT_EQ(expectedHour, dt->GetHours());
+}
+
+#pragma endregion
+
+#pragma region SetMinutes
+
+TEST(DateTime, SetMinutes_minutes_43_Assert_minutes_43)
+{
+	int expectedMinutes = 43;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetMinutes(expectedMinutes);
+
+	EXPECT_EQ(expectedMinutes, dt->GetMinutes());
+}
+
+TEST(DateTime, SetMinutes_minutes_negative10_Assert_minutes_negative10)
+{
+	int expectedMinutes = 10;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetMinutes(-10);
+
+	EXPECT_EQ(expectedMinutes, dt->GetMinutes());
+}
+
+TEST(DateTime, SetMinutes_minutes_61_Assert_minutes_59)
+{
+	int expectedMinutes = 59;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetMinutes(61);
+
+	EXPECT_EQ(expectedMinutes, dt->GetMinutes());
+}
+
+TEST(DateTime, SetMinutes_minutes_negative70_Assert_minutes_59)
+{
+	int expectedMinutes = 59;
+	DateTime *dt;
+	dt = new DateTime();
+
+	dt->SetMinutes(-70);
+
+	EXPECT_EQ(expectedMinutes, dt->GetMinutes());
+}
+
+#pragma endregionnbhbn 

@@ -36,11 +36,30 @@ void DateTime::SetYear(int year)
 
 void DateTime::SetHours(int hours)
 {
+	if (hours < 0)
+	{
+		hours *= -1;
+	}
+
+	if (hours > 23)
+	{
+		hours = 23;
+	}
+ 
 	this->hours = hours;
 }
 
 void DateTime::SetMinutes(int minutes)
 {
+	if (minutes < 0)
+	{
+		minutes *= -1;
+	}
+
+	if (minutes > 59)
+	{
+		minutes = 59;
+	}
 	this->minutes = minutes;
 }
 
