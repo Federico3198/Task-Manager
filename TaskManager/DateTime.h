@@ -19,7 +19,7 @@ public:
 	int GetYear();
 	int GetHours();
 	int GetMinutes();
-	
+
 	bool operator >(const DateTime &other);
 	bool operator <(const DateTime &other);
 	bool operator <=(const DateTime &other);

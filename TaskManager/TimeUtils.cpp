@@ -6,7 +6,9 @@ time_t TimeUtils::GetEndOfToday()
 	time_t todayTime;
 	time(&todayTime);
 
-	struct tm timeData = *localtime(&todayTime);
+	struct tm timeData = struct  tm();
+	localtime_s(&timeData, &todayTime);
+
 	timeData.tm_sec = 59;
 	timeData.tm_hour = 23;
 	timeData.tm_min = 59;
@@ -22,7 +24,9 @@ time_t TimeUtils::GetEndOfWeek()
 	//advances time by 6 days
 	todayTime += 60 * 60 * 24 * 6;
 
-	struct tm timeData = *localtime(&todayTime);
+	struct tm timeData = struct  tm();
+	localtime_s(&timeData, &todayTime);
+
 	timeData.tm_sec = 59;
 	timeData.tm_hour = 23;
 	timeData.tm_min = 59;

@@ -102,11 +102,10 @@ bool DateTime::operator<=(const DateTime & other)
 {
 	return secondsSince1970 <= other.secondsSince1970;
 }
-
 DateTime::DateTime(time_t timeInSeconds)
 {
-	struct tm timeData;
-	timeData = *localtime(&timeInSeconds);
+	struct tm timeData = struct  tm();
+	localtime_s(&timeData, &timeInSeconds);
 
 	secondsSince1970 = timeInSeconds;
 
