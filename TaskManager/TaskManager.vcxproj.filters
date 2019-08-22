@@ -33,6 +33,9 @@
     <ClInclude Include="ToDoListManager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="TimeUtils.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -57,6 +60,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="ToDoListManager.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeUtils.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

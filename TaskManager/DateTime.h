@@ -6,6 +6,7 @@ class DateTime
 private:
 	int day, month, year;
 	int hours, minutes;
+	time_t secondsSince1970;
 
 public:
 	void SetDay(int day);
@@ -19,7 +20,11 @@ public:
 	int GetHours();
 	int GetMinutes();
 	
-	DateTime(time_t time);
+	bool operator >(const DateTime &other);
+	bool operator <(const DateTime &other);
+	bool operator <=(const DateTime &other);
+	
+	DateTime(time_t timeInSeconds);
 	DateTime();
 };
 

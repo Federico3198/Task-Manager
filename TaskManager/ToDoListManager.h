@@ -1,6 +1,8 @@
 #pragma once
 #include <list>
 #include "ToDoList.h"
+#include <ctime>
+#include "TimeUtils.h"
 
 class ToDoListManager
 {
@@ -11,9 +13,10 @@ public:
 	std::list<std::shared_ptr<Task>> GetImportantTasks();
 	std::list<std::shared_ptr<Task>> GetTodayTasks();
 	std::list<std::shared_ptr<Task>> GetThisWeekTasks();
-	void AddTask(std::shared_ptr<Task> task, int listId);
-	void RemoveTask(std::shared_ptr<Task> task, int listId);
+	bool AddTask(std::shared_ptr<Task> task, int listId);
+	bool RemoveTask(std::shared_ptr<Task> task, int listId);
 	ToDoListManager();
+	ToDoListManager(std::list<ToDoList> toDoLists);
 	~ToDoListManager();
 };
 

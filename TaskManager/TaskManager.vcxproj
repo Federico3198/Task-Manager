@@ -155,6 +155,7 @@
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="TimeUtils.h" />
     <ClInclude Include="ToDoList.h" />
     <ClInclude Include="ToDoListManager.h" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClCompile Include="RepetitionType.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="TimeUtils.cpp" />
     <ClCompile Include="ToDoList.cpp" />
     <ClCompile Include="ToDoListManager.cpp" />
   </ItemGroup>

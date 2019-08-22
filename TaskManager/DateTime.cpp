@@ -12,7 +12,7 @@ void DateTime::SetDay(int day)
 	{
 		day = 31;
 	}
-	
+
 	this->day = day;
 }
 
@@ -45,7 +45,7 @@ void DateTime::SetHours(int hours)
 	{
 		hours = 23;
 	}
- 
+
 	this->hours = hours;
 }
 
@@ -88,15 +88,42 @@ int DateTime::GetMinutes()
 	return minutes;
 }
 
-DateTime::DateTime(time_t time)
+bool DateTime::operator>(const DateTime & other)
 {
+	return secondsSince1970 > other.secondsSince1970;
+}
+
+bool DateTime::operator<(const DateTime & other)
+{
+	return secondsSince1970 < other.secondsSince1970;
+}
+
+bool DateTime::operator<=(const DateTime & other)
+{
+	return secondsSince1970 <= other.secondsSince1970;
+}
+
+DateTime::DateTime(time_t timeInSeconds)
+{
+	struct tm timeData;
+	timeData = *localtime(&timeInSeconds);
+
+	secondsSince1970 = timeInSeconds;
+
+	SetYear(timeData.tm_year + 1900);
+	SetMonth(timeData.tm_mon + 1);
+	SetDay(timeData.tm_mday);
+
+	SetHours(timeData.tm_hour);
+	SetMinutes(timeData.tm_min);
 }
 
 DateTime::DateTime()
 {
+	secondsSince1970 = 0;
 	day = 1;
 	month = 1;
-	year = 1950;
+	year = 1970;
 	hours = 0;
 	minutes = 0;
 }

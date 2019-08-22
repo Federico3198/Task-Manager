@@ -21,24 +21,78 @@ std::list<std::shared_ptr<Task>> ToDoListManager::GetImportantTasks()
 
 std::list<std::shared_ptr<Task>> ToDoListManager::GetTodayTasks()
 {
-	return std::list<std::shared_ptr<Task>>();
+	std::list<std::shared_ptr<Task>> todayTasks;
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		auto tasks = toDoListIterator->GetUncompletedTasks();
+		for (auto taskIterator = tasks.begin(); taskIterator != tasks.end(); taskIterator++)
+		{
+			DateTime dueDate = (*taskIterator)->dueDate;		
+			DateTime endOfToday(TimeUtils::GetEndOfToday());
+
+			if (dueDate <= endOfToday)
+			{
+				todayTasks.push_back(*taskIterator);
+			}
+		}
+	}
+	return todayTasks;
 }
 
 std::list<std::shared_ptr<Task>> ToDoListManager::GetThisWeekTasks()
 {
-	return std::list<std::shared_ptr<Task>>();
+	std::list<std::shared_ptr<Task>> thisWeekTasks;
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		auto tasks = toDoListIterator->GetUncompletedTasks();
+		for (auto taskIterator = tasks.begin(); taskIterator != tasks.end(); taskIterator++)
+		{
+			DateTime dueDate = (*taskIterator)->dueDate;
+			DateTime endOfWeek(TimeUtils::GetEndOfWeek());
+
+			if (dueDate <= endOfWeek)
+			{
+				thisWeekTasks.push_back(*taskIterator);
+			}
+		}
+	}
+	return thisWeekTasks;
 }
 
-void ToDoListManager::AddTask(std::shared_ptr<Task> task, int listId)
+bool ToDoListManager::AddTask(std::shared_ptr<Task> task, int listId)
 {
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		if (toDoListIterator->GetId() == listId)
+		{
+			toDoListIterator->AddTask(task);
+			return true;
+		}
+	}
+	return false;
 }
 
-void ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
+bool ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
 {
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		if (toDoListIterator->GetId() == listId)
+		{
+			toDoListIterator->RemoveTask(task);
+			return true;
+		}
+	}
+	return false;
 }
 
 ToDoListManager::ToDoListManager()
 {
+	toDoLists = std::list<ToDoList>();
+}
+
+ToDoListManager::ToDoListManager(std::list<ToDoList> toDoLists)
+{
+	this->toDoLists = toDoLists;
 }
 
 
