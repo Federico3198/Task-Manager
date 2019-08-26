@@ -19,10 +19,13 @@ public:
 	int GetYear();
 	int GetHours();
 	int GetMinutes();
+	const int GetSecondsSince1970();
 
 	bool operator >(const DateTime &other);
 	bool operator <(const DateTime &other);
 	bool operator <=(const DateTime &other);
+	bool operator ==(const DateTime &other);
+
 	
 	DateTime(time_t timeInSeconds);
 	DateTime();

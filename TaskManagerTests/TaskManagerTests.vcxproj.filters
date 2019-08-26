@@ -5,6 +5,12 @@
     <ClCompile Include="DateTimeTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="CommentTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="SubTaskTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

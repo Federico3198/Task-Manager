@@ -36,6 +36,9 @@
     <ClInclude Include="TimeUtils.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="SubTask.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -63,6 +66,9 @@
       <Filter>File di origine</Filter>
     </ClCompile>
     <ClCompile Include="TimeUtils.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="SubTask.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

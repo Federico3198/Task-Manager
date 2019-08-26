@@ -88,6 +88,11 @@ int DateTime::GetMinutes()
 	return minutes;
 }
 
+const int DateTime::GetSecondsSince1970()
+{
+	return secondsSince1970;
+}
+
 bool DateTime::operator>(const DateTime & other)
 {
 	return secondsSince1970 > other.secondsSince1970;
@@ -102,6 +107,13 @@ bool DateTime::operator<=(const DateTime & other)
 {
 	return secondsSince1970 <= other.secondsSince1970;
 }
+
+bool DateTime::operator==(const DateTime & other)
+{
+	return secondsSince1970 == other.secondsSince1970;
+}
+
+
 DateTime::DateTime(time_t timeInSeconds)
 {
 	struct tm timeData = struct  tm();
@@ -126,3 +138,4 @@ DateTime::DateTime()
 	hours = 0;
 	minutes = 0;
 }
+

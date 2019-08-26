@@ -7,6 +7,7 @@ private:
 	std::string owner;
 	std::string text;
 	DateTime creationDate;
+
 public:
 	DateTime GetCreationDate();
 	std::string GetOwner();

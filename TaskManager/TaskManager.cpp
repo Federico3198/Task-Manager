@@ -3,9 +3,12 @@
 
 #include "pch.h"
 #include <iostream>
-
+#include "DateTime.h"
 
 int main()
 {
-    
+	DateTime dt(100);
+	DateTime dt2(10);
+
+	std::cout << (dt == dt2);
 }

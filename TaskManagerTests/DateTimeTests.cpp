@@ -236,3 +236,99 @@ TEST(DateTime, Operator_minor_dateA_100_second_dateB_1_second_Assert_dateA_minor
 }
 
 #pragma endregion
+
+#pragma region operator>
+
+TEST(DateTime, Operator_major_dateA_1_second_dateB_100_second_Assert_dateA_major_dateB_false)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(1);
+	dtB = DateTime(100);
+
+	bool result = dtA > dtB;
+
+	EXPECT_FALSE(result);
+}
+
+TEST(DateTime, Operator_major_dateA_100_second_dateB_1_second_Assert_dateA_major_dateB_true)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(100);
+	dtB = DateTime(1);
+
+	bool result = dtA > dtB;
+
+	EXPECT_TRUE(result);
+}
+
+#pragma endregion
+
+#pragma region operator<=
+
+TEST(DateTime, Operator_minor_equal_dateA_1_second_dateB_100_second_Assert_dateA_minor_equal_dateB_true)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(1);
+	dtB = DateTime(100);
+
+	bool result = dtA < dtB;
+
+	EXPECT_TRUE(result);
+}
+
+TEST(DateTime, Operator_minor_equal_dateA_100_second_dateB_1_second_Assert_dateA_minor_equal_dateB_false)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(100);
+	dtB = DateTime(1);
+
+	bool result = dtA < dtB;
+
+	EXPECT_FALSE(result);
+}
+
+TEST(DateTime, Operator_minor_equal_dateA_100_second_dateB_100_second_Assert_dateA_minor_equal_dateB_true)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(100);
+	dtB = DateTime(100);
+
+	bool result = dtA <= dtB;
+
+	EXPECT_TRUE(result);
+}
+
+#pragma endregion
+
+#pragma region operator==
+
+TEST(DateTime, Operator_equal_dateA_1_second_dateB_100_second_Assert_dateA_equal_dateB_false)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(1);
+	dtB = DateTime(100);
+
+	bool result = dtA == dtB;
+
+	EXPECT_FALSE(result);
+}
+
+TEST(DateTime, Operator_equal_dateA_1_second_dateB_1_second_Assert_dateA_equal_dateB_true)
+{
+	DateTime dtA;
+	DateTime dtB;
+	dtA = DateTime(1);
+	dtB = DateTime(1);
+
+	bool result = dtA == dtB;
+
+	EXPECT_TRUE(result);
+}
+
+#pragma endregion
