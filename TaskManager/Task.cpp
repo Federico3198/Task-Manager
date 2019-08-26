@@ -3,7 +3,7 @@
 
 
 
-void Task::AddSubTask(std::shared_ptr<Task> subTask)
+void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 {
 	subTasks.push_back(subTask);
 }
@@ -13,7 +13,7 @@ void Task::AddComment(std::shared_ptr<Comment> comment)
 	comments.push_back(comment);
 }
 
-std::shared_ptr<Task> Task::GetSubTask(int index)
+std::shared_ptr<SubTask> Task::GetSubTask(int index)
 {
 	auto iterator = subTasks.begin();
 	std::advance(iterator, index);

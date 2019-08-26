@@ -5,6 +5,7 @@
 #include <string>
 #include <list>
 #include <queue>
+#include "SubTask.h"
 class Task
 {
 public:
@@ -16,13 +17,13 @@ public:
 	RepetitionType repetition;
 
 private:
-	std::list<std::shared_ptr<Task>> subTasks;
+	std::list<std::shared_ptr<SubTask>> subTasks;
 	std::deque<std::shared_ptr<Comment>> comments;
 
 public:
-	void AddSubTask(std::shared_ptr<Task> subTask);
+	void AddSubTask(std::shared_ptr<SubTask> subTask);
 	void AddComment(std::shared_ptr<Comment> comment);
-	std::shared_ptr<Task> GetSubTask(int index);
+	std::shared_ptr<SubTask> GetSubTask(int index);
 	std::shared_ptr<Comment> GetComment(int index);
 
 	Task(std::string title);
