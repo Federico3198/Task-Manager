@@ -2,9 +2,6 @@
 #include <string>
 class SubTask
 {
-private:
-	std::string text;
-	bool isCompleted;
 public:
 	void SetText(std::string text);
 	void SetIsCompleted(bool isCompleted);
@@ -12,5 +9,9 @@ public:
 	bool GetIsCompleted();
 	SubTask(std::string text);
 	~SubTask();
+
+private:
+	std::string text;
+	bool isCompleted;
 };
 

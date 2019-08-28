@@ -2,12 +2,6 @@
 #include <ctime>
 class DateTime
 {
-
-private:
-	int day, month, year;
-	int hours, minutes;
-	time_t secondsSince1970;
-
 public:
 	void SetDay(int day);
 	void SetMonth(int month);
@@ -26,8 +20,13 @@ public:
 	bool operator <=(const DateTime &other);
 	bool operator ==(const DateTime &other);
 
-	
+
 	DateTime(time_t timeInSeconds);
 	DateTime();
+
+private:
+	int day, month, year;
+	int hours, minutes;
+	time_t secondsSince1970;
 };
 

@@ -16,7 +16,8 @@ TEST(Comment, Constructor_owner_text_creationDate_Assert_equal_constructor_param
 	EXPECT_EQ(expectedCreationDate, comment.GetCreationDate());
 }
 
-bool operator==(const DateTime& left, const DateTime& right) {
+bool operator==(const DateTime& left, const DateTime& right)
+{
 	DateTime dt1 = left;
 	DateTime dt2 = right;
 	return dt1.GetSecondsSince1970() == dt2.GetSecondsSince1970();
