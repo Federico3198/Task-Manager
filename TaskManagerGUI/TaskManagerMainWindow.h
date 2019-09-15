@@ -3,6 +3,8 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_TaskManagerMainWindow.h"
 #include <iostream>
+#include "ToDoListManager.h"
+#include "ToDoList.h"
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -16,4 +18,5 @@ private slots:
 
 private:
 	Ui::TaskManagerMainWindowClass ui;
+	ToDoListManager tdManager;
 };

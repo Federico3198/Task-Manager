@@ -7,12 +7,9 @@
 message("You are running qmake on a generated .pro file. This may not work!")
 
 
-HEADERS += ./TaskManagerMainWindow.h \
-    ./stdafx.h \
-    ./Test.h
+HEADERS += ./TaskManagerMainWindow.h
 SOURCES += ./main.cpp \
-    ./TaskManagerMainWindow.cpp \
     ./stdafx.cpp \
-    ./Test.cpp
+    ./TaskManagerMainWindow.cpp
 FORMS += ./TaskManagerMainWindow.ui
 RESOURCES += TaskManagerMainWindow.qrc
