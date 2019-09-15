@@ -80,6 +80,9 @@
     <ClCompile Include="ToDoListManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="CreateListDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -88,6 +91,9 @@
     <CustomBuild Include="stdafx.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <QtMoc Include="CreateListDialog.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\moc_TaskManagerMainWindow.cpp">
@@ -105,6 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="TaskManagerMainWindow.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="CreateListDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -139,6 +148,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="ToDoListManager.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CreateListDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,3 +19,28 @@ UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 include(TaskManagerGUI.pri)
 win32:RC_FILE = TaskManagerGUI.rc
+
+FORMS += \
+    CreateListDialog.ui
+
+HEADERS += \
+    Comment.h \
+    CreateListDialog.h \
+    DateTime.h \
+    RepetitionType.h \
+    SubTask.h \
+    Task.h \
+    TimeUtils.h \
+    ToDoList.h \
+    ToDoListManager.h
+
+SOURCES += \
+    Comment.cpp \
+    CreateListDialog.cpp \
+    DateTime.cpp \
+    RepetitionType.cpp \
+    SubTask.cpp \
+    Task.cpp \
+    TimeUtils.cpp \
+    ToDoList.cpp \
+    ToDoListManager.cpp

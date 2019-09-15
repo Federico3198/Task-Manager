@@ -245,6 +245,7 @@ Makefile: ..\TaskManagerGUI\TaskManagerGUI.pro D:\Qt\5.13.0\msvc2017\mkspecs\win
 		D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_config.prf \
 		D:\Qt\5.13.0\msvc2017\mkspecs\win32-msvc\qmake.conf \
 		D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds.prf \
 		D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-version.conf \
 		D:\Qt\5.13.0\msvc2017\mkspecs\features\toolchain.prf \
@@ -451,6 +452,7 @@ D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_functions.prf:
 D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_config.prf:
 D:\Qt\5.13.0\msvc2017\mkspecs\win32-msvc\qmake.conf:
 D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_post.prf:
+.qmake.stash:
 D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds.prf:
 D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-version.conf:
 D:\Qt\5.13.0\msvc2017\mkspecs\features\toolchain.prf:

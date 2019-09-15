@@ -5,6 +5,7 @@
 #include <iostream>
 #include "ToDoListManager.h"
 #include "ToDoList.h"
+#include "CreateListDialog.h"
 
 class TaskManagerMainWindow : public QMainWindow
 {
