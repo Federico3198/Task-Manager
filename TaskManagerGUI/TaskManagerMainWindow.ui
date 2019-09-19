@@ -13,7 +13,38 @@
   <property name="windowTitle">
    <string>TaskManagerMainWindow</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QListWidget" name="listWidgetLists">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>20</y>
+      <width>256</width>
+      <height>461</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidgetTasks">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>20</y>
+      <width>256</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidgetTaskInfo">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>20</y>
+      <width>256</width>
+      <height>451</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -28,8 +59,17 @@
      <string>List</string>
     </property>
     <addaction name="actionCreateList"/>
+    <addaction name="actionDeleteList"/>
+   </widget>
+   <widget class="QMenu" name="menuTask">
+    <property name="title">
+     <string>Task</string>
+    </property>
+    <addaction name="actionAddTask"/>
+    <addaction name="actionRemoveTask"/>
    </widget>
    <addaction name="menuLista"/>
+   <addaction name="menuTask"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -43,6 +83,21 @@
   <action name="actionCreateList">
    <property name="text">
     <string>Create</string>
+   </property>
+  </action>
+  <action name="actionAddTask">
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </action>
+  <action name="actionRemoveTask">
+   <property name="text">
+    <string>Remove</string>
+   </property>
+  </action>
+  <action name="actionDeleteList">
+   <property name="text">
+    <string>Delete</string>
    </property>
   </action>
  </widget>

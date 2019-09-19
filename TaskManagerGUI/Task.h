@@ -16,11 +16,6 @@ public:
 	std::string title;
 	RepetitionType repetition;
 
-private:
-	std::list<std::shared_ptr<SubTask>> subTasks;
-	std::deque<std::shared_ptr<Comment>> comments;
-
-public:
 	void AddSubTask(std::shared_ptr<SubTask> subTask);
 	void AddComment(std::shared_ptr<Comment> comment);
 	std::shared_ptr<SubTask> GetSubTask(int index);
@@ -28,5 +23,10 @@ public:
 
 	Task(std::string title);
 	~Task();
+
+private:
+	std::list<std::shared_ptr<SubTask>> subTasks;
+	std::deque<std::shared_ptr<Comment>> comments;
+
 };
 

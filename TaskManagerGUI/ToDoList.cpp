@@ -60,6 +60,11 @@ ToDoList::ToDoList(std::string listName)
 	tasks = std::list<std::shared_ptr<Task>>();
 }
 
+bool ToDoList::operator==(const ToDoList & other)
+{
+	return id==other.id;
+}
+
 ToDoList::~ToDoList()
 {
 }

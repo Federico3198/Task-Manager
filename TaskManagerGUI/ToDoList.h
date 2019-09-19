@@ -21,7 +21,10 @@ public:
 	std::shared_ptr<Task> GetUncompletedTask(int index);
 	std::list<std::shared_ptr<Task>> GetUncompletedTasks();
 	ToDoList(std::string listName);
+	bool operator ==(const ToDoList &other);
+
 	~ToDoList();
+
 
 private:
 	std::shared_ptr<Task> GetTask(int index, bool isCompleted);

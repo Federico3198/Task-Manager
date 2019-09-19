@@ -6,7 +6,7 @@
 
 class ToDoListManager
 {
-public:
+private:
 	std::list<ToDoList> toDoLists;
 
 public:
@@ -15,6 +15,9 @@ public:
 	std::list<std::shared_ptr<Task>> GetThisWeekTasks();
 	bool AddTask(std::shared_ptr<Task> task, int listId);
 	bool RemoveTask(std::shared_ptr<Task> task, int listId);
+	void AddList(ToDoList newList);
+	bool RemoveList(int listId);
+	ToDoList GetListByID(int listId);
 	ToDoListManager();
 	ToDoListManager(std::list<ToDoList> toDoLists);
 	~ToDoListManager();

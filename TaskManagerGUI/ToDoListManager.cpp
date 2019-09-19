@@ -85,6 +85,36 @@ bool ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
 	return false;
 }
 
+void ToDoListManager::AddList(ToDoList newList)
+{
+	toDoLists.push_back(newList);
+}
+
+bool ToDoListManager::RemoveList(int listId)
+{
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		if (toDoListIterator->GetId() == listId)
+		{
+			toDoLists.remove(*toDoListIterator);
+			return true;
+		}
+	}
+	return false;
+}
+
+ToDoList ToDoListManager::GetListByID(int listId)
+{
+	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	{
+		if (toDoListIterator->GetId() == listId)
+		{
+			return *toDoListIterator;
+		}
+	}
+	return false;
+}
+
 ToDoListManager::ToDoListManager()
 {
 	toDoLists = std::list<ToDoList>();

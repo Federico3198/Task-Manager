@@ -6,6 +6,10 @@
 #include "ToDoListManager.h"
 #include "ToDoList.h"
 #include "CreateListDialog.h"
+#include "ToDoListWidgetItem.h"
+#include "TaskWidgetItem.h"
+#include "qlist.h"
+
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -16,6 +20,8 @@ public:
 
 private slots:
     void on_actionCreateList_triggered();
+    void on_actionDeleteList_triggered();
+    void on_listWidgetLists_currentRowChanged(int currentRow);
 
 private:
 	Ui::TaskManagerMainWindowClass ui;

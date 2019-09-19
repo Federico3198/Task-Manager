@@ -216,9 +216,11 @@
     <ClCompile Include="TaskManagerMainWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TaskWidgetItem.cpp" />
     <ClCompile Include="TimeUtils.cpp" />
     <ClCompile Include="ToDoList.cpp" />
     <ClCompile Include="ToDoListManager.cpp" />
+    <ClCompile Include="ToDoListWidgetItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -298,6 +300,8 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\moc_TaskManagerMainWindow.cpp" />
+    <ClInclude Include="TaskWidgetItem.h" />
+    <ClInclude Include="ToDoListWidgetItem.h" />
     <QtMoc Include="CreateListDialog.h">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\moc_%(Filename).cpp</OutputFile>
       <DynamicSource Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">output</DynamicSource>

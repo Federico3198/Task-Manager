@@ -748,6 +748,8 @@ GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp: ..\TaskManage
 		..\TaskManagerGUI\Comment.h \
 		..\TaskManagerGUI\SubTask.h \
 		..\TaskManagerGUI\TimeUtils.h \
+		..\TaskManagerGUI\CreateListDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
 		GeneratedFiles\$(ConfigurationName)\moc_predefs.h \
 		D:\Qt\5.13.0\msvc2017\bin\moc.exe
 	D:\Qt\5.13.0\msvc2017\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include "C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug/GeneratedFiles/$(ConfigurationName)/moc_predefs.h" -ID:/Qt/5.13.0/msvc2017/mkspecs/win32-msvc -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -I"C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles/$(ConfigurationName)" -ID:/Qt/5.13.0/msvc2017/include -ID:/Qt/5.13.0/msvc2017/include/QtSvg -ID:/Qt/5.13.0/msvc2017/include/QtUiTools -ID:/Qt/5.13.0/msvc2017/include/QtQuickWidgets -ID:/Qt/5.13.0/msvc2017/include/QtWidgets -ID:/Qt/5.13.0/msvc2017/include/QtQuick -ID:/Qt/5.13.0/msvc2017/include/QtDataVisualization -ID:/Qt/5.13.0/msvc2017/include/QtGui -ID:/Qt/5.13.0/msvc2017/include/QtANGLE -ID:/Qt/5.13.0/msvc2017/include/QtXmlPatterns -ID:/Qt/5.13.0/msvc2017/include/QtQml -ID:/Qt/5.13.0/msvc2017/include/QtNetwork -ID:/Qt/5.13.0/msvc2017/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt" ..\TaskManagerGUI\TaskManagerMainWindow.h -o GeneratedFiles\moc_TaskManagerMainWindow.cpp
@@ -1840,6 +1842,8 @@ release\main.obj: ..\TaskManagerGUI\main.cpp ..\TaskManagerGUI\stdafx.h \
 		..\TaskManagerGUI\Comment.h \
 		..\TaskManagerGUI\SubTask.h \
 		..\TaskManagerGUI\TimeUtils.h \
+		..\TaskManagerGUI\CreateListDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
 		release\TaskManagerGUI_pch.obj
 
 release\stdafx.obj: ..\TaskManagerGUI\stdafx.cpp ..\TaskManagerGUI\stdafx.h \
@@ -2795,6 +2799,8 @@ release\TaskManagerMainWindow.obj: ..\TaskManagerGUI\TaskManagerMainWindow.cpp .
 		..\TaskManagerGUI\Comment.h \
 		..\TaskManagerGUI\SubTask.h \
 		..\TaskManagerGUI\TimeUtils.h \
+		..\TaskManagerGUI\CreateListDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
 		release\TaskManagerGUI_pch.obj
 
 release\Comment.obj: ..\TaskManagerGUI\Comment.cpp ..\TaskManagerGUI\stdafx.h \
@@ -3373,7 +3379,7 @@ release\CreateListDialog.obj: ..\TaskManagerGUI\CreateListDialog.cpp ..\TaskMana
 		D:\Qt\5.13.0\msvc2017\include\QtCore\qfiledevice.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qvector2d.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qtouchdevice.h \
-		GeneratedFiles\$(ConfigurationName)\ui_CreateListDialog.h \
+		..\TaskManagerGUI\GeneratedFiles\ui_CreateListDialog.h \
 		D:\Qt\5.13.0\msvc2017\include\QtCore\QVariant \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QApplication \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qapplication.h \
@@ -3384,6 +3390,13 @@ release\CreateListDialog.obj: ..\TaskManagerGUI\CreateListDialog.cpp ..\TaskMana
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qinputmethod.h \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialogButtonBox \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialogbuttonbox.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QLineEdit \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qlineedit.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qframe.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextcursor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextformat.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpen.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextoption.h \
 		release\TaskManagerGUI_pch.obj
 
 release\DateTime.obj: ..\TaskManagerGUI\DateTime.cpp ..\TaskManagerGUI\stdafx.h \
