@@ -59,7 +59,7 @@ public:
         listWidgetLists->setGeometry(QRect(40, 20, 256, 461));
         listWidgetTasks = new QListWidget(centralWidget);
         listWidgetTasks->setObjectName(QString::fromUtf8("listWidgetTasks"));
-        listWidgetTasks->setGeometry(QRect(350, 20, 256, 451));
+        listWidgetTasks->setGeometry(QRect(350, 20, 256, 221));
         listWidgetTaskInfo = new QListWidget(centralWidget);
         listWidgetTaskInfo->setObjectName(QString::fromUtf8("listWidgetTaskInfo"));
         listWidgetTaskInfo->setGeometry(QRect(660, 20, 256, 451));

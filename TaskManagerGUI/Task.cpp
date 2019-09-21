@@ -30,6 +30,12 @@ std::shared_ptr<Comment> Task::GetComment(int index)
 Task::Task(std::string title)
 {
 	this->title = title;
+	repetition = RepetitionType::None;
+	isImportant = false;
+	isCompleted = false;
+	notes = "";
+	dueDate = DateTime();
+
 }
 
 Task::~Task() {}

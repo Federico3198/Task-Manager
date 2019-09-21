@@ -21,7 +21,8 @@ include(TaskManagerGUI.pri)
 win32:RC_FILE = TaskManagerGUI.rc
 
 FORMS += \
-    CreateListDialog.ui
+    CreateListDialog.ui \
+    createtaskdialog.ui
 
 HEADERS += \
     Comment.h \
@@ -32,7 +33,8 @@ HEADERS += \
     Task.h \
     TimeUtils.h \
     ToDoList.h \
-    ToDoListManager.h
+    ToDoListManager.h \
+    createtaskdialog.h
 
 SOURCES += \
     Comment.cpp \
@@ -43,4 +45,5 @@ SOURCES += \
     Task.cpp \
     TimeUtils.cpp \
     ToDoList.cpp \
-    ToDoListManager.cpp
+    ToDoListManager.cpp \
+    createtaskdialog.cpp

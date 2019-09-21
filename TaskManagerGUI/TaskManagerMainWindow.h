@@ -6,6 +6,7 @@
 #include "ToDoListManager.h"
 #include "ToDoList.h"
 #include "CreateListDialog.h"
+#include "createtaskdialog.h"
 #include "ToDoListWidgetItem.h"
 #include "TaskWidgetItem.h"
 #include "qlist.h"
@@ -22,6 +23,8 @@ private slots:
     void on_actionCreateList_triggered();
     void on_actionDeleteList_triggered();
     void on_listWidgetLists_currentRowChanged(int currentRow);
+	void on_actionAddTask_triggered();
+	void on_actionRemoveTask_triggered();
 
 private:
 	Ui::TaskManagerMainWindowClass ui;
