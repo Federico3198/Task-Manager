@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidgetTasks">
+   <widget class="QListWidget" name="listWidgetUncompletedTasks">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -44,6 +44,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QListWidget" name="listWidgetCompletedTasks">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>270</y>
+      <width>256</width>
+      <height>211</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -60,6 +70,7 @@
     </property>
     <addaction name="actionCreateList"/>
     <addaction name="actionDeleteList"/>
+    <addaction name="actionModifyList"/>
    </widget>
    <widget class="QMenu" name="menuTask">
     <property name="title">
@@ -67,9 +78,22 @@
     </property>
     <addaction name="actionAddTask"/>
     <addaction name="actionRemoveTask"/>
+    <addaction name="actionModifyTask"/>
+    <addaction name="actionSet_CompletedTask"/>
+    <addaction name="actionSet_UncompletedTask"/>
+   </widget>
+   <widget class="QMenu" name="menuTask_Info">
+    <property name="title">
+     <string>Task Info</string>
+    </property>
+    <addaction name="actionAdd_Sub_Task"/>
+    <addaction name="actionRemove_Sub_Task"/>
+    <addaction name="actionSet_Sub_Task_Completed"/>
+    <addaction name="actionSet_Sub_Task_Uncompleted"/>
    </widget>
    <addaction name="menuLista"/>
    <addaction name="menuTask"/>
+   <addaction name="menuTask_Info"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -98,6 +122,46 @@
   <action name="actionDeleteList">
    <property name="text">
     <string>Delete</string>
+   </property>
+  </action>
+  <action name="actionModifyTask">
+   <property name="text">
+    <string>Modify</string>
+   </property>
+  </action>
+  <action name="actionModifyList">
+   <property name="text">
+    <string>Modify</string>
+   </property>
+  </action>
+  <action name="actionSet_CompletedTask">
+   <property name="text">
+    <string>Set Completed</string>
+   </property>
+  </action>
+  <action name="actionAdd_Sub_Task">
+   <property name="text">
+    <string>Add Sub Task</string>
+   </property>
+  </action>
+  <action name="actionRemove_Sub_Task">
+   <property name="text">
+    <string>Remove Sub Task</string>
+   </property>
+  </action>
+  <action name="actionSet_Sub_Task_Completed">
+   <property name="text">
+    <string>Set Sub Task Completed</string>
+   </property>
+  </action>
+  <action name="actionSet_Sub_Task_Uncompleted">
+   <property name="text">
+    <string>Set Sub Task Uncompleted</string>
+   </property>
+  </action>
+  <action name="actionSet_UncompletedTask">
+   <property name="text">
+    <string>Set Uncompleted</string>
    </property>
   </action>
  </widget>

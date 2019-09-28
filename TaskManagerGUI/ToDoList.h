@@ -19,7 +19,9 @@ public:
 	std::shared_ptr<Task> GetCompletedTask(int index);
 	int GetCompletedTaskCount();
 	std::shared_ptr<Task> GetUncompletedTask(int index);
-	std::list<std::shared_ptr<Task>> GetUncompletedTasks();
+
+	std::list<std::shared_ptr<Task> > GetUncompletedTasks();
+	std::list<std::shared_ptr<Task>> GetCompletedTasks();
 	ToDoList(std::string listName);
 	bool operator ==(const ToDoList &other);
 

@@ -17,16 +17,12 @@ public:
 	RepetitionType repetition;
 
 	void AddSubTask(std::shared_ptr<SubTask> subTask);
-	void AddComment(std::shared_ptr<Comment> comment);
 	std::shared_ptr<SubTask> GetSubTask(int index);
-	std::shared_ptr<Comment> GetComment(int index);
-
+	std::list<std::shared_ptr<SubTask>> GetSubTasks();
 	Task(std::string title);
 	~Task();
 
 private:
 	std::list<std::shared_ptr<SubTask>> subTasks;
-	std::deque<std::shared_ptr<Comment>> comments;
-
 };
 

@@ -21,10 +21,12 @@ include(TaskManagerGUI.pri)
 win32:RC_FILE = TaskManagerGUI.rc
 
 FORMS += \
+    AddSubTaskDialog.ui \
     CreateListDialog.ui \
     createtaskdialog.ui
 
 HEADERS += \
+    AddSubTaskDialog.h \
     Comment.h \
     CreateListDialog.h \
     DateTime.h \
@@ -37,6 +39,7 @@ HEADERS += \
     createtaskdialog.h
 
 SOURCES += \
+    AddSubTaskDialog.cpp \
     Comment.cpp \
     CreateListDialog.cpp \
     DateTime.cpp \

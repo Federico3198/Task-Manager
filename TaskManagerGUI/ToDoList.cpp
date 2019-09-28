@@ -51,6 +51,19 @@ std::list<std::shared_ptr<Task>> ToDoList::GetUncompletedTasks()
 	return uncompletedTasks;
 }
 
+std::list<std::shared_ptr<Task>> ToDoList::GetCompletedTasks()
+{
+	std::list<std::shared_ptr<Task>> completedTasks = std::list<std::shared_ptr<Task>>();
+	for (auto taskIterator = tasks.begin(); taskIterator != tasks.end(); taskIterator++)
+	{
+		if ((*taskIterator)->isCompleted)
+		{
+			completedTasks.push_back(*taskIterator);
+		}
+	}
+	return completedTasks;
+}
+
 ToDoList::ToDoList(std::string listName)
 {
 	this->id = nextId;
