@@ -23,12 +23,14 @@ win32:RC_FILE = TaskManagerGUI.rc
 FORMS += \
     AddSubTaskDialog.ui \
     CreateListDialog.ui \
+    CreateSubTaskDialog.ui \
     createtaskdialog.ui
 
 HEADERS += \
     AddSubTaskDialog.h \
     Comment.h \
     CreateListDialog.h \
+    CreateSubTaskDialog.h \
     DateTime.h \
     RepetitionType.h \
     SubTask.h \
@@ -42,6 +44,7 @@ SOURCES += \
     AddSubTaskDialog.cpp \
     Comment.cpp \
     CreateListDialog.cpp \
+    CreateSubTaskDialog.cpp \
     DateTime.cpp \
     RepetitionType.cpp \
     SubTask.cpp \

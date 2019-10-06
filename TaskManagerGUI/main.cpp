@@ -5,6 +5,7 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+	//QTextCodec::setCodecForCStrings(QTextCodec::codecForUtfText(""));
 	TaskManagerMainWindow w;
 	w.show();
 	return a.exec();

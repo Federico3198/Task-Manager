@@ -17,6 +17,7 @@ public:
 	RepetitionType repetition;
 
 	void AddSubTask(std::shared_ptr<SubTask> subTask);
+	void RemoveSubTask(std::shared_ptr<SubTask> subTask);
 	std::shared_ptr<SubTask> GetSubTask(int index);
 	std::list<std::shared_ptr<SubTask>> GetSubTasks();
 	Task(std::string title);

@@ -8,9 +8,12 @@
 #include "ToDoList.h"
 #include "CreateListDialog.h"
 #include "createtaskdialog.h"
+#include "CreateSubTaskDialog.h"
 #include "ToDoListWidgetItem.h"
 #include "TaskWidgetItem.h"
+#include "SubTaskWidgetItem.h"
 #include "qlist.h"
+#include <typeinfo>
 
 
 class TaskManagerMainWindow : public QMainWindow
@@ -32,9 +35,13 @@ private slots:
 	void on_actionSet_UncompletedTask_triggered();
 	void on_actionAdd_Sub_Task_triggered();
 	void on_actionRemove_Sub_Task_triggered();
+	void on_actionSet_Sub_Task_Completed_triggered();
+	void on_actionSet_Sub_Task_Uncompleted_triggered();
 
 private:
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
+	void SetSubTaskCompleted(bool isCompleted);
+	void FixRandomClearTaskListBug();
 	QListWidget * GetSelectedTaskList();
 
 	Ui::TaskManagerMainWindowClass ui;

@@ -174,30 +174,117 @@ void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
-	auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-	auto task = taskItem->GetTask();
+	if(taskListItem!=NULL)
+	{
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
 
-	SubTask* subTask;
-	subTask = new SubTask("Test");
-	task->AddSubTask(std::shared_ptr<SubTask>(subTask));
+	
+			CreateSubTaskDialog createSubTaskDialog;
+			createSubTaskDialog.setModal(true);
+			int result = createSubTaskDialog.exec();
 
-	ShowTaskInfo(taskListItem);
+			if (result == 1)
+			{
+				auto text = createSubTaskDialog.GetText()->text().toStdString();
+
+				SubTask* subTask;
+				subTask = new SubTask(text);
+				task->AddSubTask(std::shared_ptr<SubTask>(subTask));
+				ShowTaskInfo(taskListItem);
+			}
+	}
+	else
+	{
+		//TODO MessageBox: devi selezionare una task
+	}
 }
 
 void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 {
+	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
 	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-	auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-	auto task = taskItem->GetTask();
+	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
 
-	//TODO crea un widget item apposta per la sub task
-	// prendi la row selezionata del task info
-	// controllare che la row sia del tipo del widget della sub task
-	// se si allora modifica e fai show
-	// se no messaggio all' utente che deve selezionare una sub task
+	if (taskListItem !=NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
+	{
+		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
+		auto subTask = subTaskItem->GetSubTask();
+
+
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
+
+		task->RemoveSubTask(subTask);
+
+		ShowTaskInfo(taskListItem);
+		
+		FixRandomClearTaskListBug();
+	}
+	else
+	{
+		// se no messaggio all' utente che deve selezionare una sub task
+	}
 }
 
+void TaskManagerMainWindow::on_actionSet_Sub_Task_Completed_triggered()
+{
+	SetSubTaskCompleted(true);
+}
+
+void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
+{
+	SetSubTaskCompleted(false);
+}
+
+void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
+{
+	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
+
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
+
+	if (taskListItem !=NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
+	{
+		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
+		auto subTask = subTaskItem->GetSubTask();
+
+		subTask->SetIsCompleted(isCompleted);
+
+		ShowTaskInfo(taskListItem);
+		FixRandomClearTaskListBug();
+	}
+}
+
+#pragma region  fix random task list clear bug
+
+void TaskManagerMainWindow::FixRandomClearTaskListBug()
+{
+
+	ui.listWidgetUncompletedTasks->clear();
+	ui.listWidgetCompletedTasks->clear();
+
+	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
+	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
+	int listId = listItem->GetListId();
+
+	auto todoList = tdManager.GetListByID(listId);
+	auto uncompletedTasks = todoList->GetUncompletedTasks();
+
+	for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
+	{
+		ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+	}
+
+	auto completedTasks = todoList->GetCompletedTasks();
+
+	for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
+	{
+		ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+	}
+
+}
+#pragma endregion
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 {
@@ -237,12 +324,7 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 
 		for (auto subTasksIterator = subTasks.begin(); subTasksIterator != subTasks.end(); subTasksIterator++)
 		{
-			std::string completedChar = (*subTasksIterator)->GetIsCompleted() ? "☻" : "☺";
-
-			stringStream = std::stringstream();
-			stringStream << completedChar << " " << (*subTasksIterator)->GetText();
-
-			ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(stringStream.str().c_str())));
+			ui.listWidgetTaskInfo->addItem(new SubTaskWidgetItem((*subTasksIterator)));
 		}
 	}
 	

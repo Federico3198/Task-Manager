@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TaskManagerMainWindow_t {
-    QByteArrayData data[16];
-    char stringdata0[445];
+    QByteArrayData data[18];
+    char stringdata0[531];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,7 +47,9 @@ QT_MOC_LITERAL(11, 262, 39), // "on_listWidgetCompletedTasks_i..."
 QT_MOC_LITERAL(12, 302, 36), // "on_actionSet_CompletedTask_tr..."
 QT_MOC_LITERAL(13, 339, 38), // "on_actionSet_UncompletedTask_..."
 QT_MOC_LITERAL(14, 378, 31), // "on_actionAdd_Sub_Task_triggered"
-QT_MOC_LITERAL(15, 410, 34) // "on_actionRemove_Sub_Task_trig..."
+QT_MOC_LITERAL(15, 410, 34), // "on_actionRemove_Sub_Task_trig..."
+QT_MOC_LITERAL(16, 445, 41), // "on_actionSet_Sub_Task_Complet..."
+QT_MOC_LITERAL(17, 487, 43) // "on_actionSet_Sub_Task_Uncompl..."
 
     },
     "TaskManagerMainWindow\0"
@@ -62,7 +64,9 @@ QT_MOC_LITERAL(15, 410, 34) // "on_actionRemove_Sub_Task_trig..."
     "on_actionSet_CompletedTask_triggered\0"
     "on_actionSet_UncompletedTask_triggered\0"
     "on_actionAdd_Sub_Task_triggered\0"
-    "on_actionRemove_Sub_Task_triggered"
+    "on_actionRemove_Sub_Task_triggered\0"
+    "on_actionSet_Sub_Task_Completed_triggered\0"
+    "on_actionSet_Sub_Task_Uncompleted_triggered"
 };
 #undef QT_MOC_LITERAL
 
@@ -72,7 +76,7 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -80,17 +84,19 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   69,    2, 0x08 /* Private */,
-       3,    0,   70,    2, 0x08 /* Private */,
-       4,    1,   71,    2, 0x08 /* Private */,
-       6,    0,   74,    2, 0x08 /* Private */,
-       7,    0,   75,    2, 0x08 /* Private */,
-       8,    1,   76,    2, 0x08 /* Private */,
-      11,    1,   79,    2, 0x08 /* Private */,
-      12,    0,   82,    2, 0x08 /* Private */,
-      13,    0,   83,    2, 0x08 /* Private */,
-      14,    0,   84,    2, 0x08 /* Private */,
-      15,    0,   85,    2, 0x08 /* Private */,
+       1,    0,   79,    2, 0x08 /* Private */,
+       3,    0,   80,    2, 0x08 /* Private */,
+       4,    1,   81,    2, 0x08 /* Private */,
+       6,    0,   84,    2, 0x08 /* Private */,
+       7,    0,   85,    2, 0x08 /* Private */,
+       8,    1,   86,    2, 0x08 /* Private */,
+      11,    1,   89,    2, 0x08 /* Private */,
+      12,    0,   92,    2, 0x08 /* Private */,
+      13,    0,   93,    2, 0x08 /* Private */,
+      14,    0,   94,    2, 0x08 /* Private */,
+      15,    0,   95,    2, 0x08 /* Private */,
+      16,    0,   96,    2, 0x08 /* Private */,
+      17,    0,   97,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -100,6 +106,8 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 9,   10,
     QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -125,6 +133,8 @@ void TaskManagerMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         case 8: _t->on_actionSet_UncompletedTask_triggered(); break;
         case 9: _t->on_actionAdd_Sub_Task_triggered(); break;
         case 10: _t->on_actionRemove_Sub_Task_triggered(); break;
+        case 11: _t->on_actionSet_Sub_Task_Completed_triggered(); break;
+        case 12: _t->on_actionSet_Sub_Task_Uncompleted_triggered(); break;
         default: ;
         }
     }
@@ -159,13 +169,13 @@ int TaskManagerMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }

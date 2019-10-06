@@ -53,6 +53,7 @@ SOURCES       = ..\TaskManagerGUI\main.cpp \
 		..\TaskManagerGUI\AddSubTaskDialog.cpp \
 		..\TaskManagerGUI\Comment.cpp \
 		..\TaskManagerGUI\CreateListDialog.cpp \
+		..\TaskManagerGUI\CreateSubTaskDialog.cpp \
 		..\TaskManagerGUI\DateTime.cpp \
 		..\TaskManagerGUI\SubTask.cpp \
 		..\TaskManagerGUI\Task.cpp \
@@ -63,6 +64,7 @@ SOURCES       = ..\TaskManagerGUI\main.cpp \
 		GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp \
 		GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp \
 		GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp \
+		GeneratedFiles\$(ConfigurationName)\moc_CreateSubTaskDialog.cpp \
 		GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp
 OBJECTS       = release\main.obj \
 		release\stdafx.obj \
@@ -70,6 +72,7 @@ OBJECTS       = release\main.obj \
 		release\AddSubTaskDialog.obj \
 		release\Comment.obj \
 		release\CreateListDialog.obj \
+		release\CreateSubTaskDialog.obj \
 		release\DateTime.obj \
 		release\SubTask.obj \
 		release\Task.obj \
@@ -81,6 +84,7 @@ OBJECTS       = release\main.obj \
 		release\moc_TaskManagerMainWindow.obj \
 		release\moc_AddSubTaskDialog.obj \
 		release\moc_CreateListDialog.obj \
+		release\moc_CreateSubTaskDialog.obj \
 		release\moc_createtaskdialog.obj \
 		release\TaskManagerGUI_pch.obj
 
@@ -88,6 +92,7 @@ DIST          =  ..\TaskManagerGUI\TaskManagerMainWindow.h \
 		..\TaskManagerGUI\AddSubTaskDialog.h \
 		..\TaskManagerGUI\Comment.h \
 		..\TaskManagerGUI\CreateListDialog.h \
+		..\TaskManagerGUI\CreateSubTaskDialog.h \
 		..\TaskManagerGUI\DateTime.h \
 		..\TaskManagerGUI\RepetitionType.h \
 		..\TaskManagerGUI\SubTask.h \
@@ -101,6 +106,7 @@ DIST          =  ..\TaskManagerGUI\TaskManagerMainWindow.h \
 		..\TaskManagerGUI\AddSubTaskDialog.cpp \
 		..\TaskManagerGUI\Comment.cpp \
 		..\TaskManagerGUI\CreateListDialog.cpp \
+		..\TaskManagerGUI\CreateSubTaskDialog.cpp \
 		..\TaskManagerGUI\DateTime.cpp \
 		..\TaskManagerGUI\SubTask.cpp \
 		..\TaskManagerGUI\Task.cpp \
@@ -222,9 +228,9 @@ DESTDIR_TARGET = ..\x64\Debug\TaskManagerGUI.exe
 first: all
 all: Makefile.Release  ..\x64\Debug\TaskManagerGUI.exe
 
-..\x64\Debug\TaskManagerGUI.exe: D:\Qt\5.13.0\msvc2017\lib\Qt5Svg.lib D:\Qt\5.13.0\msvc2017\lib\Qt5UiTools.lib D:\Qt\5.13.0\msvc2017\lib\Qt5QuickWidgets.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Widgets.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Quick.lib D:\Qt\5.13.0\msvc2017\lib\Qt5DataVisualization.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Gui.lib D:\Qt\5.13.0\msvc2017\lib\Qt5XmlPatterns.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Qml.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Network.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Core.lib D:\Qt\5.13.0\msvc2017\lib\qtmain.lib GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_createtaskdialog.h $(OBJECTS) release\TaskManagerGUI.res
+..\x64\Debug\TaskManagerGUI.exe: D:\Qt\5.13.0\msvc2017\lib\Qt5Svg.lib D:\Qt\5.13.0\msvc2017\lib\Qt5UiTools.lib D:\Qt\5.13.0\msvc2017\lib\Qt5QuickWidgets.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Widgets.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Quick.lib D:\Qt\5.13.0\msvc2017\lib\Qt5DataVisualization.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Gui.lib D:\Qt\5.13.0\msvc2017\lib\Qt5XmlPatterns.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Qml.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Network.lib D:\Qt\5.13.0\msvc2017\lib\Qt5Core.lib D:\Qt\5.13.0\msvc2017\lib\qtmain.lib GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_CreateSubTaskDialog.h GeneratedFiles\ui_createtaskdialog.h $(OBJECTS) release\TaskManagerGUI.res
 	$(LINKER) $(LFLAGS) /MANIFEST:embed /OUT:$(DESTDIR_TARGET) @<<
-release\main.obj release\stdafx.obj release\TaskManagerMainWindow.obj release\AddSubTaskDialog.obj release\Comment.obj release\CreateListDialog.obj release\DateTime.obj release\SubTask.obj release\Task.obj release\TimeUtils.obj release\ToDoList.obj release\ToDoListManager.obj release\createtaskdialog.obj release\qrc_TaskManagerMainWindow.obj release\moc_TaskManagerMainWindow.obj release\moc_AddSubTaskDialog.obj release\moc_CreateListDialog.obj release\moc_createtaskdialog.obj release\TaskManagerGUI_pch.obj
+release\main.obj release\stdafx.obj release\TaskManagerMainWindow.obj release\AddSubTaskDialog.obj release\Comment.obj release\CreateListDialog.obj release\CreateSubTaskDialog.obj release\DateTime.obj release\SubTask.obj release\Task.obj release\TimeUtils.obj release\ToDoList.obj release\ToDoListManager.obj release\createtaskdialog.obj release\qrc_TaskManagerMainWindow.obj release\moc_TaskManagerMainWindow.obj release\moc_AddSubTaskDialog.obj release\moc_CreateListDialog.obj release\moc_CreateSubTaskDialog.obj release\moc_createtaskdialog.obj release\TaskManagerGUI_pch.obj
 $(LIBS)
 <<
 
@@ -237,10 +243,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) TaskManagerGUI.zip $(SOURCES) $(DIST) ..\TaskManagerGUI\TaskManagerGUI.pro D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_pre.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\angle.conf D:\Qt\5.13.0\msvc2017\mkspecs\common\windows-desktop.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\windows_vulkan_sdk.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\windows-vulkan.conf D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-desktop.conf D:\Qt\5.13.0\msvc2017\mkspecs\qconfig.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3drender.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axbase.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axserver.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bodymovin_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_charts.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_core.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_core_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_dbus.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designer.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_edid_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gui.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_help.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_help_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_location.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_location_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_network.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_network_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_nfc.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_opengl.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioning.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioningquick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioningquick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickshapes_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quicktemplates2.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_repparser.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_script.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_script_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scxml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sensors.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialport.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sql.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_svg.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_testlib.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uitools.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webengine.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webengine_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecore.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecore_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginewidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_websockets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webview.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webview_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_widgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_winextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_functions.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_config.prf D:\Qt\5.13.0\msvc2017\mkspecs\win32-msvc\qmake.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-version.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\toolchain.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\default_pre.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\default_pre.prf ..\TaskManagerGUI\TaskManagerGUI.pri D:\Qt\5.13.0\msvc2017\mkspecs\features\resolve_config.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds_post.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\default_post.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\build_pass.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qml_debug.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\precompile_header.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\warn_on.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qt.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\resources.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\moc.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\opengl.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\uic.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qmake_use.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\file_copies.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\windows.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\testcase_targets.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\exceptions.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\yacc.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\lex.prf ..\TaskManagerGUI\TaskManagerGUI.pro ..\TaskManagerGUI\TaskManagerMainWindow.qrc D:\Qt\5.13.0\msvc2017\lib\Qt5Svg.prl D:\Qt\5.13.0\msvc2017\lib\Qt5UiTools.prl D:\Qt\5.13.0\msvc2017\lib\Qt5QuickWidgets.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Widgets.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Quick.prl D:\Qt\5.13.0\msvc2017\lib\Qt5DataVisualization.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Gui.prl D:\Qt\5.13.0\msvc2017\lib\Qt5XmlPatterns.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Qml.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Network.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Core.prl D:\Qt\5.13.0\msvc2017\lib\qtmain.prl   ..\TaskManagerGUI\TaskManagerMainWindow.qrc D:\Qt\5.13.0\msvc2017\mkspecs\features\data\dummy.cpp ..\TaskManagerGUI\TaskManagerMainWindow.h ..\TaskManagerGUI\AddSubTaskDialog.h ..\TaskManagerGUI\Comment.h ..\TaskManagerGUI\CreateListDialog.h ..\TaskManagerGUI\DateTime.h ..\TaskManagerGUI\RepetitionType.h ..\TaskManagerGUI\SubTask.h ..\TaskManagerGUI\Task.h ..\TaskManagerGUI\TimeUtils.h ..\TaskManagerGUI\ToDoList.h ..\TaskManagerGUI\ToDoListManager.h ..\TaskManagerGUI\createtaskdialog.h  ..\TaskManagerGUI\main.cpp ..\TaskManagerGUI\stdafx.cpp ..\TaskManagerGUI\TaskManagerMainWindow.cpp ..\TaskManagerGUI\AddSubTaskDialog.cpp ..\TaskManagerGUI\Comment.cpp ..\TaskManagerGUI\CreateListDialog.cpp ..\TaskManagerGUI\DateTime.cpp ..\TaskManagerGUI\SubTask.cpp ..\TaskManagerGUI\Task.cpp ..\TaskManagerGUI\TimeUtils.cpp ..\TaskManagerGUI\ToDoList.cpp ..\TaskManagerGUI\ToDoListManager.cpp ..\TaskManagerGUI\createtaskdialog.cpp ..\TaskManagerGUI\TaskManagerMainWindow.ui ..\TaskManagerGUI\AddSubTaskDialog.ui ..\TaskManagerGUI\CreateListDialog.ui ..\TaskManagerGUI\createtaskdialog.ui    
+	$(ZIP) TaskManagerGUI.zip $(SOURCES) $(DIST) ..\TaskManagerGUI\TaskManagerGUI.pro D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_pre.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\angle.conf D:\Qt\5.13.0\msvc2017\mkspecs\common\windows-desktop.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\windows_vulkan_sdk.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\windows-vulkan.conf D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-desktop.conf D:\Qt\5.13.0\msvc2017\mkspecs\qconfig.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3danimation.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3danimation_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dcore.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dcore_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dinput.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dinput_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dlogic.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dlogic_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickanimation.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickanimation_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickinput.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickinput_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickrender.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickrender_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickscene2d.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3dquickscene2d_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3drender.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_3drender_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_accessibility_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axbase.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axbase_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axcontainer.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axcontainer_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axserver.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_axserver_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bluetooth.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bluetooth_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bodymovin_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_bootstrap_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_charts.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_charts_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_concurrent.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_concurrent_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_core.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_core_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_datavisualization.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_datavisualization_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_dbus.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_dbus_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designer.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designer_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_designercomponents_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_devicediscovery_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_edid_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_egl_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_fb_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_fontdatabase_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gamepad.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gamepad_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gui.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_gui_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_help.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_help_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_location.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_location_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimedia.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimedia_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimediawidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_multimediawidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_network.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_network_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_networkauth.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_networkauth_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_nfc.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_nfc_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_opengl.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_opengl_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_openglextensions.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_openglextensions_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_packetprotocol_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_platformcompositor_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioning.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioning_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioningquick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_positioningquick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_printsupport.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_printsupport_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_purchasing.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_purchasing_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmldebug_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmldevtools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmltest.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qmltest_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quick.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quick_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickcontrols2.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickcontrols2_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickparticles_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickshapes_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quicktemplates2.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quicktemplates2_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickwidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_quickwidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_remoteobjects.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_remoteobjects_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_repparser.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_repparser_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_script.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_script_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scripttools.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scripttools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scxml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_scxml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sensors.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sensors_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialbus.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialbus_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialport.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_serialport_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sql.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_sql_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_svg.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_svg_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_testlib.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_testlib_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_texttospeech.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_texttospeech_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_theme_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uiplugin.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uitools.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_uitools_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_virtualkeyboard.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_virtualkeyboard_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_vulkan_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webchannel.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webchannel_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webengine.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webengine_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecore.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecore_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginewidgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webenginewidgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_websockets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_websockets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webview.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_webview_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_widgets.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_widgets_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_winextras.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_winextras_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xml.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xml_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xmlpatterns.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_xmlpatterns_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\modules\qt_lib_zlib_private.pri D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_functions.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qt_config.prf D:\Qt\5.13.0\msvc2017\mkspecs\win32-msvc\qmake.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\spec_post.prf .qmake.stash D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds.prf D:\Qt\5.13.0\msvc2017\mkspecs\common\msvc-version.conf D:\Qt\5.13.0\msvc2017\mkspecs\features\toolchain.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\default_pre.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\default_pre.prf ..\TaskManagerGUI\TaskManagerGUI.pri D:\Qt\5.13.0\msvc2017\mkspecs\features\resolve_config.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\exclusive_builds_post.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\default_post.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\build_pass.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qml_debug.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\precompile_header.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\warn_on.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qt.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\resources.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\moc.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\opengl.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\uic.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\qmake_use.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\file_copies.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\win32\windows.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\testcase_targets.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\exceptions.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\yacc.prf D:\Qt\5.13.0\msvc2017\mkspecs\features\lex.prf ..\TaskManagerGUI\TaskManagerGUI.pro ..\TaskManagerGUI\TaskManagerMainWindow.qrc D:\Qt\5.13.0\msvc2017\lib\Qt5Svg.prl D:\Qt\5.13.0\msvc2017\lib\Qt5UiTools.prl D:\Qt\5.13.0\msvc2017\lib\Qt5QuickWidgets.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Widgets.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Quick.prl D:\Qt\5.13.0\msvc2017\lib\Qt5DataVisualization.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Gui.prl D:\Qt\5.13.0\msvc2017\lib\Qt5XmlPatterns.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Qml.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Network.prl D:\Qt\5.13.0\msvc2017\lib\Qt5Core.prl D:\Qt\5.13.0\msvc2017\lib\qtmain.prl   ..\TaskManagerGUI\TaskManagerMainWindow.qrc D:\Qt\5.13.0\msvc2017\mkspecs\features\data\dummy.cpp ..\TaskManagerGUI\TaskManagerMainWindow.h ..\TaskManagerGUI\AddSubTaskDialog.h ..\TaskManagerGUI\Comment.h ..\TaskManagerGUI\CreateListDialog.h ..\TaskManagerGUI\CreateSubTaskDialog.h ..\TaskManagerGUI\DateTime.h ..\TaskManagerGUI\RepetitionType.h ..\TaskManagerGUI\SubTask.h ..\TaskManagerGUI\Task.h ..\TaskManagerGUI\TimeUtils.h ..\TaskManagerGUI\ToDoList.h ..\TaskManagerGUI\ToDoListManager.h ..\TaskManagerGUI\createtaskdialog.h  ..\TaskManagerGUI\main.cpp ..\TaskManagerGUI\stdafx.cpp ..\TaskManagerGUI\TaskManagerMainWindow.cpp ..\TaskManagerGUI\AddSubTaskDialog.cpp ..\TaskManagerGUI\Comment.cpp ..\TaskManagerGUI\CreateListDialog.cpp ..\TaskManagerGUI\CreateSubTaskDialog.cpp ..\TaskManagerGUI\DateTime.cpp ..\TaskManagerGUI\SubTask.cpp ..\TaskManagerGUI\Task.cpp ..\TaskManagerGUI\TimeUtils.cpp ..\TaskManagerGUI\ToDoList.cpp ..\TaskManagerGUI\ToDoListManager.cpp ..\TaskManagerGUI\createtaskdialog.cpp ..\TaskManagerGUI\TaskManagerMainWindow.ui ..\TaskManagerGUI\AddSubTaskDialog.ui ..\TaskManagerGUI\CreateListDialog.ui ..\TaskManagerGUI\CreateSubTaskDialog.ui ..\TaskManagerGUI\createtaskdialog.ui    
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\main.obj release\stdafx.obj release\TaskManagerMainWindow.obj release\AddSubTaskDialog.obj release\Comment.obj release\CreateListDialog.obj release\DateTime.obj release\SubTask.obj release\Task.obj release\TimeUtils.obj release\ToDoList.obj release\ToDoListManager.obj release\createtaskdialog.obj release\qrc_TaskManagerMainWindow.obj release\moc_TaskManagerMainWindow.obj release\moc_AddSubTaskDialog.obj release\moc_CreateListDialog.obj release\moc_createtaskdialog.obj release\TaskManagerGUI_pch.obj
+	-$(DEL_FILE) release\main.obj release\stdafx.obj release\TaskManagerMainWindow.obj release\AddSubTaskDialog.obj release\Comment.obj release\CreateListDialog.obj release\CreateSubTaskDialog.obj release\DateTime.obj release\SubTask.obj release\Task.obj release\TimeUtils.obj release\ToDoList.obj release\ToDoListManager.obj release\createtaskdialog.obj release\qrc_TaskManagerMainWindow.obj release\moc_TaskManagerMainWindow.obj release\moc_AddSubTaskDialog.obj release\moc_CreateListDialog.obj release\moc_CreateSubTaskDialog.obj release\moc_createtaskdialog.obj release\TaskManagerGUI_pch.obj
 	-$(DEL_FILE) release\TaskManagerGUI_pch.pch
 	-$(DEL_FILE) release\TaskManagerGUI.res
 
@@ -273,9 +279,9 @@ GeneratedFiles\$(ConfigurationName)\moc_predefs.h: D:\Qt\5.13.0\msvc2017\mkspecs
 		release\TaskManagerGUI_pch.obj
 	cl -BxD:\Qt\5.13.0\msvc2017\bin\qmake.exe -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -Zc:referenceBinding -Zc:__cplusplus -O2 -MD -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E D:\Qt\5.13.0\msvc2017\mkspecs\features\data\dummy.cpp 2>NUL >GeneratedFiles\moc_predefs.h
 
-compiler_moc_header_make_all: GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp
+compiler_moc_header_make_all: GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp
+	-$(DEL_FILE) GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_CreateSubTaskDialog.cpp GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp
 GeneratedFiles\$(ConfigurationName)\moc_TaskManagerMainWindow.cpp: ..\TaskManagerGUI\TaskManagerMainWindow.h \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QMainWindow \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qmainwindow.h \
@@ -988,6 +994,115 @@ GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp: ..\TaskManagerGUI\
 		D:\Qt\5.13.0\msvc2017\bin\moc.exe
 	D:\Qt\5.13.0\msvc2017\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include "C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug/GeneratedFiles/$(ConfigurationName)/moc_predefs.h" -ID:/Qt/5.13.0/msvc2017/mkspecs/win32-msvc -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -I"C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles/$(ConfigurationName)" -ID:/Qt/5.13.0/msvc2017/include -ID:/Qt/5.13.0/msvc2017/include/QtSvg -ID:/Qt/5.13.0/msvc2017/include/QtUiTools -ID:/Qt/5.13.0/msvc2017/include/QtQuickWidgets -ID:/Qt/5.13.0/msvc2017/include/QtWidgets -ID:/Qt/5.13.0/msvc2017/include/QtQuick -ID:/Qt/5.13.0/msvc2017/include/QtDataVisualization -ID:/Qt/5.13.0/msvc2017/include/QtGui -ID:/Qt/5.13.0/msvc2017/include/QtANGLE -ID:/Qt/5.13.0/msvc2017/include/QtXmlPatterns -ID:/Qt/5.13.0/msvc2017/include/QtQml -ID:/Qt/5.13.0/msvc2017/include/QtNetwork -ID:/Qt/5.13.0/msvc2017/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt" ..\TaskManagerGUI\CreateListDialog.h -o GeneratedFiles\moc_CreateListDialog.cpp
 
+GeneratedFiles\$(ConfigurationName)\moc_CreateSubTaskDialog.cpp: ..\TaskManagerGUI\CreateSubTaskDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qtwidgetsglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtguiglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qconfig-bootstrapped.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qconfig.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtcore-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsystemdetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qprocessordetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcompilerdetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtypeinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsysinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlogging.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qflags.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbasicatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_bootstrap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qgenericatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_cxx11.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_msvc.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qglobalstatic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmutex.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qnumeric.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qversiontagging.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtgui-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qtwidgets-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qwidget.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qwindowdefs.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobjectdefs.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qnamespace.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobjectdefs_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobject.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstring.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qchar.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbytearray.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qrefcount.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qarraydata.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringliteral.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringalgorithms.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringview.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringbuilder.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qalgorithms.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qiterator.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qhashfunctions.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qpair.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvector.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qpoint.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbytearraylist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringlist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qregexp.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringmatcher.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcoreevent.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qscopedpointer.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmetatype.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvarlengtharray.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcontainerfwd.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobject_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmargins.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpaintdevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qrect.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsize.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpalette.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qcolor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qrgb.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qrgba64.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qbrush.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qmatrix.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpolygon.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qregion.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qdatastream.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qiodevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qline.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtransform.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpainterpath.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qimage.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpixelformat.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpixmap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsharedpointer.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qshareddata.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qhash.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfont.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfontmetrics.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfontinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qcursor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qkeysequence.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qevent.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvariant.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qdebug.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtextstream.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlocale.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qset.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcontiguouscache.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qurl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qurlquery.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qfile.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qfiledevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qvector2d.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtouchdevice.h \
+		GeneratedFiles\$(ConfigurationName)\moc_predefs.h \
+		D:\Qt\5.13.0\msvc2017\bin\moc.exe
+	D:\Qt\5.13.0\msvc2017\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include "C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug/GeneratedFiles/$(ConfigurationName)/moc_predefs.h" -ID:/Qt/5.13.0/msvc2017/mkspecs/win32-msvc -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles -IC:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI -I"C:/Users/feder/OneDrive/Documenti/Progetto_Task/TaskManager/TaskManagerGUI/GeneratedFiles/$(ConfigurationName)" -ID:/Qt/5.13.0/msvc2017/include -ID:/Qt/5.13.0/msvc2017/include/QtSvg -ID:/Qt/5.13.0/msvc2017/include/QtUiTools -ID:/Qt/5.13.0/msvc2017/include/QtQuickWidgets -ID:/Qt/5.13.0/msvc2017/include/QtWidgets -ID:/Qt/5.13.0/msvc2017/include/QtQuick -ID:/Qt/5.13.0/msvc2017/include/QtDataVisualization -ID:/Qt/5.13.0/msvc2017/include/QtGui -ID:/Qt/5.13.0/msvc2017/include/QtANGLE -ID:/Qt/5.13.0/msvc2017/include/QtXmlPatterns -ID:/Qt/5.13.0/msvc2017/include/QtQml -ID:/Qt/5.13.0/msvc2017/include/QtNetwork -ID:/Qt/5.13.0/msvc2017/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\include" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.17763.0\cppwinrt" ..\TaskManagerGUI\CreateSubTaskDialog.h -o GeneratedFiles\moc_CreateSubTaskDialog.cpp
+
 GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp: ..\TaskManagerGUI\createtaskdialog.h \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialog.h \
@@ -1101,9 +1216,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_createtaskdialog.h
+compiler_uic_make_all: GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_CreateSubTaskDialog.h GeneratedFiles\ui_createtaskdialog.h
 compiler_uic_clean:
-	-$(DEL_FILE) GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_createtaskdialog.h
+	-$(DEL_FILE) GeneratedFiles\ui_TaskManagerMainWindow.h GeneratedFiles\ui_AddSubTaskDialog.h GeneratedFiles\ui_CreateListDialog.h GeneratedFiles\ui_CreateSubTaskDialog.h GeneratedFiles\ui_createtaskdialog.h
 GeneratedFiles\ui_TaskManagerMainWindow.h: ..\TaskManagerGUI\TaskManagerMainWindow.ui \
 		D:\Qt\5.13.0\msvc2017\bin\uic.exe
 	D:\Qt\5.13.0\msvc2017\bin\uic.exe ..\TaskManagerGUI\TaskManagerMainWindow.ui -o GeneratedFiles\ui_TaskManagerMainWindow.h
@@ -1115,6 +1230,10 @@ GeneratedFiles\ui_AddSubTaskDialog.h: ..\TaskManagerGUI\AddSubTaskDialog.ui \
 GeneratedFiles\ui_CreateListDialog.h: ..\TaskManagerGUI\CreateListDialog.ui \
 		D:\Qt\5.13.0\msvc2017\bin\uic.exe
 	D:\Qt\5.13.0\msvc2017\bin\uic.exe ..\TaskManagerGUI\CreateListDialog.ui -o GeneratedFiles\ui_CreateListDialog.h
+
+GeneratedFiles\ui_CreateSubTaskDialog.h: ..\TaskManagerGUI\CreateSubTaskDialog.ui \
+		D:\Qt\5.13.0\msvc2017\bin\uic.exe
+	D:\Qt\5.13.0\msvc2017\bin\uic.exe ..\TaskManagerGUI\CreateSubTaskDialog.ui -o GeneratedFiles\ui_CreateSubTaskDialog.h
 
 GeneratedFiles\ui_createtaskdialog.h: ..\TaskManagerGUI\createtaskdialog.ui \
 		D:\Qt\5.13.0\msvc2017\bin\uic.exe
@@ -3158,7 +3277,26 @@ release\AddSubTaskDialog.obj: ..\TaskManagerGUI\AddSubTaskDialog.cpp ..\TaskMana
 		D:\Qt\5.13.0\msvc2017\include\QtCore\qfiledevice.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qvector2d.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qtouchdevice.h \
-		GeneratedFiles\ui_AddSubTaskDialog.h \
+		..\TaskManagerGUI\GeneratedFiles\ui_AddSubTaskDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\QVariant \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QApplication \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qapplication.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcoreapplication.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qeventloop.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdesktopwidget.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qguiapplication.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qinputmethod.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialogButtonBox \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialogbuttonbox.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QLabel \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qlabel.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qframe.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QLineEdit \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qlineedit.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextcursor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextformat.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpen.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextoption.h \
 		release\TaskManagerGUI_pch.obj
 
 release\Comment.obj: ..\TaskManagerGUI\Comment.cpp ..\TaskManagerGUI\stdafx.h \
@@ -3748,13 +3886,123 @@ release\CreateListDialog.obj: ..\TaskManagerGUI\CreateListDialog.cpp ..\TaskMana
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qinputmethod.h \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialogButtonBox \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialogbuttonbox.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QLabel \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qlabel.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qframe.h \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QLineEdit \
 		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qlineedit.h \
-		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qframe.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextcursor.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextformat.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qpen.h \
 		D:\Qt\5.13.0\msvc2017\include\QtGui\qtextoption.h \
+		release\TaskManagerGUI_pch.obj
+
+release\CreateSubTaskDialog.obj: ..\TaskManagerGUI\CreateSubTaskDialog.cpp ..\TaskManagerGUI\CreateSubTaskDialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\QDialog \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qdialog.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qtwidgetsglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtguiglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qglobal.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qconfig-bootstrapped.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qconfig.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtcore-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsystemdetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qprocessordetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcompilerdetection.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtypeinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsysinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlogging.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qflags.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbasicatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_bootstrap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qgenericatomic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_cxx11.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qatomic_msvc.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qglobalstatic.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmutex.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qnumeric.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qversiontagging.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtgui-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qtwidgets-config.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qwidget.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qwindowdefs.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobjectdefs.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qnamespace.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobjectdefs_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qwindowdefs_win.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobject.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstring.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qchar.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbytearray.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qrefcount.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qarraydata.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringliteral.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringalgorithms.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringview.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringbuilder.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qalgorithms.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qiterator.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qhashfunctions.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qpair.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvector.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qpoint.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qbytearraylist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringlist.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qregexp.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qstringmatcher.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcoreevent.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qscopedpointer.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmetatype.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvarlengtharray.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcontainerfwd.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qobject_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmargins.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpaintdevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qrect.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsize.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpalette.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qcolor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qrgb.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qrgba64.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qbrush.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qmatrix.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpolygon.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qregion.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qdatastream.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qiodevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qline.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtransform.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpainterpath.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qimage.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpixelformat.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qpixmap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsharedpointer.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qshareddata.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qhash.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qsharedpointer_impl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfont.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfontmetrics.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qfontinfo.h \
+		D:\Qt\5.13.0\msvc2017\include\QtWidgets\qsizepolicy.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qcursor.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qkeysequence.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qevent.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qvariant.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qmap.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qdebug.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qtextstream.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qlocale.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qset.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qcontiguouscache.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qurl.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qurlquery.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qfile.h \
+		D:\Qt\5.13.0\msvc2017\include\QtCore\qfiledevice.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qvector2d.h \
+		D:\Qt\5.13.0\msvc2017\include\QtGui\qtouchdevice.h \
+		GeneratedFiles\ui_CreateSubTaskDialog.h \
 		release\TaskManagerGUI_pch.obj
 
 release\DateTime.obj: ..\TaskManagerGUI\DateTime.cpp ..\TaskManagerGUI\stdafx.h \
@@ -6752,6 +7000,8 @@ release\moc_TaskManagerMainWindow.obj: GeneratedFiles\$(ConfigurationName)\moc_T
 release\moc_AddSubTaskDialog.obj: GeneratedFiles\$(ConfigurationName)\moc_AddSubTaskDialog.cpp release\TaskManagerGUI_pch.obj
 
 release\moc_CreateListDialog.obj: GeneratedFiles\$(ConfigurationName)\moc_CreateListDialog.cpp release\TaskManagerGUI_pch.obj
+
+release\moc_CreateSubTaskDialog.obj: GeneratedFiles\$(ConfigurationName)\moc_CreateSubTaskDialog.cpp release\TaskManagerGUI_pch.obj
 
 release\moc_createtaskdialog.obj: GeneratedFiles\$(ConfigurationName)\moc_createtaskdialog.cpp release\TaskManagerGUI_pch.obj
 

@@ -92,6 +92,12 @@
     <ClCompile Include="createtaskdialog.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="CreateSubTaskDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SubTaskWidgetItem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -104,6 +110,9 @@
       <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="createtaskdialog.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="CreateSubTaskDialog.h">
       <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -129,6 +138,9 @@
       <Filter>Form Files</Filter>
     </QtUic>
     <QtUic Include="createtaskdialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="CreateSubTaskDialog.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -175,6 +187,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_createtaskdialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SubTaskWidgetItem.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

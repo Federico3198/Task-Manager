@@ -6,6 +6,11 @@ void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 	subTasks.push_back(subTask);
 }
 
+void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
+{
+	subTasks.remove(subTask);
+}
+
 std::shared_ptr<SubTask> Task::GetSubTask(int index)
 {
 	auto iterator = subTasks.begin();

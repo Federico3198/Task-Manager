@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 
 QT_BEGIN_NAMESPACE
@@ -22,6 +23,7 @@ class Ui_CreateListDialog
 public:
     QDialogButtonBox *buttonBox;
     QLineEdit *filedListName;
+    QLabel *label;
 
     void setupUi(QDialog *CreateListDialog)
     {
@@ -35,7 +37,10 @@ public:
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         filedListName = new QLineEdit(CreateListDialog);
         filedListName->setObjectName(QString::fromUtf8("filedListName"));
-        filedListName->setGeometry(QRect(130, 100, 113, 24));
+        filedListName->setGeometry(QRect(150, 130, 171, 24));
+        label = new QLabel(CreateListDialog);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(90, 130, 55, 16));
 
         retranslateUi(CreateListDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), CreateListDialog, SLOT(accept()));
@@ -47,6 +52,7 @@ public:
     void retranslateUi(QDialog *CreateListDialog)
     {
         CreateListDialog->setWindowTitle(QCoreApplication::translate("CreateListDialog", "Dialog", nullptr));
+        label->setText(QCoreApplication::translate("CreateListDialog", "Nome:", nullptr));
     } // retranslateUi
 
 };
