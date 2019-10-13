@@ -68,7 +68,7 @@
   <widget class="QDateTimeEdit" name="dateTimeDueDate">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>140</x>
      <y>50</y>
      <width>151</width>
      <height>25</height>
@@ -138,6 +138,19 @@
    </property>
    <property name="text">
     <string>Ripeti:</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxDueDate">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>50</y>
+     <width>83</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

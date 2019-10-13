@@ -13,6 +13,11 @@ QLineEdit * CreateListDialog::GetFieldListName()
     return ui->filedListName;
 }
 
+void CreateListDialog::SetFieldListName(QString listName)
+{
+	ui->filedListName->setText(listName);
+}
+
 CreateListDialog::~CreateListDialog()
 {
     delete ui;

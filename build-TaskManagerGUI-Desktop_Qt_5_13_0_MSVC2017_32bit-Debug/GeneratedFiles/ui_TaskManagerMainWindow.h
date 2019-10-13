@@ -37,6 +37,7 @@ public:
     QAction *actionSet_Sub_Task_Completed;
     QAction *actionSet_Sub_Task_Uncompleted;
     QAction *actionSet_UncompletedTask;
+    QAction *actionModify_Sub_Task;
     QWidget *centralWidget;
     QListWidget *listWidgetLists;
     QListWidget *listWidgetUncompletedTasks;
@@ -78,6 +79,8 @@ public:
         actionSet_Sub_Task_Uncompleted->setObjectName(QString::fromUtf8("actionSet_Sub_Task_Uncompleted"));
         actionSet_UncompletedTask = new QAction(TaskManagerMainWindowClass);
         actionSet_UncompletedTask->setObjectName(QString::fromUtf8("actionSet_UncompletedTask"));
+        actionModify_Sub_Task = new QAction(TaskManagerMainWindowClass);
+        actionModify_Sub_Task->setObjectName(QString::fromUtf8("actionModify_Sub_Task"));
         centralWidget = new QWidget(TaskManagerMainWindowClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         listWidgetLists = new QListWidget(centralWidget);
@@ -125,6 +128,7 @@ public:
         menuTask_Info->addAction(actionRemove_Sub_Task);
         menuTask_Info->addAction(actionSet_Sub_Task_Completed);
         menuTask_Info->addAction(actionSet_Sub_Task_Uncompleted);
+        menuTask_Info->addAction(actionModify_Sub_Task);
 
         retranslateUi(TaskManagerMainWindowClass);
 
@@ -146,6 +150,7 @@ public:
         actionSet_Sub_Task_Completed->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Sub Task Completed", nullptr));
         actionSet_Sub_Task_Uncompleted->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Sub Task Uncompleted", nullptr));
         actionSet_UncompletedTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Uncompleted", nullptr));
+        actionModify_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modify Sub Task", nullptr));
         menuLista->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "List", nullptr));
         menuTask->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Task", nullptr));
         menuTask_Info->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Task Info", nullptr));

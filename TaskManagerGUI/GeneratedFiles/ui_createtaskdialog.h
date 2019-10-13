@@ -35,6 +35,7 @@ public:
     QLabel *label_3;
     QComboBox *comboBoxRepetition;
     QLabel *label_4;
+    QCheckBox *checkBoxDueDate;
 
     void setupUi(QDialog *CreateTaskDialog)
     {
@@ -57,7 +58,7 @@ public:
         checkIsImportant->setGeometry(QRect(20, 120, 121, 22));
         dateTimeDueDate = new QDateTimeEdit(CreateTaskDialog);
         dateTimeDueDate->setObjectName(QString::fromUtf8("dateTimeDueDate"));
-        dateTimeDueDate->setGeometry(QRect(90, 50, 151, 25));
+        dateTimeDueDate->setGeometry(QRect(140, 50, 151, 25));
         label_2 = new QLabel(CreateTaskDialog);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(20, 50, 61, 16));
@@ -74,6 +75,9 @@ public:
         label_4 = new QLabel(CreateTaskDialog);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setGeometry(QRect(20, 90, 55, 16));
+        checkBoxDueDate = new QCheckBox(CreateTaskDialog);
+        checkBoxDueDate->setObjectName(QString::fromUtf8("checkBoxDueDate"));
+        checkBoxDueDate->setGeometry(QRect(100, 50, 83, 22));
 
         retranslateUi(CreateTaskDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), CreateTaskDialog, SLOT(accept()));
@@ -91,6 +95,7 @@ public:
         label_3->setText(QCoreApplication::translate("CreateTaskDialog", "Note:", nullptr));
         comboBoxRepetition->setCurrentText(QString());
         label_4->setText(QCoreApplication::translate("CreateTaskDialog", "Ripeti:", nullptr));
+        checkBoxDueDate->setText(QString());
     } // retranslateUi
 
 };

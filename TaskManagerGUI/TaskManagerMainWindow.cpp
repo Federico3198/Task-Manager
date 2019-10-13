@@ -89,7 +89,8 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 			sharedTask->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
 			sharedTask->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
 			sharedTask->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
-			sharedTask->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
+			sharedTask->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t()); 
+			sharedTask->expire = createTaskDialog.GetCheckExpire()->checkState();
 
 			todoList->AddTask(sharedTask);
 			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(sharedTask));
@@ -204,22 +205,19 @@ void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 {
 	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
 	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
+	auto taskListItem = listWidget->item(listWidget->currentRow());
 
 	if (taskListItem !=NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
 	{
 		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
 		auto subTask = subTaskItem->GetSubTask();
 
-
 		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
 		auto task = taskItem->GetTask();
 
 		task->RemoveSubTask(subTask);
 
-		ShowTaskInfo(taskListItem);
-		
-		FixRandomClearTaskListBug();
+		ShowTaskInfo(taskListItem);	
 	}
 	else
 	{
@@ -237,12 +235,113 @@ void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
 	SetSubTaskCompleted(false);
 }
 
+void TaskManagerMainWindow::on_actionModifyList_triggered()
+{
+	CreateListDialog createListDialog;
+	createListDialog.setModal(true);
+
+	auto currentList = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
+	auto todoListItem = static_cast<ToDoListWidgetItem*>(currentList);
+	int listId = todoListItem->GetListId();
+	auto todoList = tdManager.GetListByID(listId);
+
+	createListDialog.SetFieldListName(QString(todoList->listName.c_str()));
+	
+	int result = createListDialog.exec();
+
+	if (result == 1)
+	{
+		auto fieldlistName = createListDialog.GetFieldListName();
+		auto listName = fieldlistName->text();
+
+		todoList->listName = listName.toStdString();
+
+		todoListItem->setText(QString(todoList->listName.c_str()));
+	}
+}
+
+void TaskManagerMainWindow::on_actionModifyTask_triggered()
+{
+	auto listWidget = GetSelectedTaskList();
+
+	if (listWidget != NULL)
+	{
+		CreateTaskDialog createTaskDialog;
+		createTaskDialog.setModal(true);
+
+		auto taskListItem = listWidget->item(listWidget->currentRow());
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
+
+		createTaskDialog.SetName(QString(task->title.c_str()));
+		createTaskDialog.SetCheckIsImportant(task->isImportant);
+		createTaskDialog.SetCheckExpire(task->expire);
+		createTaskDialog.SetRepetition(task->repetition);
+		createTaskDialog.SetNotes(QString(task->notes.c_str()));
+		createTaskDialog.SetDueDate(task->dueDate);
+
+		int result = createTaskDialog.exec();
+
+		if (result == 1)
+		{
+			auto fieldTaskName = createTaskDialog.GetName();
+			auto taskName = fieldTaskName->text();
+			task->title = taskName.toStdString();
+
+			task->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
+			task->expire = createTaskDialog.GetCheckExpire()->checkState();
+			task->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
+			task->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
+			task->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
+
+			taskListItem->setText(taskName);
+			ShowTaskInfo(taskListItem);
+		}
+	}
+	else
+	{
+		//TODO dialogo "devi selezionare una lista prima di aggiungere una task"
+	}
+}
+
+void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
+{
+	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	if (taskListItem != NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
+	{
+		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
+		auto subTask = subTaskItem->GetSubTask();
+
+		CreateSubTaskDialog createSubTaskDialog;
+		createSubTaskDialog.setModal(true);
+
+		
+		createSubTaskDialog.SetText(QString(subTask->GetText().c_str()));
+
+		int result = createSubTaskDialog.exec();
+
+		if (result == 1)
+		{
+			auto text = createSubTaskDialog.GetText()->text().toStdString();
+
+			subTask->SetText(text);
+
+			ShowTaskInfo(taskListItem);
+		}
+
+		ShowTaskInfo(taskListItem);
+	}
+}
+
 void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
 {
 	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
 
 	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
+	auto taskListItem = listWidget->item(listWidget->currentRow());
 
 	if (taskListItem !=NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
 	{
@@ -252,39 +351,8 @@ void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
 		subTask->SetIsCompleted(isCompleted);
 
 		ShowTaskInfo(taskListItem);
-		FixRandomClearTaskListBug();
 	}
 }
-
-#pragma region  fix random task list clear bug
-
-void TaskManagerMainWindow::FixRandomClearTaskListBug()
-{
-
-	ui.listWidgetUncompletedTasks->clear();
-	ui.listWidgetCompletedTasks->clear();
-
-	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
-	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-	int listId = listItem->GetListId();
-
-	auto todoList = tdManager.GetListByID(listId);
-	auto uncompletedTasks = todoList->GetUncompletedTasks();
-
-	for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
-	{
-		ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
-	}
-
-	auto completedTasks = todoList->GetCompletedTasks();
-
-	for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
-	{
-		ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
-	}
-
-}
-#pragma endregion
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 {
@@ -298,24 +366,32 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(("Completato: " + BoolUtils::ConvertBoolToYesNoIta(task->isCompleted)).c_str())));
 	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(("Importante: " + BoolUtils::ConvertBoolToYesNoIta(task->isImportant)).c_str())));
 
+	if (task->expire)
+	{
+		std::stringstream stringStream;
+		stringStream << "Scadenza: " << task->dueDate.GetDay() << "-" << task->dueDate.GetMonth() << "-" << task->dueDate.GetYear();
+		std::string date = stringStream.str();
+		ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(date.c_str())));
+
+		stringStream = std::stringstream();
+		stringStream << "Ricordamelo alle: " << task->dueDate.GetHours() << ":";
+
+		if (task->dueDate.GetMinutes() < 10)
+		{
+			stringStream << "0";
+		}
+		stringStream << task->dueDate.GetMinutes();
+
+		std::string time = stringStream.str();
+		ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(time.c_str())));
+	}
 	
-	//TODO mettere un check nel form per settare la scadenza
-	std::stringstream stringStream;
-	stringStream << "Scadenza: " << task->dueDate.GetDay() << "-" << task->dueDate.GetMonth() << "-" << task->dueDate.GetYear();
-	std::string date = stringStream.str();
-	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(date.c_str())));
-
-	stringStream = std::stringstream();
-	stringStream << "Ricordamelo alle: " << task->dueDate.GetHours() << ":" << task->dueDate.GetMinutes();
-	std::string time = stringStream.str();
-	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(time.c_str())));
-	//--------------------------------
-
-
 	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(("Ripetizione: " + RepetitionTypeUtils::ConvertEnumToIta(task->repetition)).c_str())));
 	
-	ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(("Note: " + task->notes).c_str())));
-	
+	if (!task->notes.empty())
+	{
+		ui.listWidgetTaskInfo->addItem(new QListWidgetItem(QString(("Note: " + task->notes).c_str())));
+	}
 
 	auto subTasks = task->GetSubTasks();
 

@@ -37,11 +37,13 @@ private slots:
 	void on_actionRemove_Sub_Task_triggered();
 	void on_actionSet_Sub_Task_Completed_triggered();
 	void on_actionSet_Sub_Task_Uncompleted_triggered();
+	void on_actionModifyList_triggered();
+	void on_actionModifyTask_triggered();
+	void on_actionModify_Sub_Task_triggered();
 
 private:
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
 	void SetSubTaskCompleted(bool isCompleted);
-	void FixRandomClearTaskListBug();
 	QListWidget * GetSelectedTaskList();
 
 	Ui::TaskManagerMainWindowClass ui;

@@ -8,6 +8,7 @@ private:
 public:
 	ToDoListWidgetItem(QString name, int listId);
 	int GetListId();
+
 	~ToDoListWidgetItem();
 
 };

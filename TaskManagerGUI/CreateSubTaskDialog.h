@@ -14,6 +14,7 @@ class CreateSubTaskDialog : public QDialog
 public:
     explicit CreateSubTaskDialog(QWidget *parent = nullptr);
 	QLineEdit * GetText();
+	void SetText(QString text);
     ~CreateSubTaskDialog();
 
 private:

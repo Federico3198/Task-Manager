@@ -37,10 +37,10 @@ public:
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         lblText = new QLineEdit(CreateSubTaskDialog);
         lblText->setObjectName(QString::fromUtf8("lblText"));
-        lblText->setGeometry(QRect(120, 90, 241, 24));
+        lblText->setGeometry(QRect(110, 130, 241, 24));
         label = new QLabel(CreateSubTaskDialog);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(50, 90, 55, 16));
+        label->setGeometry(QRect(50, 130, 55, 16));
 
         retranslateUi(CreateSubTaskDialog);
         QObject::connect(buttonBox, SIGNAL(accepted()), CreateSubTaskDialog, SLOT(accept()));
@@ -52,7 +52,7 @@ public:
     void retranslateUi(QDialog *CreateSubTaskDialog)
     {
         CreateSubTaskDialog->setWindowTitle(QCoreApplication::translate("CreateSubTaskDialog", "Dialog", nullptr));
-        label->setText(QCoreApplication::translate("CreateSubTaskDialog", "TextLabel", nullptr));
+        label->setText(QCoreApplication::translate("CreateSubTaskDialog", "Nome:", nullptr));
     } // retranslateUi
 
 };

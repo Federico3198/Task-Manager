@@ -5,12 +5,17 @@ CreateSubTaskDialog::CreateSubTaskDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CreateSubTaskDialog)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 }
 
 QLineEdit * CreateSubTaskDialog::GetText()
 {
 	return ui->lblText;
+}
+
+void CreateSubTaskDialog::SetText(QString text)
+{
+	ui->lblText->setText(text);
 }
 
 CreateSubTaskDialog::~CreateSubTaskDialog()

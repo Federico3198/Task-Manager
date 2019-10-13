@@ -90,6 +90,7 @@
     <addaction name="actionRemove_Sub_Task"/>
     <addaction name="actionSet_Sub_Task_Completed"/>
     <addaction name="actionSet_Sub_Task_Uncompleted"/>
+    <addaction name="actionModify_Sub_Task"/>
    </widget>
    <addaction name="menuLista"/>
    <addaction name="menuTask"/>
@@ -162,6 +163,11 @@
   <action name="actionSet_UncompletedTask">
    <property name="text">
     <string>Set Uncompleted</string>
+   </property>
+  </action>
+  <action name="actionModify_Sub_Task">
+   <property name="text">
+    <string>Modify Sub Task</string>
    </property>
   </action>
  </widget>

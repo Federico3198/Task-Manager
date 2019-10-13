@@ -15,6 +15,8 @@ public:
     explicit CreateListDialog(QWidget *parent = nullptr);
     ~CreateListDialog();
     QLineEdit * GetFieldListName();
+	void SetFieldListName(QString listName);
+
 private:
     Ui::CreateListDialog *ui;
 };

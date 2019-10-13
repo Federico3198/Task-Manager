@@ -12,6 +12,7 @@ public:
 	bool isCompleted;
 	bool isImportant;
 	DateTime dueDate;
+	bool expire;
 	std::string notes;
 	std::string title;
 	RepetitionType repetition;
