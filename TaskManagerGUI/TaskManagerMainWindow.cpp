@@ -6,6 +6,20 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 	tdManager = ToDoListManager();
+
+	std::fstream fs;
+	fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::app);
+
+	if (!fs)
+	{
+		fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+		fs << "{}" << std::endl; //BUG non scrive in realtà
+	}
+
+	fs.close();
+	boost::property_tree::read_json(fileName, jsonRoot);
+	//TODO read all json to initialize the lists
+
 }
 
 void TaskManagerMainWindow::on_actionCreateList_triggered()
@@ -24,6 +38,40 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 		auto listItem = new ToDoListWidgetItem(listName, sharedTDL->GetId());
 
 		ui.listWidgetLists->addItem(listItem);
+		
+		boost::property_tree::ptree todoListNode;
+		todoListNode.put("listName", listName.toStdString());
+
+
+
+		auto child = jsonRoot.find("todoLists");
+		
+		if (child == jsonRoot.not_found())
+		{
+			todoListsRoot.push_back(std::make_pair("", todoListNode));
+			jsonRoot.add_child("todoLists", todoListsRoot);
+		}
+		else
+		{
+			std::string first = child->first;
+			auto second = child->second;
+
+			second.push_back(std::make_pair("", todoListNode));
+			
+			/*boost::property_tree::ptree todoListNode;
+			todoListNode.put("listName", listName.toStdString());
+
+			todoListsRoot = jsonRoot.get_child("todoLists");
+			auto data = todoListsRoot.s.data();
+			todoListsRoot.push_back(std::make_pair("", todoListNode));*/
+		}
+
+	/*	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, jsonRoot.get_child("todoLists"))
+		{
+			assert(v.first.empty());
+			std::string data = v.second.data();
+		}*/
+		boost::property_tree::write_json(fileName, jsonRoot);
 	}
 }
 

@@ -3,6 +3,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_TaskManagerMainWindow.h"
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include "ToDoListManager.h"
 #include "ToDoList.h"
@@ -14,7 +15,11 @@
 #include "SubTaskWidgetItem.h"
 #include "qlist.h"
 #include <typeinfo>
-
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/foreach.hpp>
+#include <cassert>
+#include <exception>
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -42,6 +47,10 @@ private slots:
 	void on_actionModify_Sub_Task_triggered();
 
 private:
+	boost::property_tree::ptree jsonRoot;
+	boost::property_tree::ptree todoListsRoot;
+	std::string fileName = "taskData.json";
+
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
 	void SetSubTaskCompleted(bool isCompleted);
 	QListWidget * GetSelectedTaskList();
