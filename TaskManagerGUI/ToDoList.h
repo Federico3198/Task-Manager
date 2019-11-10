@@ -25,6 +25,8 @@ public:
 	ToDoList(std::string listName);
 	bool operator ==(const ToDoList &other);
 
+	std::list<std::shared_ptr<Task>> GetAllTasks();
+
 	~ToDoList();
 
 
