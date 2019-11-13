@@ -3,13 +3,13 @@
 class ToDoListWidgetItem :
 	public QListWidgetItem
 {
-private:
-	int listId;
 public:
 	ToDoListWidgetItem(QString name, int listId);
 	int GetListId();
 
 	~ToDoListWidgetItem();
 
+private:
+	int listId;
 };
 

@@ -6,9 +6,6 @@
 
 class ToDoListManager
 {
-private:
-	std::list<std::shared_ptr<ToDoList> > toDoLists;
-
 public:
 	std::list<std::shared_ptr<Task>> GetImportantTasks();
 	std::list<std::shared_ptr<Task>> GetTodayTasks();
@@ -21,5 +18,8 @@ public:
 	ToDoListManager();
 	ToDoListManager(std::list<std::shared_ptr<ToDoList> > toDoLists);
 	~ToDoListManager();
+
+private:
+	std::list<std::shared_ptr<ToDoList> > toDoLists;
 };
 

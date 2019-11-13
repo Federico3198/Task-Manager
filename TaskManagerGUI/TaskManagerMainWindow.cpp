@@ -155,10 +155,6 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(sharedTask));
 		}
 	}
-	else
-	{
-		//TODO dialogo "devi selezionare una lista prima di aggiungere una task"
-	}
 }
 
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
@@ -254,10 +250,6 @@ void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 			ShowTaskInfo(taskListItem);
 		}
 	}
-	else
-	{
-		//TODO MessageBox: devi selezionare una task
-	}
 }
 
 void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
@@ -277,10 +269,6 @@ void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 		task->RemoveSubTask(subTask);
 
 		ShowTaskInfo(taskListItem);
-	}
-	else
-	{
-		// se no messaggio all' utente che deve selezionare una sub task
 	}
 }
 
@@ -356,10 +344,6 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 			taskListItem->setText(taskName);
 			ShowTaskInfo(taskListItem);
 		}
-	}
-	else
-	{
-		//TODO dialogo "devi selezionare una lista prima di aggiungere una task"
 	}
 }
 
