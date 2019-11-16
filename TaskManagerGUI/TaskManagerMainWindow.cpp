@@ -8,16 +8,17 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	tdManager = ToDoListManager();
 
 	std::fstream fs;
-	fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::app);
+	
+	fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
 
-	if (!fs)
+	if (fs.is_open())
 	{
-		fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+		//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
 		fs << "{}" << std::endl; //BUG non scrive in realtà
+		fs.close();
 	}
 
-	fs.close();
-	boost::property_tree::read_json(fileName, jsonRoot);
+		//boost::property_tree::read_json(fileName, jsonRoot);
 	//TODO read all json to initialize the lists
 
 }
@@ -40,6 +41,7 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 		ui.listWidgetLists->addItem(listItem);
 
 
+		//-----------json
 		boost::property_tree::ptree todoListNode;
 		todoListNode.put("listName", listName.toStdString());
 		auto tasks = sharedTDL->GetAllTasks();
@@ -54,11 +56,6 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 		}
 
 		todoListNode.add_child("tasks", tasksNode);
-
-
-		//todoListNode.put("test", 4);
-
-
 
 		auto child = jsonRoot.find("todoLists");
 
@@ -83,6 +80,8 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 				std::string data = v.second.data();
 			}*/
 		boost::property_tree::write_json(fileName, jsonRoot);
+
+		//-----json
 	}
 }
 
@@ -153,6 +152,94 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 
 			todoList->AddTask(sharedTask);
 			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(sharedTask));
+
+
+			//------- json
+
+			//boost::property_tree::ptree
+			//if (todoListsNode != jsonRoot.not_found())
+	
+				//BOOST_FOREACH(boost::property_tree::ptree::value_type &v, todoListsRoot)
+				//{
+				//	assert(v.first.empty());
+				//	std::string data = v.second.data();
+				//	auto taskNode =  v.second.find("tasks");
+
+				//	if (taskNode != jsonRoot.not_found())
+				//	{
+				//		taskNode->second.put("title", task->title);
+				//		v.second.add_child("tasks",taskNode->second);
+				//	}
+				//}
+				///*std::string first = todoListsNode->first;
+				//auto second = todoListsNode->second;*/
+
+				////todoListsRoot.push_back(std::make_pair("", todoListNode));
+				//jsonRoot.add_child("todoLists", todoListsRoot);
+			
+
+			//------ json
+
+
+			auto todoLists = tdManager.toDoLists;
+			todoListsRoot.clear();
+
+			for (auto iterator = todoLists.begin(); iterator!= todoLists.end(); iterator++)
+			{
+
+				auto tdList = (*iterator);
+
+				boost::property_tree::ptree todoListNode;
+				todoListNode.put("listName", tdList->listName);
+				auto tasks = tdList->GetAllTasks();
+
+
+				boost::property_tree::ptree tasksNode;
+				for (auto tasksIterator = tasks.begin(); tasksIterator != tasks.end(); tasksIterator++)
+				{
+					boost::property_tree::ptree taskNode;
+					taskNode.put("title", (*tasksIterator)->title);
+					tasksNode.push_back(std::make_pair("", taskNode));
+				}
+
+				todoListNode.add_child("tasks", tasksNode);
+
+				auto child = jsonRoot.find("todoLists");
+
+				if (child == jsonRoot.not_found())
+				{
+					todoListsRoot.push_back(std::make_pair("", todoListNode));
+					jsonRoot.add_child("todoLists", todoListsRoot);
+				}
+				else
+				{
+					std::string first = child->first;
+					auto second = child->second;
+
+					jsonRoot.clear();
+					todoListsRoot.push_back(std::make_pair("", todoListNode));
+					jsonRoot.add_child("todoLists", todoListsRoot);
+				}
+
+				/*	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, jsonRoot.get_child("todoLists"))
+					{
+						assert(v.first.empty());
+						std::string data = v.second.data();
+					}*/
+
+				//std::fstream fs;
+
+				//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+
+				//if (fs.is_open())
+				//{
+				//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+				//	fs << "{}" << std::endl; //BUG non scrive in realtà
+				//	fs.close();
+				//}
+				boost::property_tree::write_json(fileName, jsonRoot);
+			}
+
 		}
 	}
 }

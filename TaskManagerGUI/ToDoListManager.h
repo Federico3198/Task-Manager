@@ -19,7 +19,7 @@ public:
 	ToDoListManager(std::list<std::shared_ptr<ToDoList> > toDoLists);
 	~ToDoListManager();
 
-private:
 	std::list<std::shared_ptr<ToDoList> > toDoLists;
+private:
 };
 
