@@ -47,12 +47,12 @@ private slots:
 	void on_actionModify_Sub_Task_triggered();
 
 private:
-	boost::property_tree::ptree jsonRoot;
 	boost::property_tree::ptree todoListsRoot;
-	std::string fileName = "taskData.json";
+	std::string filePath = "taskData.json";
 
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
 	void SetSubTaskCompleted(bool isCompleted);
+	void RefreshUI();
 	QListWidget * GetSelectedTaskList();
 
 	Ui::TaskManagerMainWindowClass ui;

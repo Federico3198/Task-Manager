@@ -7,20 +7,21 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	ui.setupUi(this);
 	tdManager = ToDoListManager();
 
-	std::fstream fs;
+	/*std::fstream fs;
 	
-	fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+	fs.open(filePath, std::fstream::in | std::fstream::out | std::fstream::trunc);
+*/
+	//if (fs.is_open())
+	//{
+	//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+	//	fs << "{}" << std::endl; //BUG non scrive in realtà
+	//	fs.close();
+	//}
 
-	if (fs.is_open())
-	{
-		//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
-		fs << "{}" << std::endl; //BUG non scrive in realtà
-		fs.close();
-	}
 
-		//boost::property_tree::read_json(fileName, jsonRoot);
-	//TODO read all json to initialize the lists
-
+	tdManager.LoadFromJson(filePath);
+	RefreshUI();
+	
 }
 
 void TaskManagerMainWindow::on_actionCreateList_triggered()
@@ -40,48 +41,7 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 
 		ui.listWidgetLists->addItem(listItem);
 
-
-		//-----------json
-		boost::property_tree::ptree todoListNode;
-		todoListNode.put("listName", listName.toStdString());
-		auto tasks = sharedTDL->GetAllTasks();
-
-
-		boost::property_tree::ptree tasksNode;
-		for (auto tasksIterator = tasks.begin(); tasksIterator != tasks.end(); tasksIterator++)
-		{
-			boost::property_tree::ptree taskNode;
-			taskNode.put("title", (*tasksIterator)->title);
-			tasksNode.push_back(std::make_pair("", taskNode));
-		}
-
-		todoListNode.add_child("tasks", tasksNode);
-
-		auto child = jsonRoot.find("todoLists");
-
-		if (child == jsonRoot.not_found())
-		{
-			todoListsRoot.push_back(std::make_pair("", todoListNode));
-			jsonRoot.add_child("todoLists", todoListsRoot);
-		}
-		else
-		{
-			std::string first = child->first;
-			auto second = child->second;
-
-			jsonRoot.clear();
-			todoListsRoot.push_back(std::make_pair("", todoListNode));
-			jsonRoot.add_child("todoLists", todoListsRoot);		
-		}
-
-		/*	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, jsonRoot.get_child("todoLists"))
-			{
-				assert(v.first.empty());
-				std::string data = v.second.data();
-			}*/
-		boost::property_tree::write_json(fileName, jsonRoot);
-
-		//-----json
+		tdManager.SaveToJson(filePath);
 	}
 }
 
@@ -95,6 +55,7 @@ void TaskManagerMainWindow::on_actionDeleteList_triggered()
 	tdManager.RemoveList(listId);
 
 	delete currentItem;
+	tdManager.SaveToJson(filePath);
 }
 
 void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
@@ -153,93 +114,7 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 			todoList->AddTask(sharedTask);
 			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(sharedTask));
 
-
-			//------- json
-
-			//boost::property_tree::ptree
-			//if (todoListsNode != jsonRoot.not_found())
-	
-				//BOOST_FOREACH(boost::property_tree::ptree::value_type &v, todoListsRoot)
-				//{
-				//	assert(v.first.empty());
-				//	std::string data = v.second.data();
-				//	auto taskNode =  v.second.find("tasks");
-
-				//	if (taskNode != jsonRoot.not_found())
-				//	{
-				//		taskNode->second.put("title", task->title);
-				//		v.second.add_child("tasks",taskNode->second);
-				//	}
-				//}
-				///*std::string first = todoListsNode->first;
-				//auto second = todoListsNode->second;*/
-
-				////todoListsRoot.push_back(std::make_pair("", todoListNode));
-				//jsonRoot.add_child("todoLists", todoListsRoot);
-			
-
-			//------ json
-
-
-			auto todoLists = tdManager.toDoLists;
-			todoListsRoot.clear();
-
-			for (auto iterator = todoLists.begin(); iterator!= todoLists.end(); iterator++)
-			{
-
-				auto tdList = (*iterator);
-
-				boost::property_tree::ptree todoListNode;
-				todoListNode.put("listName", tdList->listName);
-				auto tasks = tdList->GetAllTasks();
-
-
-				boost::property_tree::ptree tasksNode;
-				for (auto tasksIterator = tasks.begin(); tasksIterator != tasks.end(); tasksIterator++)
-				{
-					boost::property_tree::ptree taskNode;
-					taskNode.put("title", (*tasksIterator)->title);
-					tasksNode.push_back(std::make_pair("", taskNode));
-				}
-
-				todoListNode.add_child("tasks", tasksNode);
-
-				auto child = jsonRoot.find("todoLists");
-
-				if (child == jsonRoot.not_found())
-				{
-					todoListsRoot.push_back(std::make_pair("", todoListNode));
-					jsonRoot.add_child("todoLists", todoListsRoot);
-				}
-				else
-				{
-					std::string first = child->first;
-					auto second = child->second;
-
-					jsonRoot.clear();
-					todoListsRoot.push_back(std::make_pair("", todoListNode));
-					jsonRoot.add_child("todoLists", todoListsRoot);
-				}
-
-				/*	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, jsonRoot.get_child("todoLists"))
-					{
-						assert(v.first.empty());
-						std::string data = v.second.data();
-					}*/
-
-				//std::fstream fs;
-
-				//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
-
-				//if (fs.is_open())
-				//{
-				//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
-				//	fs << "{}" << std::endl; //BUG non scrive in realtà
-				//	fs.close();
-				//}
-				boost::property_tree::write_json(fileName, jsonRoot);
-			}
-
+			tdManager.SaveToJson(filePath);
 		}
 	}
 }
@@ -264,6 +139,7 @@ void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 
 	ui.listWidgetTaskInfo->clear();
 	listWidget->clearSelection();
+	tdManager.SaveToJson(filePath);
 }
 
 void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
@@ -293,6 +169,7 @@ void TaskManagerMainWindow::on_actionSet_CompletedTask_triggered()
 		ui.listWidgetCompletedTasks->clearSelection();
 		ui.listWidgetCompletedTasks->setCurrentItem(taskListItem);
 		ShowTaskInfo(taskListItem);
+		tdManager.SaveToJson(filePath);
 	}
 }
 
@@ -310,6 +187,7 @@ void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 		ui.listWidgetCompletedTasks->clearSelection();
 		ui.listWidgetUncompletedTasks->setCurrentItem(taskListItem);
 		ShowTaskInfo(taskListItem);
+		tdManager.SaveToJson(filePath);
 	}
 }
 
@@ -335,6 +213,8 @@ void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 			subTask = new SubTask(text);
 			task->AddSubTask(std::shared_ptr<SubTask>(subTask));
 			ShowTaskInfo(taskListItem);
+
+			tdManager.SaveToJson(filePath);
 		}
 	}
 }
@@ -356,17 +236,20 @@ void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 		task->RemoveSubTask(subTask);
 
 		ShowTaskInfo(taskListItem);
+		tdManager.SaveToJson(filePath);
 	}
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Completed_triggered()
 {
 	SetSubTaskCompleted(true);
+	tdManager.SaveToJson(filePath);
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
 {
 	SetSubTaskCompleted(false);
+	tdManager.SaveToJson(filePath);
 }
 
 void TaskManagerMainWindow::on_actionModifyList_triggered()
@@ -391,6 +274,7 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 		todoList->listName = listName.toStdString();
 
 		todoListItem->setText(QString(todoList->listName.c_str()));
+		tdManager.SaveToJson(filePath);
 	}
 }
 
@@ -430,6 +314,7 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 
 			taskListItem->setText(taskName);
 			ShowTaskInfo(taskListItem);
+			tdManager.SaveToJson(filePath);
 		}
 	}
 }
@@ -459,7 +344,7 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 
 			subTask->SetText(text);
 
-			ShowTaskInfo(taskListItem);
+			tdManager.SaveToJson(filePath);
 		}
 
 		ShowTaskInfo(taskListItem);
@@ -481,6 +366,17 @@ void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
 		subTask->SetIsCompleted(isCompleted);
 
 		ShowTaskInfo(taskListItem);
+	}
+}
+
+void TaskManagerMainWindow::RefreshUI()
+{
+	auto toDoLists = tdManager.GetToDoLists();
+
+	for (auto todoListIterator = toDoLists.begin(); todoListIterator!= toDoLists.end(); todoListIterator++)
+	{
+		auto listItem = new ToDoListWidgetItem(QString((*todoListIterator)->listName.c_str()), (*todoListIterator)->GetId());
+		ui.listWidgetLists->addItem(listItem);
 	}
 }
 

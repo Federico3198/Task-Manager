@@ -3,6 +3,9 @@
 #include "ToDoList.h"
 #include <ctime>
 #include "TimeUtils.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/foreach.hpp>
 
 class ToDoListManager
 {
@@ -15,11 +18,14 @@ public:
 	void AddList(std::shared_ptr<ToDoList> newList);
 	bool RemoveList(int listId);
 	std::shared_ptr<ToDoList> GetListByID(int listId);
+	void SaveToJson(std::string filePath);
+	void LoadFromJson(std::string filePath);
+	std::list<std::shared_ptr<ToDoList>> GetToDoLists();
 	ToDoListManager();
 	ToDoListManager(std::list<std::shared_ptr<ToDoList> > toDoLists);
 	~ToDoListManager();
 
-	std::list<std::shared_ptr<ToDoList> > toDoLists;
 private:
+	std::list<std::shared_ptr<ToDoList> > toDoLists;
 };
 
