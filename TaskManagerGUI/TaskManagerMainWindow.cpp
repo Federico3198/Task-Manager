@@ -8,20 +8,20 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	tdManager = ToDoListManager();
 
 	/*std::fstream fs;
-	
+
 	fs.open(filePath, std::fstream::in | std::fstream::out | std::fstream::trunc);
 */
-	//if (fs.is_open())
-	//{
-	//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
-	//	fs << "{}" << std::endl; //BUG non scrive in realtà
-	//	fs.close();
-	//}
+//if (fs.is_open())
+//{
+//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
+//	fs << "{}" << std::endl; //BUG non scrive in realtà
+//	fs.close();
+//}
 
 
 	tdManager.LoadFromJson(filePath);
 	RefreshUI();
-	
+
 }
 
 void TaskManagerMainWindow::on_actionCreateList_triggered()
@@ -128,18 +128,25 @@ void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 	auto todoList = tdManager.GetListByID(listId);
 
 	auto listWidget = GetSelectedTaskList();
-
 	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
-	auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-	auto task = taskItem->GetTask();
 
-	//remove task
-	todoList->RemoveTask(task);
-	delete taskListItem;
+	if (taskListItem != NULL)
+	{
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
 
-	ui.listWidgetTaskInfo->clear();
-	listWidget->clearSelection();
-	tdManager.SaveToJson(filePath);
+		//remove task
+		todoList->RemoveTask(task);
+		delete taskListItem;
+
+		ui.listWidgetTaskInfo->clear();
+		listWidget->clearSelection();
+		tdManager.SaveToJson(filePath);
+	}
+	else
+	{
+		//TODO avverti utente che non ha selezionato nulla
+	}
 }
 
 void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
@@ -282,12 +289,12 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
 
-	if (listWidget != NULL)
-	{
-		CreateTaskDialog createTaskDialog;
-		createTaskDialog.setModal(true);
+	CreateTaskDialog createTaskDialog;
+	createTaskDialog.setModal(true);
 
-		auto taskListItem = listWidget->item(listWidget->currentRow());
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+	if (taskListItem != NULL)
+	{
 		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
 		auto task = taskItem->GetTask();
 
@@ -317,6 +324,11 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 			tdManager.SaveToJson(filePath);
 		}
 	}
+	else
+	{
+		//TODO avverti utente
+	}
+
 }
 
 void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
@@ -373,7 +385,7 @@ void TaskManagerMainWindow::RefreshUI()
 {
 	auto toDoLists = tdManager.GetToDoLists();
 
-	for (auto todoListIterator = toDoLists.begin(); todoListIterator!= toDoLists.end(); todoListIterator++)
+	for (auto todoListIterator = toDoLists.begin(); todoListIterator != toDoLists.end(); todoListIterator++)
 	{
 		auto listItem = new ToDoListWidgetItem(QString((*todoListIterator)->listName.c_str()), (*todoListIterator)->GetId());
 		ui.listWidgetLists->addItem(listItem);
