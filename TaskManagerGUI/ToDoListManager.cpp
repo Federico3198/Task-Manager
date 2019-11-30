@@ -191,6 +191,7 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 		auto todoListNode = todoListsPair.second;
 
 		auto listName = todoListNode.get<std::string>("listName");
+
 		std::shared_ptr<ToDoList> sharedToDoList(new ToDoList(listName));
 
 		auto tasksRoot = todoListNode.get_child("tasks");
@@ -225,8 +226,9 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 
 
 			sharedToDoList->AddTask(sharedTask);
-			AddList(sharedToDoList);
 		}
+
+		AddList(sharedToDoList);
 	}
 
 
