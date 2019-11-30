@@ -1,6 +1,6 @@
 #pragma once
 #include <ctime>
-static class TimeUtils
+class TimeUtils
 {
 public:
 	static time_t GetEndOfToday();

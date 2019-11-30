@@ -31,7 +31,6 @@ Task::Task(std::string title)
 	isCompleted = false;
 	notes = "";
 	dueDate = DateTime();
-
 }
 
 Task::~Task() {}

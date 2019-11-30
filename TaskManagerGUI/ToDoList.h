@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "Task.h"
+
 class ToDoList
 {
 public:
@@ -28,4 +29,3 @@ private:
 	std::shared_ptr<Task> GetTask(int index, bool isCompleted);
 	int GetTaskCount(bool isCompleted);
 };
-

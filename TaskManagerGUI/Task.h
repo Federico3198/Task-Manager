@@ -6,6 +6,7 @@
 #include <list>
 #include <queue>
 #include "SubTask.h"
+
 class Task
 {
 public:

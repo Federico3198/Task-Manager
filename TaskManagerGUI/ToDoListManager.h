@@ -28,4 +28,3 @@ public:
 private:
 	std::list<std::shared_ptr<ToDoList> > toDoLists;
 };
-

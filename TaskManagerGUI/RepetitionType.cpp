@@ -77,5 +77,9 @@ public:
 		{
 			return RepetitionType::Yearly;
 		}
+		else
+		{
+			return RepetitionType::None;
+		}
 	}
 };

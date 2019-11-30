@@ -45,6 +45,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SubTaskTests.cpp" />
+    <ClCompile Include="TaskTests.cpp" />
+    <ClCompile Include="ToDoListManagerTests.cpp" />
+    <ClCompile Include="ToDoListTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskManager\TaskManager.vcxproj">

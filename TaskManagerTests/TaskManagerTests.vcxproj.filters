@@ -11,6 +11,15 @@
     <ClCompile Include="SubTaskTests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="TaskTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ToDoListTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="ToDoListManagerTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />

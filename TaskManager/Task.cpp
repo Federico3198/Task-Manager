@@ -1,35 +1,50 @@
 #include "pch.h"
 #include "Task.h"
 
-
-
 void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 {
-	subTasks.push_back(subTask);
+	if (subTask != NULL)
+	{
+		subTasks.push_back(subTask);
+	}
 }
 
-void Task::AddComment(std::shared_ptr<Comment> comment)
+void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
 {
-	comments.push_back(comment);
+	subTasks.remove(subTask);
 }
 
 std::shared_ptr<SubTask> Task::GetSubTask(int index)
 {
-	auto iterator = subTasks.begin();
-	std::advance(iterator, index);
-	return *iterator;
+	if (index > -1)
+	{
+		auto iterator = subTasks.begin();
+		std::advance(iterator, index);
+		return *iterator;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
-std::shared_ptr<Comment> Task::GetComment(int index)
+std::list<std::shared_ptr<SubTask>> Task::GetSubTasks()
 {
-	auto iterator = comments.begin();
-	std::advance(iterator, index);
-	return *iterator;
+	return subTasks;
 }
 
 Task::Task(std::string title)
 {
+	if ((&title) == NULL)
+	{
+		title = "";
+	}
 	this->title = title;
+	repetition = RepetitionType::None;
+	isImportant = false;
+	isCompleted = false;
+	notes = "";
+	dueDate = DateTime();
 }
 
 Task::~Task() {}

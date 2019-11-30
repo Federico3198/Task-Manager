@@ -138,4 +138,3 @@ DateTime::DateTime()
 	hours = 0;
 	minutes = 0;
 }
-

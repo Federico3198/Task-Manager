@@ -29,4 +29,3 @@ private:
 	int hours, minutes;
 	time_t secondsSince1970;
 };
-
