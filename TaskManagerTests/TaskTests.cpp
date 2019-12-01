@@ -87,12 +87,6 @@ TEST(Task, GetSubTasks_subTaskListCount_moreThan0_Assert_notEmpty_subTaskList)
 	EXPECT_FALSE(taskTest.GetSubTasks().empty());
 }
 
-TEST(Task, Constructor_title_null_Assert_noExceptions)
-{
-	Task taskTest(NULL);
-	EXPECT_TRUE("" == taskTest.title);
-}
-
 TEST(Task, Constructor_title_task_Assert_title_equal_task)
 {
 	Task taskTest("task");

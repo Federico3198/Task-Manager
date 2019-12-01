@@ -10,7 +10,10 @@ int ToDoList::GetId()
 
 void ToDoList::AddTask(std::shared_ptr<Task> task)
 {
-	tasks.push_back(task);
+	if (task != NULL)
+	{
+		tasks.push_back(task);
+	}
 }
 
 void ToDoList::RemoveTask(std::shared_ptr<Task> task)

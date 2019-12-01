@@ -16,7 +16,7 @@ void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
 
 std::shared_ptr<SubTask> Task::GetSubTask(int index)
 {
-	if (index > -1)
+	if (index > -1 && index < subTasks.size())
 	{
 		auto iterator = subTasks.begin();
 		std::advance(iterator, index);
@@ -35,10 +35,6 @@ std::list<std::shared_ptr<SubTask>> Task::GetSubTasks()
 
 Task::Task(std::string title)
 {
-	if ((&title) == NULL)
-	{
-		title = "";
-	}
 	this->title = title;
 	repetition = RepetitionType::None;
 	isImportant = false;
