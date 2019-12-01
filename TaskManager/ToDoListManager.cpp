@@ -60,12 +60,15 @@ std::list<std::shared_ptr<Task>> ToDoListManager::GetThisWeekTasks()
 
 bool ToDoListManager::AddTask(std::shared_ptr<Task> task, int listId)
 {
-	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	if (task != NULL)
 	{
-		if ((*toDoListIterator)->GetId() == listId)
+		for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
 		{
-			(*toDoListIterator)->AddTask(task);
-			return true;
+			if ((*toDoListIterator)->GetId() == listId)
+			{
+				(*toDoListIterator)->AddTask(task);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -73,12 +76,15 @@ bool ToDoListManager::AddTask(std::shared_ptr<Task> task, int listId)
 
 bool ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
 {
-	for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
+	if (task != NULL)
 	{
-		if ((*toDoListIterator)->GetId() == listId)
+		for (auto toDoListIterator = toDoLists.begin(); toDoListIterator != toDoLists.end(); toDoListIterator++)
 		{
-			(*toDoListIterator)->RemoveTask(task);
-			return true;
+			if ((*toDoListIterator)->GetId() == listId)
+			{
+				(*toDoListIterator)->RemoveTask(task);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -86,7 +92,10 @@ bool ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
 
 void ToDoListManager::AddList(std::shared_ptr<ToDoList> newList)
 {
-	toDoLists.push_back(newList);
+	if (newList != NULL)
+	{
+		toDoLists.push_back(newList);
+	}
 }
 
 bool ToDoListManager::RemoveList(int listId)
