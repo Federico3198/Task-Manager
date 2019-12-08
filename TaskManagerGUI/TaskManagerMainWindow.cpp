@@ -6,22 +6,8 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 {
 	ui.setupUi(this);
 	tdManager = ToDoListManager();
-
-	/*std::fstream fs;
-
-	fs.open(filePath, std::fstream::in | std::fstream::out | std::fstream::trunc);
-*/
-//if (fs.is_open())
-//{
-//	//fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::trunc);
-//	fs << "{}" << std::endl; //BUG non scrive in realtà
-//	fs.close();
-//}
-
-
 	tdManager.LoadFromJson(filePath);
 	RefreshUI();
-
 }
 
 void TaskManagerMainWindow::on_actionCreateList_triggered()
@@ -48,13 +34,18 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 void TaskManagerMainWindow::on_actionDeleteList_triggered()
 {
 	auto currentItem = ui.listWidgetLists->takeItem(ui.listWidgetLists->currentRow());
-
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 	int listId = listItem->GetListId();
-
+	
 	tdManager.RemoveList(listId);
-
 	delete currentItem;
+
+	if (tdManager.GetToDoLists().size()==0)
+	{
+		ui.listWidgetCompletedTasks->clear();
+		ui.listWidgetUncompletedTasks->clear();
+		ui.listWidgetTaskInfo->clear();
+	}
 	tdManager.SaveToJson(filePath);
 }
 
@@ -67,20 +58,23 @@ void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
 	auto currentItem = ui.listWidgetLists->item(currentRow);
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 	int listId = listItem->GetListId();
-
 	auto todoList = tdManager.GetListByID(listId);
-	auto uncompletedTasks = todoList->GetUncompletedTasks();
 
-	for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
+	if (todoList != NULL)
 	{
-		ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
-	}
+		auto uncompletedTasks = todoList->GetUncompletedTasks();
 
-	auto completedTasks = todoList->GetCompletedTasks();
+		for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
+		{
+			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+		}
 
-	for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
-	{
-		ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+		auto completedTasks = todoList->GetCompletedTasks();
+
+		for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
+		{
+			ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+		}
 	}
 }
 
@@ -142,10 +136,6 @@ void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 		ui.listWidgetTaskInfo->clear();
 		listWidget->clearSelection();
 		tdManager.SaveToJson(filePath);
-	}
-	else
-	{
-		//TODO avverti utente che non ha selezionato nulla
 	}
 }
 
@@ -324,11 +314,6 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 			tdManager.SaveToJson(filePath);
 		}
 	}
-	else
-	{
-		//TODO avverti utente
-	}
-
 }
 
 void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
@@ -441,9 +426,6 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 			ui.listWidgetTaskInfo->addItem(new SubTaskWidgetItem((*subTasksIterator)));
 		}
 	}
-
-	//"☑⬜"
-	//"►"
 }
 
 QListWidget * TaskManagerMainWindow::GetSelectedTaskList()
@@ -459,7 +441,3 @@ QListWidget * TaskManagerMainWindow::GetSelectedTaskList()
 
 	return listWidget;
 }
-
-
-
-

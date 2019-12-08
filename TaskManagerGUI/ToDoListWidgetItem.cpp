@@ -10,7 +10,14 @@ ToDoListWidgetItem::ToDoListWidgetItem(QString name, int listId)
 
 int ToDoListWidgetItem::GetListId()
 {
-	return listId;
+	if (this != NULL)
+	{
+		return listId;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 

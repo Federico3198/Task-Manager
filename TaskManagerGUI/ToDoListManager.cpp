@@ -181,56 +181,74 @@ void ToDoListManager::SaveToJson(std::string filePath)
 
 void ToDoListManager::LoadFromJson(std::string filePath)
 {
-	boost::property_tree::ptree jsonRoot;
-	boost::property_tree::read_json(filePath, jsonRoot);
 
-	auto todoListsRoot = jsonRoot.get_child("todoLists");
-	BOOST_FOREACH(boost::property_tree::ptree::value_type& todoListsPair, todoListsRoot)
+	struct stat buffer;
+	bool exists (stat(filePath.c_str(), &buffer) == 0);
+
+	if (!exists)
 	{
-		
-		auto todoListNode = todoListsPair.second;
+		std::fstream fs;
 
-		auto listName = todoListNode.get<std::string>("listName");
+		fs.open(filePath, std::fstream::in | std::fstream::out | std::fstream::trunc);
 
-		std::shared_ptr<ToDoList> sharedToDoList(new ToDoList(listName));
-
-		auto tasksRoot = todoListNode.get_child("tasks");
-
-		BOOST_FOREACH( boost::property_tree::ptree::value_type& tasksPair , tasksRoot)
-		{			
-			auto taskNode = tasksPair.second;
-
-			
-			auto title = taskNode.get<std::string>("title");
-			std::shared_ptr<Task> sharedTask(new Task(title));
-
-			sharedTask->isCompleted = taskNode.get<bool>("isCompleted");
-			sharedTask->isImportant = taskNode.get<bool>("isImportant");
-			sharedTask->dueDate = DateTime(taskNode.get<time_t>("dueDate"));
-			sharedTask->expire = taskNode.get<bool>("expire");
-			sharedTask->repetition = RepetitionTypeUtils::ConvertItaToEnum(taskNode.get<std::string>("repetition"));
-			sharedTask->notes = taskNode.get<std::string>("notes");
-			
-			auto subTasksRoot = taskNode.get_child("subTasks");
-
-			BOOST_FOREACH(boost::property_tree::ptree::value_type& subTasksPair, subTasksRoot) 
-			{
-				auto subTaskNode = subTasksPair.second;
-
-				auto text = subTaskNode.get<std::string>("text");
-				std::shared_ptr<SubTask> sharedSubTask(new SubTask(text));
-				sharedSubTask->SetIsCompleted(subTaskNode.get<bool>("isCompleted"));
-				
-				sharedTask->AddSubTask(sharedSubTask);
-			}
-
-
-			sharedToDoList->AddTask(sharedTask);
+		if (fs.is_open())
+		{
+			fs << "{}" << std::endl;
+			fs.close();
 		}
-
-		AddList(sharedToDoList);
 	}
 
+	boost::property_tree::ptree jsonRoot;
+	boost::property_tree::read_json(filePath, jsonRoot);
+	if (!jsonRoot.empty())
+	{
+		auto todoListsRoot = jsonRoot.get_child("todoLists");
+		BOOST_FOREACH(boost::property_tree::ptree::value_type& todoListsPair, todoListsRoot)
+		{
+
+			auto todoListNode = todoListsPair.second;
+
+			auto listName = todoListNode.get<std::string>("listName");
+
+			std::shared_ptr<ToDoList> sharedToDoList(new ToDoList(listName));
+
+			auto tasksRoot = todoListNode.get_child("tasks");
+
+			BOOST_FOREACH(boost::property_tree::ptree::value_type& tasksPair, tasksRoot)
+			{
+				auto taskNode = tasksPair.second;
+
+
+				auto title = taskNode.get<std::string>("title");
+				std::shared_ptr<Task> sharedTask(new Task(title));
+
+				sharedTask->isCompleted = taskNode.get<bool>("isCompleted");
+				sharedTask->isImportant = taskNode.get<bool>("isImportant");
+				sharedTask->dueDate = DateTime(taskNode.get<time_t>("dueDate"));
+				sharedTask->expire = taskNode.get<bool>("expire");
+				sharedTask->repetition = RepetitionTypeUtils::ConvertItaToEnum(taskNode.get<std::string>("repetition"));
+				sharedTask->notes = taskNode.get<std::string>("notes");
+
+				auto subTasksRoot = taskNode.get_child("subTasks");
+
+				BOOST_FOREACH(boost::property_tree::ptree::value_type& subTasksPair, subTasksRoot)
+				{
+					auto subTaskNode = subTasksPair.second;
+
+					auto text = subTaskNode.get<std::string>("text");
+					std::shared_ptr<SubTask> sharedSubTask(new SubTask(text));
+					sharedSubTask->SetIsCompleted(subTaskNode.get<bool>("isCompleted"));
+
+					sharedTask->AddSubTask(sharedSubTask);
+				}
+
+
+				sharedToDoList->AddTask(sharedTask);
+			}
+
+			AddList(sharedToDoList);
+		}
+	}
 
 }
 
