@@ -44,6 +44,7 @@ private slots:
 	void on_actionSet_Sub_Task_Uncompleted_triggered();
 	void on_actionModifyList_triggered();
 	void on_actionModifyTask_triggered();
+	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 	void on_actionModify_Sub_Task_triggered();
 
 private:
@@ -57,4 +58,5 @@ private:
 
 	Ui::TaskManagerMainWindowClass ui;
 	ToDoListManager tdManager;
+	const char* important = "Importanti";
 };

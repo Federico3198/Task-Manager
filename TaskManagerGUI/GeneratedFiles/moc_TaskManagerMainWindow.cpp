@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TaskManagerMainWindow_t {
-    QByteArrayData data[21];
-    char stringdata0[626];
+    QByteArrayData data[27];
+    char stringdata0[712];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -52,7 +52,13 @@ QT_MOC_LITERAL(16, 445, 41), // "on_actionSet_Sub_Task_Complet..."
 QT_MOC_LITERAL(17, 487, 43), // "on_actionSet_Sub_Task_Uncompl..."
 QT_MOC_LITERAL(18, 531, 29), // "on_actionModifyList_triggered"
 QT_MOC_LITERAL(19, 561, 29), // "on_actionModifyTask_triggered"
-QT_MOC_LITERAL(20, 591, 34) // "on_actionModify_Sub_Task_trig..."
+QT_MOC_LITERAL(20, 591, 20), // "RefreshImportantList"
+QT_MOC_LITERAL(21, 612, 22), // "std::shared_ptr<Task>&"
+QT_MOC_LITERAL(22, 635, 4), // "task"
+QT_MOC_LITERAL(23, 640, 12), // "QListWidget*"
+QT_MOC_LITERAL(24, 653, 10), // "listWidget"
+QT_MOC_LITERAL(25, 664, 12), // "taskListItem"
+QT_MOC_LITERAL(26, 677, 34) // "on_actionModify_Sub_Task_trig..."
 
     },
     "TaskManagerMainWindow\0"
@@ -72,6 +78,8 @@ QT_MOC_LITERAL(20, 591, 34) // "on_actionModify_Sub_Task_trig..."
     "on_actionSet_Sub_Task_Uncompleted_triggered\0"
     "on_actionModifyList_triggered\0"
     "on_actionModifyTask_triggered\0"
+    "RefreshImportantList\0std::shared_ptr<Task>&\0"
+    "task\0QListWidget*\0listWidget\0taskListItem\0"
     "on_actionModify_Sub_Task_triggered"
 };
 #undef QT_MOC_LITERAL
@@ -82,7 +90,7 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
+      17,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -90,22 +98,23 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   94,    2, 0x08 /* Private */,
-       3,    0,   95,    2, 0x08 /* Private */,
-       4,    1,   96,    2, 0x08 /* Private */,
-       6,    0,   99,    2, 0x08 /* Private */,
-       7,    0,  100,    2, 0x08 /* Private */,
-       8,    1,  101,    2, 0x08 /* Private */,
-      11,    1,  104,    2, 0x08 /* Private */,
-      12,    0,  107,    2, 0x08 /* Private */,
-      13,    0,  108,    2, 0x08 /* Private */,
-      14,    0,  109,    2, 0x08 /* Private */,
-      15,    0,  110,    2, 0x08 /* Private */,
-      16,    0,  111,    2, 0x08 /* Private */,
-      17,    0,  112,    2, 0x08 /* Private */,
-      18,    0,  113,    2, 0x08 /* Private */,
-      19,    0,  114,    2, 0x08 /* Private */,
-      20,    0,  115,    2, 0x08 /* Private */,
+       1,    0,   99,    2, 0x08 /* Private */,
+       3,    0,  100,    2, 0x08 /* Private */,
+       4,    1,  101,    2, 0x08 /* Private */,
+       6,    0,  104,    2, 0x08 /* Private */,
+       7,    0,  105,    2, 0x08 /* Private */,
+       8,    1,  106,    2, 0x08 /* Private */,
+      11,    1,  109,    2, 0x08 /* Private */,
+      12,    0,  112,    2, 0x08 /* Private */,
+      13,    0,  113,    2, 0x08 /* Private */,
+      14,    0,  114,    2, 0x08 /* Private */,
+      15,    0,  115,    2, 0x08 /* Private */,
+      16,    0,  116,    2, 0x08 /* Private */,
+      17,    0,  117,    2, 0x08 /* Private */,
+      18,    0,  118,    2, 0x08 /* Private */,
+      19,    0,  119,    2, 0x08 /* Private */,
+      20,    3,  120,    2, 0x08 /* Private */,
+      26,    0,  127,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -123,6 +132,7 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 21, 0x80000000 | 23, 0x80000000 | 9,   22,   24,   25,
     QMetaType::Void,
 
        0        // eod
@@ -149,8 +159,20 @@ void TaskManagerMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         case 12: _t->on_actionSet_Sub_Task_Uncompleted_triggered(); break;
         case 13: _t->on_actionModifyList_triggered(); break;
         case 14: _t->on_actionModifyTask_triggered(); break;
-        case 15: _t->on_actionModify_Sub_Task_triggered(); break;
+        case 15: _t->RefreshImportantList((*reinterpret_cast< std::shared_ptr<Task>(*)>(_a[1])),(*reinterpret_cast< QListWidget*(*)>(_a[2])),(*reinterpret_cast< QListWidgetItem*(*)>(_a[3]))); break;
+        case 16: _t->on_actionModify_Sub_Task_triggered(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+        case 15:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
+            case 1:
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QListWidget* >(); break;
+            }
+            break;
         }
     }
 }
@@ -184,13 +206,13 @@ int TaskManagerMainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 16;
+        if (_id < 17)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 17;
     }
     return _id;
 }

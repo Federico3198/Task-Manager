@@ -79,12 +79,17 @@ ToDoList::~ToDoList()
 
 bool ToDoList::operator==(const ToDoList & other)
 {
-	return id==other.id;
+	return id == other.id;
 }
 
 std::list<std::shared_ptr<Task>> ToDoList::GetAllTasks()
 {
 	return tasks;
+}
+
+bool ToDoList::IsCompleted()
+{
+	return tasks.size() > 0 && GetUncompletedTaskCount() == 0;
 }
 
 std::shared_ptr<Task> ToDoList::GetTask(int index, bool isCompleted)

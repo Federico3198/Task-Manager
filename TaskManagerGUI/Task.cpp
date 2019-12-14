@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Task.h"
 
+
 void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 {
 	subTasks.push_back(subTask);

@@ -1,6 +1,14 @@
 ﻿#include "stdafx.h"
 #include "TaskManagerMainWindow.h"
 
+//Gui da rifare
+//implementare comment
+//task main managerwindow implementare observer
+//funzione di ricerca per le task e per le liste
+//test per la ricerca
+//numerino task non completate
+
+
 TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -33,20 +41,26 @@ void TaskManagerMainWindow::on_actionCreateList_triggered()
 
 void TaskManagerMainWindow::on_actionDeleteList_triggered()
 {
-	auto currentItem = ui.listWidgetLists->takeItem(ui.listWidgetLists->currentRow());
-	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-	int listId = listItem->GetListId();
-	
-	tdManager.RemoveList(listId);
-	delete currentItem;
+	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 
-	if (tdManager.GetToDoLists().size()==0)
+	if (currentItem->text().compare(important) != 0)
 	{
-		ui.listWidgetCompletedTasks->clear();
-		ui.listWidgetUncompletedTasks->clear();
-		ui.listWidgetTaskInfo->clear();
+		currentItem = ui.listWidgetLists->takeItem(ui.listWidgetLists->currentRow());
+		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
+
+		int listId = listItem->GetListId();
+
+		tdManager.RemoveList(listId);
+		delete currentItem;
+
+		if (tdManager.GetToDoLists().size() == 0)
+		{
+			ui.listWidgetCompletedTasks->clear();
+			ui.listWidgetUncompletedTasks->clear();
+			ui.listWidgetTaskInfo->clear();
+		}
+		tdManager.SaveToJson(filePath);
 	}
-	tdManager.SaveToJson(filePath);
 }
 
 void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
@@ -57,23 +71,40 @@ void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
 
 	auto currentItem = ui.listWidgetLists->item(currentRow);
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-	int listId = listItem->GetListId();
-	auto todoList = tdManager.GetListByID(listId);
 
-	if (todoList != NULL)
+
+
+	if (listItem->text().compare(important) == 0)
 	{
-		auto uncompletedTasks = todoList->GetUncompletedTasks();
+		ui.listWidgetCompletedTasks->clear();
+
+		auto uncompletedTasks = tdManager.GetImportantTasks();
 
 		for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
 		{
 			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
 		}
+	}
+	else
+	{
+		int listId = listItem->GetListId();
+		auto todoList = tdManager.GetListByID(listId);
 
-		auto completedTasks = todoList->GetCompletedTasks();
-
-		for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
+		if (todoList != NULL)
 		{
-			ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+			auto uncompletedTasks = todoList->GetUncompletedTasks();
+
+			for (auto tasksIterator = uncompletedTasks.begin(); tasksIterator != uncompletedTasks.end(); tasksIterator++)
+			{
+				ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+			}
+
+			auto completedTasks = todoList->GetCompletedTasks();
+
+			for (auto tasksIterator = completedTasks.begin(); tasksIterator != completedTasks.end(); tasksIterator++)
+			{
+				ui.listWidgetCompletedTasks->addItem(new TaskWidgetItem(*tasksIterator));
+			}
 		}
 	}
 }
@@ -81,7 +112,7 @@ void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
 void TaskManagerMainWindow::on_actionAddTask_triggered()
 {
 	auto currentItem = ui.listWidgetLists->currentItem();
-	if (currentItem != NULL)
+	if (currentItem != NULL && currentItem->text().compare(important) != 0)
 	{
 		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 		int listId = listItem->GetListId();
@@ -106,7 +137,10 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 			sharedTask->expire = createTaskDialog.GetCheckExpire()->checkState();
 
 			todoList->AddTask(sharedTask);
-			ui.listWidgetUncompletedTasks->addItem(new TaskWidgetItem(sharedTask));
+			auto listItem = new TaskWidgetItem(sharedTask);
+			ui.listWidgetUncompletedTasks->addItem(listItem);
+
+			RefreshImportantList(sharedTask, ui.listWidgetUncompletedTasks, listItem);
 
 			tdManager.SaveToJson(filePath);
 		}
@@ -115,27 +149,30 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 {
-	//get todolist
 	auto currentList = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 	auto todoListItem = static_cast<ToDoListWidgetItem*>(currentList);
-	int listId = todoListItem->GetListId();
-	auto todoList = tdManager.GetListByID(listId);
 
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->takeItem(listWidget->currentRow());
-
-	if (taskListItem != NULL)
+	if (todoListItem->text().compare(important) != 0)
 	{
-		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-		auto task = taskItem->GetTask();
+		int listId = todoListItem->GetListId();
+		auto todoList = tdManager.GetListByID(listId);
 
-		//remove task
-		todoList->RemoveTask(task);
-		delete taskListItem;
+		auto listWidget = GetSelectedTaskList();
+		auto taskListItem = listWidget->takeItem(listWidget->currentRow());
 
-		ui.listWidgetTaskInfo->clear();
-		listWidget->clearSelection();
-		tdManager.SaveToJson(filePath);
+		if (taskListItem != NULL)
+		{
+			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+			auto task = taskItem->GetTask();
+
+			todoList->RemoveTask(task);
+			delete taskListItem;
+
+			ui.listWidgetTaskInfo->clear();
+			listWidget->clearSelection();
+			RefreshImportantList(task, listWidget, taskListItem);
+			tdManager.SaveToJson(filePath);
+		}
 	}
 }
 
@@ -144,7 +181,6 @@ void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidge
 	ui.listWidgetCompletedTasks->clearSelection();
 	ShowTaskInfo(listWidgetItem);
 }
-
 
 void TaskManagerMainWindow::on_listWidgetCompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
 {
@@ -165,7 +201,17 @@ void TaskManagerMainWindow::on_actionSet_CompletedTask_triggered()
 		ui.listWidgetUncompletedTasks->clearSelection();
 		ui.listWidgetCompletedTasks->clearSelection();
 		ui.listWidgetCompletedTasks->setCurrentItem(taskListItem);
-		ShowTaskInfo(taskListItem);
+
+		if (ui.listWidgetLists->item(ui.listWidgetLists->currentRow())->text().compare(important) == 0)
+		{
+			ui.listWidgetCompletedTasks->clear();
+			ui.listWidgetTaskInfo->clear();
+		}
+		else
+		{
+			ShowTaskInfo(taskListItem);
+			RefreshImportantList(task, ui.listWidgetCompletedTasks, taskListItem);
+		}
 		tdManager.SaveToJson(filePath);
 	}
 }
@@ -184,6 +230,9 @@ void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 		ui.listWidgetCompletedTasks->clearSelection();
 		ui.listWidgetUncompletedTasks->setCurrentItem(taskListItem);
 		ShowTaskInfo(taskListItem);
+
+		RefreshImportantList(task, ui.listWidgetUncompletedTasks, taskListItem);
+
 		tdManager.SaveToJson(filePath);
 	}
 }
@@ -251,27 +300,32 @@ void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
 
 void TaskManagerMainWindow::on_actionModifyList_triggered()
 {
-	CreateListDialog createListDialog;
-	createListDialog.setModal(true);
-
 	auto currentList = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 	auto todoListItem = static_cast<ToDoListWidgetItem*>(currentList);
-	int listId = todoListItem->GetListId();
-	auto todoList = tdManager.GetListByID(listId);
 
-	createListDialog.SetFieldListName(QString(todoList->listName.c_str()));
-
-	int result = createListDialog.exec();
-
-	if (result == 1)
+	if (todoListItem->text().compare(important) != 0)
 	{
-		auto fieldlistName = createListDialog.GetFieldListName();
-		auto listName = fieldlistName->text();
+		CreateListDialog createListDialog;
+		createListDialog.setModal(true);
 
-		todoList->listName = listName.toStdString();
+		int listId = todoListItem->GetListId();
+		auto todoList = tdManager.GetListByID(listId);
 
-		todoListItem->setText(QString(todoList->listName.c_str()));
-		tdManager.SaveToJson(filePath);
+		createListDialog.SetFieldListName(QString(todoList->listName.c_str()));
+
+		int result = createListDialog.exec();
+
+		if (result == 1)
+		{
+			auto fieldlistName = createListDialog.GetFieldListName();
+			auto listName = fieldlistName->text();
+
+			todoList->listName = listName.toStdString();
+
+			todoListItem->setText(QString(todoList->listName.c_str()));
+			tdManager.SaveToJson(filePath);
+
+		}
 	}
 }
 
@@ -311,8 +365,32 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 
 			taskListItem->setText(taskName);
 			ShowTaskInfo(taskListItem);
+			RefreshImportantList(task, listWidget, taskListItem);
+
 			tdManager.SaveToJson(filePath);
 		}
+	}
+}
+
+void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem)
+{
+
+	if (tdManager.GetImportantTasks().size() > 0)
+	{
+		if (ui.listWidgetLists->item(0)->text().compare(important) != 0)
+		{
+			auto listItem = new ToDoListWidgetItem(QString(important), -1);
+			ui.listWidgetLists->insertItem(0, listItem);
+		}
+		else if (ui.listWidgetLists->currentRow() == 0 && !task->isImportant)
+		{
+			delete listWidget->takeItem(listWidget->row(taskListItem));
+			ui.listWidgetTaskInfo->clear();
+		}
+	}
+	else if (ui.listWidgetLists->item(0)->text().compare(important) == 0)
+	{
+		delete ui.listWidgetLists->takeItem(0);
 	}
 }
 
@@ -370,12 +448,21 @@ void TaskManagerMainWindow::RefreshUI()
 {
 	auto toDoLists = tdManager.GetToDoLists();
 
+	ui.listWidgetLists->clear();
+
+	if (tdManager.GetImportantTasks().size() > 0)
+	{
+		auto listItem = new ToDoListWidgetItem(QString(important), -1);
+		ui.listWidgetLists->addItem(listItem);
+	}
+
 	for (auto todoListIterator = toDoLists.begin(); todoListIterator != toDoLists.end(); todoListIterator++)
 	{
 		auto listItem = new ToDoListWidgetItem(QString((*todoListIterator)->listName.c_str()), (*todoListIterator)->GetId());
 		ui.listWidgetLists->addItem(listItem);
 	}
 }
+
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 {
