@@ -9,7 +9,7 @@ CommentWidgetItem::CommentWidgetItem(std::shared_ptr<Comment> comment)
 	stringStream << comment->GetOwner() << " | ";
 	DateTime creation = comment->GetCreationDate();
 	stringStream << creation.GetDay() << "/"<< creation.GetMonth()<<"/"<<creation.GetYear()<< " - ";
-	stringStream << creation.GetHours() << ":" << creation.GetMinutes() << " | ";
+	stringStream << creation.GetHours() << ":" << creation.GetMinutes() << std::endl;
 	stringStream << comment->GetText();
 	setText(stringStream.str().c_str());
 }

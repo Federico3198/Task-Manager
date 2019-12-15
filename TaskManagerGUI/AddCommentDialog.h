@@ -14,6 +14,8 @@ class AddCommentDialog : public QDialog
 public:
     explicit AddCommentDialog(QWidget *parent = nullptr);
     ~AddCommentDialog();
+	QLineEdit * GetOwnerField();
+	QTextEdit * GetCommentText();
 
 private:
     Ui::AddCommentDialog *ui;

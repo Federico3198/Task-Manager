@@ -12,3 +12,13 @@ AddCommentDialog::~AddCommentDialog()
 {
     delete ui;
 }
+
+QLineEdit * AddCommentDialog::GetOwnerField()
+{
+	return ui->fieldName;
+}
+
+QTextEdit * AddCommentDialog::GetCommentText()
+{
+	return ui->textEdit;
+}

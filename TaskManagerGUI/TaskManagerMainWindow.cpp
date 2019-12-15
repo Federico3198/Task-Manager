@@ -2,7 +2,6 @@
 #include "TaskManagerMainWindow.h"
 
 //Gui da rifare
-//implementare comment
 //task main managerwindow implementare observer
 //funzione di ricerca per le task e per le liste
 //test per la ricerca
@@ -429,28 +428,31 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 
 void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
 {
-	AddCommentDialog dialog;
-	dialog.setModal(true);
-	dialog.exec();
-
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 
 	if (taskListItem != NULL)
 	{
+		AddCommentDialog dialog;
+		dialog.setModal(true);
 		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
 		auto task = taskItem->GetTask();
 
-		DateTime today = DateTime::GetToday();
+		if (dialog.exec() == 1)
+		{
+			DateTime today = DateTime::GetToday();
+			std::string  owner = dialog.GetOwnerField()->text().toStdString();
+			std::string text = dialog.GetCommentText()->toPlainText().toStdString();
 
-		std::shared_ptr<Comment> sharedComment(new Comment("Federico", "oggi vado a fare la spesa", today));
+			std::shared_ptr<Comment> sharedComment(new Comment(owner, text, today));
 
-		task->AddComment(sharedComment);
+			task->AddComment(sharedComment);
 
-		
-		ui.listWidgetComments->addItem(new CommentWidgetItem(sharedComment));
 
-		tdManager.SaveToJson(filePath);
+			ui.listWidgetComments->addItem(new CommentWidgetItem(sharedComment));
+
+			tdManager.SaveToJson(filePath);
+		}
 	}
 }
 
