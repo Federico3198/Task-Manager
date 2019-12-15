@@ -429,6 +429,10 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 
 void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
 {
+	AddCommentDialog dialog;
+	dialog.setModal(true);
+	dialog.exec();
+
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 

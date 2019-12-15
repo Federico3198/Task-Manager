@@ -21,35 +21,46 @@ include(TaskManagerGUI.pri)
 win32:RC_FILE = TaskManagerGUI.rc
 
 FORMS += \
+    AddCommentDialog.ui \
     AddSubTaskDialog.ui \
     CreateListDialog.ui \
     CreateSubTaskDialog.ui \
     createtaskdialog.ui
 
 HEADERS += \
+    AddCommentDialog.h \
     AddSubTaskDialog.h \
     Comment.h \
+    CommentWidgetItem.h \
     CreateListDialog.h \
     CreateSubTaskDialog.h \
     DateTime.h \
     RepetitionType.h \
     SubTask.h \
+    SubTaskWidgetItem.h \
     Task.h \
+    TaskWidgetItem.h \
     TimeUtils.h \
     ToDoList.h \
     ToDoListManager.h \
+    ToDoListWidgetItem.h \
     createtaskdialog.h
 
 SOURCES += \
+    AddCommentDialog.cpp \
     AddSubTaskDialog.cpp \
     Comment.cpp \
+    CommentWidgetItem.cpp \
     CreateListDialog.cpp \
     CreateSubTaskDialog.cpp \
     DateTime.cpp \
     RepetitionType.cpp \
     SubTask.cpp \
+    SubTaskWidgetItem.cpp \
     Task.cpp \
+    TaskWidgetItem.cpp \
     TimeUtils.cpp \
     ToDoList.cpp \
     ToDoListManager.cpp \
+    ToDoListWidgetItem.cpp \
     createtaskdialog.cpp

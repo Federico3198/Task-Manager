@@ -10,6 +10,7 @@
 #include "CreateListDialog.h"
 #include "createtaskdialog.h"
 #include "CreateSubTaskDialog.h"
+#include "AddCommentDialog.h"
 #include "ToDoListWidgetItem.h"
 #include "TaskWidgetItem.h"
 #include "SubTaskWidgetItem.h"

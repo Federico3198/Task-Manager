@@ -101,6 +101,12 @@
     <ClCompile Include="CommentWidgetItem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddCommentDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\moc_AddCommentDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -116,6 +122,9 @@
       <Filter>Generated Files</Filter>
     </QtMoc>
     <QtMoc Include="CreateSubTaskDialog.h">
+      <Filter>Generated Files</Filter>
+    </QtMoc>
+    <QtMoc Include="AddCommentDialog.h">
       <Filter>Generated Files</Filter>
     </QtMoc>
   </ItemGroup>
@@ -145,6 +154,9 @@
     </QtUic>
     <QtUic Include="CreateSubTaskDialog.ui">
       <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="AddCommentDialog.ui">
+      <Filter>Generated Files</Filter>
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +208,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="CommentWidgetItem.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_addcommentdialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
