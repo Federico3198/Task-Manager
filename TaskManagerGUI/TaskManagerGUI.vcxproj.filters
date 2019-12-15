@@ -98,6 +98,9 @@
     <ClCompile Include="SubTaskWidgetItem.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="CommentWidgetItem.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -190,6 +193,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="SubTaskWidgetItem.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommentWidgetItem.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

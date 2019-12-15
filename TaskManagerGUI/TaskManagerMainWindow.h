@@ -13,6 +13,7 @@
 #include "ToDoListWidgetItem.h"
 #include "TaskWidgetItem.h"
 #include "SubTaskWidgetItem.h"
+#include "CommentWidgetItem.h"
 #include "qlist.h"
 #include <typeinfo>
 #include <boost/property_tree/ptree.hpp>
@@ -44,8 +45,9 @@ private slots:
 	void on_actionSet_Sub_Task_Uncompleted_triggered();
 	void on_actionModifyList_triggered();
 	void on_actionModifyTask_triggered();
-	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 	void on_actionModify_Sub_Task_triggered();
+	void on_actionAdd_Comment_triggered();
+	void on_actionRemove_Comment_triggered();
 
 private:
 	boost::property_tree::ptree todoListsRoot;
@@ -54,6 +56,7 @@ private:
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
 	void SetSubTaskCompleted(bool isCompleted);
 	void RefreshUI();
+	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 	QListWidget * GetSelectedTaskList();
 
 	Ui::TaskManagerMainWindowClass ui;

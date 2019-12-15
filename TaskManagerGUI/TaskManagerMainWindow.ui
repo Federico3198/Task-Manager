@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>714</height>
+    <width>1446</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,7 +37,7 @@
    <widget class="QListWidget" name="listWidgetTaskInfo">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>620</x>
       <y>20</y>
       <width>256</width>
       <height>451</height>
@@ -54,13 +54,23 @@
      </rect>
     </property>
    </widget>
+   <widget class="QListWidget" name="listWidgetComments">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>20</y>
+      <width>531</width>
+      <height>451</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1002</width>
+     <width>1446</width>
      <height>25</height>
     </rect>
    </property>
@@ -92,9 +102,17 @@
     <addaction name="actionSet_Sub_Task_Uncompleted"/>
     <addaction name="actionModify_Sub_Task"/>
    </widget>
+   <widget class="QMenu" name="menuComment">
+    <property name="title">
+     <string>Comment</string>
+    </property>
+    <addaction name="actionAdd_Comment"/>
+    <addaction name="actionRemove_Comment"/>
+   </widget>
    <addaction name="menuLista"/>
    <addaction name="menuTask"/>
    <addaction name="menuTask_Info"/>
+   <addaction name="menuComment"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -168,6 +186,16 @@
   <action name="actionModify_Sub_Task">
    <property name="text">
     <string>Modify Sub Task</string>
+   </property>
+  </action>
+  <action name="actionAdd_Comment">
+   <property name="text">
+    <string>Add Comment</string>
+   </property>
+  </action>
+  <action name="actionRemove_Comment">
+   <property name="text">
+    <string>Remove Comment</string>
    </property>
   </action>
  </widget>

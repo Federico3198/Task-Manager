@@ -138,3 +138,11 @@ DateTime::DateTime()
 	hours = 0;
 	minutes = 0;
 }
+
+DateTime DateTime::GetToday()
+{
+	auto currentTime = std::chrono::system_clock::now();
+	auto currentTime_t = std::chrono::system_clock::to_time_t(currentTime);
+
+	return DateTime(currentTime_t);
+}

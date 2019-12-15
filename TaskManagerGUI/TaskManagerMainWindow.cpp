@@ -68,6 +68,7 @@ void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
 	ui.listWidgetUncompletedTasks->clear();
 	ui.listWidgetCompletedTasks->clear();
 	ui.listWidgetTaskInfo->clear();
+	ui.listWidgetComments->clear();
 
 	auto currentItem = ui.listWidgetLists->item(currentRow);
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
@@ -426,6 +427,53 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 	}
 }
 
+void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
+{
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	if (taskListItem != NULL)
+	{
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
+
+		DateTime today = DateTime::GetToday();
+
+		std::shared_ptr<Comment> sharedComment(new Comment("Federico", "oggi vado a fare la spesa", today));
+
+		task->AddComment(sharedComment);
+
+		
+		ui.listWidgetComments->addItem(new CommentWidgetItem(sharedComment));
+
+		tdManager.SaveToJson(filePath);
+	}
+}
+
+void TaskManagerMainWindow::on_actionRemove_Comment_triggered()
+{
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	if (taskListItem != NULL)
+	{
+		auto commentListItem = ui.listWidgetComments->item(ui.listWidgetComments->currentRow());
+
+		if (commentListItem != NULL)
+		{
+			commentListItem = ui.listWidgetComments->takeItem(ui.listWidgetComments->currentRow());
+			auto commentItem = static_cast<CommentWidgetItem*>(commentListItem);
+
+			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+			auto task = taskItem->GetTask();
+		
+			task->RemoveComment(commentItem->GetComment());
+
+			tdManager.SaveToJson(filePath);
+		}
+	}
+}
+
 void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
 {
 	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
@@ -513,6 +561,17 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 			ui.listWidgetTaskInfo->addItem(new SubTaskWidgetItem((*subTasksIterator)));
 		}
 	}
+
+	auto comments = task->GetComments();
+	ui.listWidgetComments->clear();
+	if (comments.size() > 0)
+	{
+		for (auto commentsIterator = comments.begin(); commentsIterator != comments.end(); commentsIterator++)
+		{
+			ui.listWidgetComments->addItem(new CommentWidgetItem((*commentsIterator)));
+		}
+	}
+	
 }
 
 QListWidget * TaskManagerMainWindow::GetSelectedTaskList()

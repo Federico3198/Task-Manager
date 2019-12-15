@@ -1,5 +1,6 @@
 #pragma once
 #include <ctime>
+#include <chrono>
 class DateTime
 {
 public:
@@ -23,6 +24,8 @@ public:
 
 	DateTime(time_t timeInSeconds);
 	DateTime();
+
+	static DateTime GetToday();
 
 private:
 	int day, month, year;
