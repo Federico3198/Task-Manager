@@ -472,12 +472,70 @@ void TaskManagerMainWindow::on_actionRemove_Comment_triggered()
 
 			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
 			auto task = taskItem->GetTask();
-		
+
 			task->RemoveComment(commentItem->GetComment());
 
 			tdManager.SaveToJson(filePath);
 		}
 	}
+}
+
+void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchText)
+{
+	auto text = searchText.toStdString();
+
+	//ricerca nel nome
+	//ricerca nel nelle sub task
+	//ricerca nelle note
+
+	std::list<std::shared_ptr<Task> > result = std::list<std::shared_ptr<Task> >();
+
+	if (!text.empty())
+	{
+		auto todoLists = tdManager.GetToDoLists();
+
+		for (auto tdListIterator = todoLists.begin(); tdListIterator != todoLists.end(); tdListIterator++)
+		{
+			auto tdList = *tdListIterator;
+			auto taskList = tdList->GetAllTasks();
+
+			for (auto taskIterator = taskList.begin(); taskIterator != taskList.end(); taskIterator++)
+			{
+				auto task = *taskIterator;
+				if (task->title.find(text) != std::string::npos)
+				{
+					result.push_back(task);
+				}
+			}
+		}
+	}
+
+
+
+
+	//ui.listWidgetSearch->clear();
+	ui.listWidgetCompletedTasks->clear();
+	ui.listWidgetUncompletedTasks->clear();
+	ui.listWidgetLists->clearSelection();
+
+	for (auto resultIterator = result.begin(); resultIterator != result.end(); resultIterator++)
+	{
+		auto task = *resultIterator;
+
+		TaskWidgetItem *taskItem = new TaskWidgetItem(task);
+
+		if (task->isCompleted)
+		{
+			ui.listWidgetCompletedTasks->addItem(taskItem);
+			//ui.listWidgetSearch->addItem(taskItem);
+		}
+		else
+		{
+			ui.listWidgetUncompletedTasks->addItem(taskItem);
+
+		}
+	}
+
 }
 
 void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
@@ -577,7 +635,7 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 			ui.listWidgetComments->addItem(new CommentWidgetItem((*commentsIterator)));
 		}
 	}
-	
+
 }
 
 QListWidget * TaskManagerMainWindow::GetSelectedTaskList()

@@ -49,6 +49,7 @@ private slots:
 	void on_actionModify_Sub_Task_triggered();
 	void on_actionAdd_Comment_triggered();
 	void on_actionRemove_Comment_triggered();
+    void on_fieldSearch_textChanged(const QString &searchText);
 
 private:
 	boost::property_tree::ptree todoListsRoot;

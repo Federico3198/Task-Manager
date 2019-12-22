@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -46,6 +47,8 @@ public:
     QListWidget *listWidgetTaskInfo;
     QListWidget *listWidgetCompletedTasks;
     QListWidget *listWidgetComments;
+    QListWidget *listWidgetSearch;
+    QLineEdit *lineEdit;
     QMenuBar *menuBar;
     QMenu *menuLista;
     QMenu *menuTask;
@@ -58,7 +61,7 @@ public:
     {
         if (TaskManagerMainWindowClass->objectName().isEmpty())
             TaskManagerMainWindowClass->setObjectName(QString::fromUtf8("TaskManagerMainWindowClass"));
-        TaskManagerMainWindowClass->resize(1446, 599);
+        TaskManagerMainWindowClass->resize(1446, 962);
         actionCreateList = new QAction(TaskManagerMainWindowClass);
         actionCreateList->setObjectName(QString::fromUtf8("actionCreateList"));
         actionAddTask = new QAction(TaskManagerMainWindowClass);
@@ -99,13 +102,19 @@ public:
         listWidgetUncompletedTasks->setGeometry(QRect(350, 20, 256, 221));
         listWidgetTaskInfo = new QListWidget(centralWidget);
         listWidgetTaskInfo->setObjectName(QString::fromUtf8("listWidgetTaskInfo"));
-        listWidgetTaskInfo->setGeometry(QRect(620, 20, 256, 451));
+        listWidgetTaskInfo->setGeometry(QRect(620, 20, 256, 461));
         listWidgetCompletedTasks = new QListWidget(centralWidget);
         listWidgetCompletedTasks->setObjectName(QString::fromUtf8("listWidgetCompletedTasks"));
         listWidgetCompletedTasks->setGeometry(QRect(350, 270, 256, 211));
         listWidgetComments = new QListWidget(centralWidget);
         listWidgetComments->setObjectName(QString::fromUtf8("listWidgetComments"));
-        listWidgetComments->setGeometry(QRect(890, 20, 531, 451));
+        listWidgetComments->setGeometry(QRect(890, 20, 531, 461));
+        listWidgetSearch = new QListWidget(centralWidget);
+        listWidgetSearch->setObjectName(QString::fromUtf8("listWidgetSearch"));
+        listWidgetSearch->setGeometry(QRect(50, 530, 256, 341));
+        lineEdit = new QLineEdit(centralWidget);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setGeometry(QRect(50, 500, 231, 24));
         TaskManagerMainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(TaskManagerMainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));

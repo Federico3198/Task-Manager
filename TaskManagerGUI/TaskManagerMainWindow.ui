@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1446</width>
-    <height>599</height>
+    <height>962</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
       <x>620</x>
       <y>20</y>
       <width>256</width>
-      <height>451</height>
+      <height>461</height>
      </rect>
     </property>
    </widget>
@@ -60,7 +60,27 @@
       <x>890</x>
       <y>20</y>
       <width>531</width>
-      <height>451</height>
+      <height>461</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidgetSearch">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>530</y>
+      <width>256</width>
+      <height>341</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="fieldSearch">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>500</y>
+      <width>231</width>
+      <height>24</height>
      </rect>
     </property>
    </widget>
