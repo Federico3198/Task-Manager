@@ -153,6 +153,19 @@ void ToDoListManager::SaveToJson(std::string filePath)
 
 			taskNode.add_child("subTasks", subTasksNode);
 
+			auto comments = (*tasksIterator)->GetComments();
+			boost::property_tree::ptree commentsNode;
+			for (auto commentsIterator = comments.begin(); commentsIterator!=comments.end(); commentsIterator++)
+			{
+				boost::property_tree::ptree commentNode;
+				commentNode.put("owner", (*commentsIterator)->GetOwner());
+				commentNode.put("creationDate", (*commentsIterator)->GetCreationDate().GetSecondsSince1970());
+				commentNode.put("text", (*commentsIterator)->GetText());
+				commentsNode.push_back(std::make_pair("", commentNode));
+			}
+
+			taskNode.add_child("comments", commentsNode);
+
 			tasksNode.push_back(std::make_pair("", taskNode));
 		}
 
@@ -240,6 +253,21 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 					sharedSubTask->SetIsCompleted(subTaskNode.get<bool>("isCompleted"));
 
 					sharedTask->AddSubTask(sharedSubTask);
+				}
+
+				auto commentsRoot = taskNode.get_child("comments");
+
+				BOOST_FOREACH(boost::property_tree::ptree::value_type& commentsPair, commentsRoot)
+				{
+					auto commentNode = commentsPair.second;
+
+					auto owner = commentNode.get<std::string>("owner");
+					auto creationDate = DateTime(commentNode.get<time_t>("creationDate"));
+					auto text = commentNode.get<std::string>("text");
+
+					std::shared_ptr<Comment> sharedComment(new Comment(owner,text,creationDate));
+
+					sharedTask->AddComment(sharedComment);
 				}
 
 
