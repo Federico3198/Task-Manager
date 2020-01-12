@@ -88,7 +88,7 @@ public:
 
     void retranslateUi(QDialog *CreateTaskDialog)
     {
-        CreateTaskDialog->setWindowTitle(QCoreApplication::translate("CreateTaskDialog", "Dialog", nullptr));
+        CreateTaskDialog->setWindowTitle(QCoreApplication::translate("CreateTaskDialog", "Crea Task", nullptr));
         label->setText(QCoreApplication::translate("CreateTaskDialog", "Nome:", nullptr));
         checkIsImportant->setText(QCoreApplication::translate("CreateTaskDialog", "Importante", nullptr));
         label_2->setText(QCoreApplication::translate("CreateTaskDialog", "Scadenza:", nullptr));

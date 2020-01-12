@@ -1,13 +1,9 @@
 ﻿#include "stdafx.h"
 #include "TaskManagerMainWindow.h"
 
-//Gui da rifare
 //task main managerwindow implementare observer
 //test per la ricerca
-//numerino task non completate
-
-//far vedere nella ricerca le liste da quali provengono i task
-
+//bug: se dopo la ricerca si clicca sulla lista precedente, i box non si aggiornano
 
 TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	: QMainWindow(parent)
@@ -263,30 +259,26 @@ void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
 
-	if (listWidget != NULL && typeid(*listWidget) == typeid(TaskWidgetItem))
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
 	{
-		auto taskListItem = listWidget->item(listWidget->currentRow());
-		if (taskListItem != NULL)
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
+
+		CreateSubTaskDialog createSubTaskDialog;
+		createSubTaskDialog.setModal(true);
+		int result = createSubTaskDialog.exec();
+
+		if (result == 1)
 		{
-			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-			auto task = taskItem->GetTask();
+			auto text = createSubTaskDialog.GetText()->text().toStdString();
 
+			SubTask* subTask;
+			subTask = new SubTask(text);
+			task->AddSubTask(std::shared_ptr<SubTask>(subTask));
+			ShowTaskInfo(taskListItem);
 
-			CreateSubTaskDialog createSubTaskDialog;
-			createSubTaskDialog.setModal(true);
-			int result = createSubTaskDialog.exec();
-
-			if (result == 1)
-			{
-				auto text = createSubTaskDialog.GetText()->text().toStdString();
-
-				SubTask* subTask;
-				subTask = new SubTask(text);
-				task->AddSubTask(std::shared_ptr<SubTask>(subTask));
-				ShowTaskInfo(taskListItem);
-
-				tdManager.SaveToJson(filePath);
-			}
+			tdManager.SaveToJson(filePath);
 		}
 	}
 }
@@ -358,44 +350,43 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 void TaskManagerMainWindow::on_actionModifyTask_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
-	if (listWidget != NULL && typeid(*listWidget) == typeid(TaskWidgetItem))
+
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
 	{
 		CreateTaskDialog createTaskDialog;
 		createTaskDialog.setModal(true);
 
-		auto taskListItem = listWidget->item(listWidget->currentRow());
-		if (taskListItem != NULL)
+		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
+		auto task = taskItem->GetTask();
+
+		createTaskDialog.SetName(QString(task->title.c_str()));
+		createTaskDialog.SetCheckIsImportant(task->isImportant);
+		createTaskDialog.SetCheckExpire(task->expire);
+		createTaskDialog.SetRepetition(task->repetition);
+		createTaskDialog.SetNotes(QString(task->notes.c_str()));
+		createTaskDialog.SetDueDate(task->dueDate);
+
+		int result = createTaskDialog.exec();
+
+		if (result == 1)
 		{
-			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-			auto task = taskItem->GetTask();
+			auto fieldTaskName = createTaskDialog.GetName();
+			auto taskName = fieldTaskName->text();
+			task->title = taskName.toStdString();
 
-			createTaskDialog.SetName(QString(task->title.c_str()));
-			createTaskDialog.SetCheckIsImportant(task->isImportant);
-			createTaskDialog.SetCheckExpire(task->expire);
-			createTaskDialog.SetRepetition(task->repetition);
-			createTaskDialog.SetNotes(QString(task->notes.c_str()));
-			createTaskDialog.SetDueDate(task->dueDate);
+			task->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
+			task->expire = createTaskDialog.GetCheckExpire()->checkState();
+			task->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
+			task->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
+			task->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
 
-			int result = createTaskDialog.exec();
+			taskListItem->setText(taskName);
+			ShowTaskInfo(taskListItem);
+			RefreshImportantList(task, listWidget, taskListItem);
 
-			if (result == 1)
-			{
-				auto fieldTaskName = createTaskDialog.GetName();
-				auto taskName = fieldTaskName->text();
-				task->title = taskName.toStdString();
-
-				task->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
-				task->expire = createTaskDialog.GetCheckExpire()->checkState();
-				task->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
-				task->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
-				task->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
-
-				taskListItem->setText(taskName);
-				ShowTaskInfo(taskListItem);
-				RefreshImportantList(task, listWidget, taskListItem);
-
-				tdManager.SaveToJson(filePath);
-			}
+			tdManager.SaveToJson(filePath);
 		}
 	}
 }

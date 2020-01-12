@@ -51,7 +51,7 @@ public:
 
     void retranslateUi(QDialog *AddSubTaskDialog)
     {
-        AddSubTaskDialog->setWindowTitle(QCoreApplication::translate("AddSubTaskDialog", "Dialog", nullptr));
+        AddSubTaskDialog->setWindowTitle(QCoreApplication::translate("AddSubTaskDialog", "Aggiungi Sotto-Task", nullptr));
         label->setText(QCoreApplication::translate("AddSubTaskDialog", "Nome:", nullptr));
     } // retranslateUi
 

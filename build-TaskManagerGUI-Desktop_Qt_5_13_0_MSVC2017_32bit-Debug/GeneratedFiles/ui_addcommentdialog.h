@@ -60,7 +60,7 @@ public:
 
     void retranslateUi(QDialog *AddCommentDialog)
     {
-        AddCommentDialog->setWindowTitle(QCoreApplication::translate("AddCommentDialog", "Dialog", nullptr));
+        AddCommentDialog->setWindowTitle(QCoreApplication::translate("AddCommentDialog", "Aggiungi Commento", nullptr));
         label->setText(QCoreApplication::translate("AddCommentDialog", "Inserisci il tuo nome:", nullptr));
         label_2->setText(QCoreApplication::translate("AddCommentDialog", "Inserisci il commento:", nullptr));
     } // retranslateUi

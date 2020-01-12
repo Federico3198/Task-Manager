@@ -51,7 +51,7 @@ public:
 
     void retranslateUi(QDialog *CreateListDialog)
     {
-        CreateListDialog->setWindowTitle(QCoreApplication::translate("CreateListDialog", "Dialog", nullptr));
+        CreateListDialog->setWindowTitle(QCoreApplication::translate("CreateListDialog", "Crea Lista", nullptr));
         label->setText(QCoreApplication::translate("CreateListDialog", "Nome:", nullptr));
     } // retranslateUi
 

@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
@@ -47,8 +48,13 @@ public:
     QListWidget *listWidgetTaskInfo;
     QListWidget *listWidgetCompletedTasks;
     QListWidget *listWidgetComments;
-    QListWidget *listWidgetSearch;
-    QLineEdit *lineEdit;
+    QLineEdit *fieldSearch;
+    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_5;
+    QLabel *label_6;
     QMenuBar *menuBar;
     QMenu *menuLista;
     QMenu *menuTask;
@@ -61,7 +67,9 @@ public:
     {
         if (TaskManagerMainWindowClass->objectName().isEmpty())
             TaskManagerMainWindowClass->setObjectName(QString::fromUtf8("TaskManagerMainWindowClass"));
-        TaskManagerMainWindowClass->resize(1446, 962);
+        TaskManagerMainWindowClass->resize(1466, 705);
+        TaskManagerMainWindowClass->setMinimumSize(QSize(1466, 705));
+        TaskManagerMainWindowClass->setMaximumSize(QSize(1466, 705));
         actionCreateList = new QAction(TaskManagerMainWindowClass);
         actionCreateList->setObjectName(QString::fromUtf8("actionCreateList"));
         actionAddTask = new QAction(TaskManagerMainWindowClass);
@@ -96,29 +104,44 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         listWidgetLists = new QListWidget(centralWidget);
         listWidgetLists->setObjectName(QString::fromUtf8("listWidgetLists"));
-        listWidgetLists->setGeometry(QRect(40, 20, 256, 461));
+        listWidgetLists->setGeometry(QRect(30, 100, 256, 531));
         listWidgetUncompletedTasks = new QListWidget(centralWidget);
         listWidgetUncompletedTasks->setObjectName(QString::fromUtf8("listWidgetUncompletedTasks"));
-        listWidgetUncompletedTasks->setGeometry(QRect(350, 20, 256, 221));
+        listWidgetUncompletedTasks->setGeometry(QRect(330, 100, 256, 221));
         listWidgetTaskInfo = new QListWidget(centralWidget);
         listWidgetTaskInfo->setObjectName(QString::fromUtf8("listWidgetTaskInfo"));
-        listWidgetTaskInfo->setGeometry(QRect(620, 20, 256, 461));
+        listWidgetTaskInfo->setGeometry(QRect(620, 100, 256, 531));
         listWidgetCompletedTasks = new QListWidget(centralWidget);
         listWidgetCompletedTasks->setObjectName(QString::fromUtf8("listWidgetCompletedTasks"));
-        listWidgetCompletedTasks->setGeometry(QRect(350, 270, 256, 211));
+        listWidgetCompletedTasks->setGeometry(QRect(330, 410, 256, 221));
         listWidgetComments = new QListWidget(centralWidget);
         listWidgetComments->setObjectName(QString::fromUtf8("listWidgetComments"));
-        listWidgetComments->setGeometry(QRect(890, 20, 531, 461));
-        listWidgetSearch = new QListWidget(centralWidget);
-        listWidgetSearch->setObjectName(QString::fromUtf8("listWidgetSearch"));
-        listWidgetSearch->setGeometry(QRect(50, 530, 256, 341));
-        lineEdit = new QLineEdit(centralWidget);
-        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(50, 500, 231, 24));
+        listWidgetComments->setGeometry(QRect(900, 100, 531, 531));
+        fieldSearch = new QLineEdit(centralWidget);
+        fieldSearch->setObjectName(QString::fromUtf8("fieldSearch"));
+        fieldSearch->setGeometry(QRect(140, 20, 231, 24));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(30, 70, 55, 20));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(330, 70, 141, 16));
+        label_3 = new QLabel(centralWidget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(330, 380, 131, 16));
+        label_4 = new QLabel(centralWidget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(620, 70, 171, 16));
+        label_5 = new QLabel(centralWidget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(900, 70, 161, 16));
+        label_6 = new QLabel(centralWidget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setGeometry(QRect(30, 20, 111, 16));
         TaskManagerMainWindowClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(TaskManagerMainWindowClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1446, 25));
+        menuBar->setGeometry(QRect(0, 0, 1466, 25));
         menuLista = new QMenu(menuBar);
         menuLista->setObjectName(QString::fromUtf8("menuLista"));
         menuTask = new QMenu(menuBar);
@@ -162,26 +185,32 @@ public:
 
     void retranslateUi(QMainWindow *TaskManagerMainWindowClass)
     {
-        TaskManagerMainWindowClass->setWindowTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "TaskManagerMainWindow", nullptr));
-        actionCreateList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Create", nullptr));
-        actionAddTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Add", nullptr));
-        actionRemoveTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Remove", nullptr));
-        actionDeleteList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Delete", nullptr));
-        actionModifyTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modify", nullptr));
-        actionModifyList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modify", nullptr));
-        actionSet_CompletedTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Completed", nullptr));
-        actionAdd_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Add Sub Task", nullptr));
-        actionRemove_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Remove Sub Task", nullptr));
-        actionSet_Sub_Task_Completed->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Sub Task Completed", nullptr));
-        actionSet_Sub_Task_Uncompleted->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Sub Task Uncompleted", nullptr));
-        actionSet_UncompletedTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Set Uncompleted", nullptr));
-        actionModify_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modify Sub Task", nullptr));
-        actionAdd_Comment->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Add Comment", nullptr));
-        actionRemove_Comment->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Remove Comment", nullptr));
-        menuLista->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "List", nullptr));
+        TaskManagerMainWindowClass->setWindowTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Project Task Manager", nullptr));
+        actionCreateList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Crea", nullptr));
+        actionAddTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Aggiungi", nullptr));
+        actionRemoveTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Rimuovi", nullptr));
+        actionDeleteList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Cancella", nullptr));
+        actionModifyTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modifica", nullptr));
+        actionModifyList->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modifica", nullptr));
+        actionSet_CompletedTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Completa Task", nullptr));
+        actionAdd_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Aggiungi Sotto-Task", nullptr));
+        actionRemove_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Rimuovi Sotto-Task", nullptr));
+        actionSet_Sub_Task_Completed->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Completa Sotto-Task", nullptr));
+        actionSet_Sub_Task_Uncompleted->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Imposta Sotto-Task non Completata", nullptr));
+        actionSet_UncompletedTask->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Imposta non Completata", nullptr));
+        actionModify_Sub_Task->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Modifica Sotto-Task", nullptr));
+        actionAdd_Comment->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Aggiungi Commento", nullptr));
+        actionRemove_Comment->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Rimuovi Commento", nullptr));
+        label->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Liste:", nullptr));
+        label_2->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Task non completate:", nullptr));
+        label_3->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Task completate:", nullptr));
+        label_4->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Informazioni sulla Task:", nullptr));
+        label_5->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Commenti sulla Task:", nullptr));
+        label_6->setText(QCoreApplication::translate("TaskManagerMainWindowClass", "Ricerca una Task:", nullptr));
+        menuLista->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Lista", nullptr));
         menuTask->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Task", nullptr));
         menuTask_Info->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Task Info", nullptr));
-        menuComment->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Comment", nullptr));
+        menuComment->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Commento", nullptr));
     } // retranslateUi
 
 };
