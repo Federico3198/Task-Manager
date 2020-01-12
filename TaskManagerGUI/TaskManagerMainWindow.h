@@ -33,7 +33,6 @@ public:
 private slots:
     void on_actionCreateList_triggered();
     void on_actionDeleteList_triggered();
-    void on_listWidgetLists_currentRowChanged(int currentRow);
 	void on_actionAddTask_triggered();
 	void on_actionRemoveTask_triggered();
 	void on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem);
@@ -50,10 +49,11 @@ private slots:
 	void on_actionAdd_Comment_triggered();
 	void on_actionRemove_Comment_triggered();
     void on_fieldSearch_textChanged(const QString &searchText);
+    void on_listWidgetLists_itemClicked(QListWidgetItem *item);
 
 private:
 	boost::property_tree::ptree todoListsRoot;
-	std::string filePath = "taskData.json";
+	const std::string filePath = "taskData.json";
 
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
 	void SetSubTaskCompleted(bool isCompleted);

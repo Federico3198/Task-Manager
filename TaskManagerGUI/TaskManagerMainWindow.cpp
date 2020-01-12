@@ -59,14 +59,15 @@ void TaskManagerMainWindow::on_actionDeleteList_triggered()
 	}
 }
 
-void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
+
+void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item)
 {
 	ui.listWidgetUncompletedTasks->clear();
 	ui.listWidgetCompletedTasks->clear();
 	ui.listWidgetTaskInfo->clear();
 	ui.listWidgetComments->clear();
 
-	auto currentItem = ui.listWidgetLists->item(currentRow);
+	auto currentItem = item;
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 
 
@@ -106,10 +107,12 @@ void TaskManagerMainWindow::on_listWidgetLists_currentRowChanged(int currentRow)
 	}
 }
 
+
 void TaskManagerMainWindow::on_actionAddTask_triggered()
 {
+	
 	auto currentItem = ui.listWidgetLists->currentItem();
-	if (currentItem != NULL && currentItem->text().compare(important) != 0)
+	if (currentItem != NULL && ui.listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(important) != 0)
 	{
 		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 		int listId = listItem->GetListId();
@@ -505,9 +508,12 @@ void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchTex
 
 	std::list<std::shared_ptr<Task> > result = std::list<std::shared_ptr<Task> >();
 
-	ui.listWidgetCompletedTasks->clear();
-	ui.listWidgetUncompletedTasks->clear();
-	ui.listWidgetLists->clearSelection();
+
+
+		ui.listWidgetCompletedTasks->clear();
+		ui.listWidgetUncompletedTasks->clear();
+		ui.listWidgetLists->clearSelection();
+	//ui.listWidgetLists->setCurrentRow(100);
 
 	if (!text.empty())
 	{
@@ -525,11 +531,6 @@ void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchTex
 				auto task = *taskIterator;
 				if (task->title.find(text) != std::string::npos)
 				{
-
-
-
-
-
 					TaskWidgetItem *taskItem = new TaskWidgetItem(task);
 
 					if (task->isCompleted)
@@ -564,26 +565,6 @@ void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchTex
 			}
 		}
 	}
-
-	//ui.listWidgetSearch->clear();
-
-	//for (auto resultIterator = result.begin(); resultIterator != result.end(); resultIterator++)
-	//{
-	//	auto task = *resultIterator;
-
-	//	TaskWidgetItem *taskItem = new TaskWidgetItem(task);
-
-	//	if (task->isCompleted)
-	//	{
-	//		ui.listWidgetCompletedTasks->addItem(taskItem);
-	//		//ui.listWidgetSearch->addItem(taskItem);
-	//	}
-	//	else
-	//	{
-	//		ui.listWidgetUncompletedTasks->addItem(taskItem);
-
-	//	}
-	//}
 
 }
 
@@ -694,8 +675,6 @@ QListWidget * TaskManagerMainWindow::GetSelectedTaskList()
 
 	auto selectedListItemCompleted = ui.listWidgetCompletedTasks->selectedItems();
 	auto listItemCompleted = selectedListItemCompleted.length() > 0 ? selectedListItemCompleted.first() : NULL;
-
-
 	auto listWidget = (listItemCompleted != NULL ? ui.listWidgetCompletedTasks : ui.listWidgetUncompletedTasks);
 
 	return listWidget;

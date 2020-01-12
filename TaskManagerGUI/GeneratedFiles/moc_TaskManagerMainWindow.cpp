@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_TaskManagerMainWindow_t {
     QByteArrayData data[25];
-    char stringdata0[729];
+    char stringdata0[717];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,34 +36,33 @@ QT_MOC_LITERAL(0, 0, 21), // "TaskManagerMainWindow"
 QT_MOC_LITERAL(1, 22, 29), // "on_actionCreateList_triggered"
 QT_MOC_LITERAL(2, 52, 0), // ""
 QT_MOC_LITERAL(3, 53, 29), // "on_actionDeleteList_triggered"
-QT_MOC_LITERAL(4, 83, 36), // "on_listWidgetLists_currentRow..."
-QT_MOC_LITERAL(5, 120, 10), // "currentRow"
-QT_MOC_LITERAL(6, 131, 26), // "on_actionAddTask_triggered"
-QT_MOC_LITERAL(7, 158, 29), // "on_actionRemoveTask_triggered"
-QT_MOC_LITERAL(8, 188, 41), // "on_listWidgetUncompletedTasks..."
-QT_MOC_LITERAL(9, 230, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(10, 247, 14), // "listWidgetItem"
-QT_MOC_LITERAL(11, 262, 39), // "on_listWidgetCompletedTasks_i..."
-QT_MOC_LITERAL(12, 302, 36), // "on_actionSet_CompletedTask_tr..."
-QT_MOC_LITERAL(13, 339, 38), // "on_actionSet_UncompletedTask_..."
-QT_MOC_LITERAL(14, 378, 31), // "on_actionAdd_Sub_Task_triggered"
-QT_MOC_LITERAL(15, 410, 34), // "on_actionRemove_Sub_Task_trig..."
-QT_MOC_LITERAL(16, 445, 41), // "on_actionSet_Sub_Task_Complet..."
-QT_MOC_LITERAL(17, 487, 43), // "on_actionSet_Sub_Task_Uncompl..."
-QT_MOC_LITERAL(18, 531, 29), // "on_actionModifyList_triggered"
-QT_MOC_LITERAL(19, 561, 29), // "on_actionModifyTask_triggered"
-QT_MOC_LITERAL(20, 591, 34), // "on_actionModify_Sub_Task_trig..."
-QT_MOC_LITERAL(21, 626, 30), // "on_actionAdd_Comment_triggered"
-QT_MOC_LITERAL(22, 657, 33), // "on_actionRemove_Comment_trigg..."
-QT_MOC_LITERAL(23, 691, 26), // "on_fieldSearch_textChanged"
-QT_MOC_LITERAL(24, 718, 10) // "searchText"
+QT_MOC_LITERAL(4, 83, 26), // "on_actionAddTask_triggered"
+QT_MOC_LITERAL(5, 110, 29), // "on_actionRemoveTask_triggered"
+QT_MOC_LITERAL(6, 140, 41), // "on_listWidgetUncompletedTasks..."
+QT_MOC_LITERAL(7, 182, 16), // "QListWidgetItem*"
+QT_MOC_LITERAL(8, 199, 14), // "listWidgetItem"
+QT_MOC_LITERAL(9, 214, 39), // "on_listWidgetCompletedTasks_i..."
+QT_MOC_LITERAL(10, 254, 36), // "on_actionSet_CompletedTask_tr..."
+QT_MOC_LITERAL(11, 291, 38), // "on_actionSet_UncompletedTask_..."
+QT_MOC_LITERAL(12, 330, 31), // "on_actionAdd_Sub_Task_triggered"
+QT_MOC_LITERAL(13, 362, 34), // "on_actionRemove_Sub_Task_trig..."
+QT_MOC_LITERAL(14, 397, 41), // "on_actionSet_Sub_Task_Complet..."
+QT_MOC_LITERAL(15, 439, 43), // "on_actionSet_Sub_Task_Uncompl..."
+QT_MOC_LITERAL(16, 483, 29), // "on_actionModifyList_triggered"
+QT_MOC_LITERAL(17, 513, 29), // "on_actionModifyTask_triggered"
+QT_MOC_LITERAL(18, 543, 34), // "on_actionModify_Sub_Task_trig..."
+QT_MOC_LITERAL(19, 578, 30), // "on_actionAdd_Comment_triggered"
+QT_MOC_LITERAL(20, 609, 33), // "on_actionRemove_Comment_trigg..."
+QT_MOC_LITERAL(21, 643, 26), // "on_fieldSearch_textChanged"
+QT_MOC_LITERAL(22, 670, 10), // "searchText"
+QT_MOC_LITERAL(23, 681, 30), // "on_listWidgetLists_itemClicked"
+QT_MOC_LITERAL(24, 712, 4) // "item"
 
     },
     "TaskManagerMainWindow\0"
     "on_actionCreateList_triggered\0\0"
     "on_actionDeleteList_triggered\0"
-    "on_listWidgetLists_currentRowChanged\0"
-    "currentRow\0on_actionAddTask_triggered\0"
+    "on_actionAddTask_triggered\0"
     "on_actionRemoveTask_triggered\0"
     "on_listWidgetUncompletedTasks_itemClicked\0"
     "QListWidgetItem*\0listWidgetItem\0"
@@ -79,7 +78,8 @@ QT_MOC_LITERAL(24, 718, 10) // "searchText"
     "on_actionModify_Sub_Task_triggered\0"
     "on_actionAdd_Comment_triggered\0"
     "on_actionRemove_Comment_triggered\0"
-    "on_fieldSearch_textChanged\0searchText"
+    "on_fieldSearch_textChanged\0searchText\0"
+    "on_listWidgetLists_itemClicked\0item"
 };
 #undef QT_MOC_LITERAL
 
@@ -99,34 +99,31 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
  // slots: name, argc, parameters, tag, flags
        1,    0,  109,    2, 0x08 /* Private */,
        3,    0,  110,    2, 0x08 /* Private */,
-       4,    1,  111,    2, 0x08 /* Private */,
-       6,    0,  114,    2, 0x08 /* Private */,
-       7,    0,  115,    2, 0x08 /* Private */,
-       8,    1,  116,    2, 0x08 /* Private */,
-      11,    1,  119,    2, 0x08 /* Private */,
-      12,    0,  122,    2, 0x08 /* Private */,
-      13,    0,  123,    2, 0x08 /* Private */,
-      14,    0,  124,    2, 0x08 /* Private */,
-      15,    0,  125,    2, 0x08 /* Private */,
-      16,    0,  126,    2, 0x08 /* Private */,
-      17,    0,  127,    2, 0x08 /* Private */,
-      18,    0,  128,    2, 0x08 /* Private */,
-      19,    0,  129,    2, 0x08 /* Private */,
-      20,    0,  130,    2, 0x08 /* Private */,
-      21,    0,  131,    2, 0x08 /* Private */,
-      22,    0,  132,    2, 0x08 /* Private */,
+       4,    0,  111,    2, 0x08 /* Private */,
+       5,    0,  112,    2, 0x08 /* Private */,
+       6,    1,  113,    2, 0x08 /* Private */,
+       9,    1,  116,    2, 0x08 /* Private */,
+      10,    0,  119,    2, 0x08 /* Private */,
+      11,    0,  120,    2, 0x08 /* Private */,
+      12,    0,  121,    2, 0x08 /* Private */,
+      13,    0,  122,    2, 0x08 /* Private */,
+      14,    0,  123,    2, 0x08 /* Private */,
+      15,    0,  124,    2, 0x08 /* Private */,
+      16,    0,  125,    2, 0x08 /* Private */,
+      17,    0,  126,    2, 0x08 /* Private */,
+      18,    0,  127,    2, 0x08 /* Private */,
+      19,    0,  128,    2, 0x08 /* Private */,
+      20,    0,  129,    2, 0x08 /* Private */,
+      21,    1,  130,    2, 0x08 /* Private */,
       23,    1,  133,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    5,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 7,    8,
+    QMetaType::Void, 0x80000000 | 7,    8,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -136,7 +133,10 @@ static const uint qt_meta_data_TaskManagerMainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   24,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   22,
+    QMetaType::Void, 0x80000000 | 7,   24,
 
        0        // eod
 };
@@ -149,23 +149,23 @@ void TaskManagerMainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c
         switch (_id) {
         case 0: _t->on_actionCreateList_triggered(); break;
         case 1: _t->on_actionDeleteList_triggered(); break;
-        case 2: _t->on_listWidgetLists_currentRowChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->on_actionAddTask_triggered(); break;
-        case 4: _t->on_actionRemoveTask_triggered(); break;
-        case 5: _t->on_listWidgetUncompletedTasks_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 6: _t->on_listWidgetCompletedTasks_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 7: _t->on_actionSet_CompletedTask_triggered(); break;
-        case 8: _t->on_actionSet_UncompletedTask_triggered(); break;
-        case 9: _t->on_actionAdd_Sub_Task_triggered(); break;
-        case 10: _t->on_actionRemove_Sub_Task_triggered(); break;
-        case 11: _t->on_actionSet_Sub_Task_Completed_triggered(); break;
-        case 12: _t->on_actionSet_Sub_Task_Uncompleted_triggered(); break;
-        case 13: _t->on_actionModifyList_triggered(); break;
-        case 14: _t->on_actionModifyTask_triggered(); break;
-        case 15: _t->on_actionModify_Sub_Task_triggered(); break;
-        case 16: _t->on_actionAdd_Comment_triggered(); break;
-        case 17: _t->on_actionRemove_Comment_triggered(); break;
-        case 18: _t->on_fieldSearch_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->on_actionAddTask_triggered(); break;
+        case 3: _t->on_actionRemoveTask_triggered(); break;
+        case 4: _t->on_listWidgetUncompletedTasks_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 5: _t->on_listWidgetCompletedTasks_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 6: _t->on_actionSet_CompletedTask_triggered(); break;
+        case 7: _t->on_actionSet_UncompletedTask_triggered(); break;
+        case 8: _t->on_actionAdd_Sub_Task_triggered(); break;
+        case 9: _t->on_actionRemove_Sub_Task_triggered(); break;
+        case 10: _t->on_actionSet_Sub_Task_Completed_triggered(); break;
+        case 11: _t->on_actionSet_Sub_Task_Uncompleted_triggered(); break;
+        case 12: _t->on_actionModifyList_triggered(); break;
+        case 13: _t->on_actionModifyTask_triggered(); break;
+        case 14: _t->on_actionModify_Sub_Task_triggered(); break;
+        case 15: _t->on_actionAdd_Comment_triggered(); break;
+        case 16: _t->on_actionRemove_Comment_triggered(); break;
+        case 17: _t->on_fieldSearch_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 18: _t->on_listWidgetLists_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     }
