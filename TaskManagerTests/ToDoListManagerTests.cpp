@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "../TaskManager/ToDoListManager.cpp"
 #include "../TaskManager/ToDoListManager.h"
+#include "../TaskManager/ToDoListTaskPair.cpp"
+#include "../TaskManager/ToDoListTaskPair.h"
 #include "../TaskManager/TimeUtils.h"
 #include "../TaskManager/TimeUtils.cpp"
 
@@ -50,8 +52,6 @@ TEST(ToDoListManager, AddTask_task_Null_id_valid_Assert_false)
 	EXPECT_FALSE(result);
 }
 
-
-
 TEST(ToDoListManager, RemoveTask_task_notNull_id_0_noLists_Assert_false)
 {
 	ToDoListManager tdManager;
@@ -97,7 +97,6 @@ TEST(ToDoListManager, RemoveTask_task_Null_id_valid_Assert_false)
 	EXPECT_FALSE(result);
 }
 
-
 TEST(ToDoListManager, AddList_tdlist_Null_emptyList_Assert_listIsEmpty)
 {
 
@@ -117,7 +116,6 @@ TEST(ToDoListManager, AddList_tdlist_notNull_emptyList_Assert_listIsNotEmpty)
 
 	EXPECT_FALSE(tdManager.GetToDoLists().empty());
 }
-
 
 TEST(ToDoListManager, RemoveList_tdlist_idInvalid_notEmptyList_Assert_listUnchanged)
 {
@@ -144,7 +142,6 @@ TEST(ToDoListManager, RemoveList_tdlist_id_valid_notEmptyList_Assert_tdListRemov
 
 	EXPECT_EQ(1, tdManager.GetToDoLists().size());
 }
-
 
 TEST(ToDoListManager, GetListByID_id_notValid_notEmptyList_Assert_null)
 {
@@ -198,9 +195,33 @@ TEST(ToDoListManager, ContructorEmpty_Assert_emptyList)
 
 TEST(ToDoListManager, ContructorToDoList_tdLists_notNull_with_moreThan0_lists_Assert_notEmptyList)
 {
-	std::list<std::shared_ptr<ToDoList> > toDoLists;
+	std::list<std::shared_ptr<ToDoList>> toDoLists;
 	toDoLists.push_back(std::shared_ptr<ToDoList>(new ToDoList("")));
 	ToDoListManager tdManager(toDoLists);
 
 	EXPECT_FALSE(tdManager.GetToDoLists().empty());
+}
+
+TEST(ToDoListManager, Find_search_emptystring_assert_emptyresult)
+{
+	std::list<std::shared_ptr<ToDoList>> toDoLists;
+	toDoLists.push_back(std::shared_ptr<ToDoList>(new ToDoList("")));
+	ToDoListManager tdManager(toDoLists);
+	auto result = tdManager.Find("");
+
+	EXPECT_TRUE(result.empty());
+}
+
+TEST(ToDoListManager, Find_search_notnull_assert_notemptyresult)
+{
+	std::list<std::shared_ptr<ToDoList>> toDoLists;
+	auto tdList = std::shared_ptr<ToDoList>(new ToDoList(""));
+	auto task = std::shared_ptr<Task>(new Task("tasktest"));
+	tdList->AddTask(task);
+	toDoLists.push_back(tdList);
+
+	ToDoListManager tdManager(toDoLists);
+	auto result = tdManager.Find("tasktest");
+
+	EXPECT_FALSE(result.empty());
 }

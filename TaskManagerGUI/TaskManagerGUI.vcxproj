@@ -226,6 +226,7 @@
     <ClCompile Include="TimeUtils.cpp" />
     <ClCompile Include="ToDoList.cpp" />
     <ClCompile Include="ToDoListManager.cpp" />
+    <ClCompile Include="ToDoListTaskPair.cpp" />
     <ClCompile Include="ToDoListWidgetItem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +342,7 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
     <ClInclude Include="CommentWidgetItem.h" />
     <ClInclude Include="SubTaskWidgetItem.h" />
     <ClInclude Include="TaskWidgetItem.h" />
+    <ClInclude Include="ToDoListTaskPair.h" />
     <ClInclude Include="ToDoListWidgetItem.h" />
     <QtMoc Include="CreateListDialog.h">
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\moc_%(Filename).cpp</OutputFile>

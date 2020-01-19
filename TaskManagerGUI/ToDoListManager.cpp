@@ -285,6 +285,37 @@ std::list<std::shared_ptr<ToDoList>> ToDoListManager::GetToDoLists()
 	return toDoLists;
 }
 
+std::list<ToDoListTaskPair> ToDoListManager::Find(std::string searchString)
+{
+	std::list<ToDoListTaskPair> result = std::list<ToDoListTaskPair>();
+
+	if (!searchString.empty())
+	{
+		auto todoLists = GetToDoLists();
+
+		for (auto tdListIterator = todoLists.begin(); tdListIterator != todoLists.end(); tdListIterator++)
+		{
+			auto tdList = *tdListIterator;
+			auto taskList = tdList->GetAllTasks();
+
+			for (auto taskIterator = taskList.begin(); taskIterator != taskList.end(); taskIterator++)
+			{
+				auto task = *taskIterator;
+				if (task->title.find(searchString) != std::string::npos)
+				{
+					ToDoListTaskPair pair;
+					pair.list = tdList;
+					pair.task = task;
+
+					result.push_back(pair);
+				}
+			}
+		}
+	}
+
+	return result;
+}
+
 ToDoListManager::ToDoListManager()
 {
 	toDoLists = std::list<std::shared_ptr<ToDoList> >();

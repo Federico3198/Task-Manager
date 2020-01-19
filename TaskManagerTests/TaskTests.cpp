@@ -2,6 +2,7 @@
 #include "../TaskManager/Task.h"
 #include "../TaskManager/Task.cpp"
 
+
 TEST(Task, AddSubTask_subTask_null_Assert_subTask_not_added)
 {
 	Task taskTest("task");
@@ -93,3 +94,64 @@ TEST(Task, Constructor_title_task_Assert_title_equal_task)
 
 	EXPECT_EQ("task", taskTest.title);
 }
+
+//----------------
+
+TEST(Task, AddComment_comment_null_Assert_comment_not_added)
+{
+	Task taskTest("task");
+
+	taskTest.AddComment(NULL);
+
+	EXPECT_EQ(0, taskTest.GetComments().size());
+}
+
+TEST(Task, AddComment_comment_notNull_Assert_comment_added)
+{
+	Task taskTest("task");
+	std::shared_ptr<Comment> sharedComment(new Comment("owner","testComment",DateTime()));
+
+	taskTest.AddComment(sharedComment);
+
+	EXPECT_FALSE(taskTest.GetComments().empty());
+}
+
+TEST(Task, RemoveComment_comment_null_Assert_no_listChanges)
+{
+	Task taskTest("task");
+	std::shared_ptr<Comment> sharedComment(new Comment("owner", "testComment", DateTime()));
+
+	taskTest.AddComment(sharedComment);
+	taskTest.RemoveComment(NULL);
+
+	EXPECT_FALSE(taskTest.GetComments().empty());
+}
+
+TEST(Task, RemoveComment_comment_notNull_Assert_comment_isRemoved)
+{
+	Task taskTest("task");
+	std::shared_ptr<Comment> sharedComment(new Comment("owner", "testComment", DateTime()));
+
+	taskTest.AddComment(sharedComment);
+	taskTest.RemoveComment(sharedComment);
+
+	EXPECT_TRUE(taskTest.GetComments().empty());
+}
+
+TEST(Task, GetComments_commentListSize_equal0_Assert_empty_commentList)
+{
+	Task taskTest("task");
+
+	EXPECT_TRUE(taskTest.GetComments().empty());
+}
+
+TEST(Task, GetSComments_commentListCount_moreThan0_Assert_notEmpty_commentList)
+{
+	Task taskTest("task");
+	std::shared_ptr<Comment> sharedComment(new Comment("owner", "testComment", DateTime()));
+
+	taskTest.AddComment(sharedComment);
+
+	EXPECT_FALSE(taskTest.GetComments().empty());
+}
+

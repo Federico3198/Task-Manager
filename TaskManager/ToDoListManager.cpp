@@ -90,6 +90,37 @@ bool ToDoListManager::RemoveTask(std::shared_ptr<Task> task, int listId)
 	return false;
 }
 
+std::list<ToDoListTaskPair> ToDoListManager::Find(std::string searchString)
+{
+	std::list<ToDoListTaskPair> result = std::list<ToDoListTaskPair>();
+
+	if (!searchString.empty())
+	{
+		auto todoLists = GetToDoLists();
+
+		for (auto tdListIterator = todoLists.begin(); tdListIterator != todoLists.end(); tdListIterator++)
+		{
+			auto tdList = *tdListIterator;
+			auto taskList = tdList->GetAllTasks();
+
+			for (auto taskIterator = taskList.begin(); taskIterator != taskList.end(); taskIterator++)
+			{
+				auto task = *taskIterator;
+				if (task->title.find(searchString) != std::string::npos)
+				{
+					ToDoListTaskPair pair;
+					pair.list = tdList;
+					pair.task = task;
+
+					result.push_back(pair);
+				}
+			}
+		}
+	}
+
+	return result;
+}
+
 void ToDoListManager::AddList(std::shared_ptr<ToDoList> newList)
 {
 	if (newList != NULL)
@@ -195,7 +226,7 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 	auto todoListsRoot = jsonRoot.get_child("todoLists");
 	BOOST_FOREACH(boost::property_tree::ptree::value_type& todoListsPair, todoListsRoot)
 	{
-		
+
 		auto todoListNode = todoListsPair.second;
 
 		auto listName = todoListNode.get<std::string>("listName");
@@ -204,11 +235,11 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 
 		auto tasksRoot = todoListNode.get_child("tasks");
 
-		BOOST_FOREACH( boost::property_tree::ptree::value_type& tasksPair , tasksRoot)
-		{			
+		BOOST_FOREACH(boost::property_tree::ptree::value_type& tasksPair, tasksRoot)
+		{
 			auto taskNode = tasksPair.second;
 
-			
+
 			auto title = taskNode.get<std::string>("title");
 			std::shared_ptr<Task> sharedTask(new Task(title));
 
@@ -218,17 +249,17 @@ void ToDoListManager::LoadFromJson(std::string filePath)
 			sharedTask->expire = taskNode.get<bool>("expire");
 			sharedTask->repetition = RepetitionTypeUtils::ConvertItaToEnum(taskNode.get<std::string>("repetition"));
 			sharedTask->notes = taskNode.get<std::string>("notes");
-			
+
 			auto subTasksRoot = taskNode.get_child("subTasks");
 
-			BOOST_FOREACH(boost::property_tree::ptree::value_type& subTasksPair, subTasksRoot) 
+			BOOST_FOREACH(boost::property_tree::ptree::value_type& subTasksPair, subTasksRoot)
 			{
 				auto subTaskNode = subTasksPair.second;
 
 				auto text = subTaskNode.get<std::string>("text");
 				std::shared_ptr<SubTask> sharedSubTask(new SubTask(text));
 				sharedSubTask->SetIsCompleted(subTaskNode.get<bool>("isCompleted"));
-				
+
 				sharedTask->AddSubTask(sharedSubTask);
 			}
 

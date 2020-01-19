@@ -1,10 +1,6 @@
 ﻿#include "stdafx.h"
 #include "TaskManagerMainWindow.h"
 
-//task main managerwindow implementare observer
-//test per la ricerca
-//bug: se dopo la ricerca si clicca sulla lista precedente, i box non si aggiornano
-
 TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -345,7 +341,6 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 
 			todoListItem->setText(QString(todoList->listName.c_str()));
 			tdManager.SaveToJson(filePath);
-
 		}
 	}
 }
@@ -396,7 +391,6 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 
 void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem)
 {
-
 	if (tdManager.GetImportantTasks().size() > 0)
 	{
 		if (ui.listWidgetLists->item(0)->text().compare(important) != 0)
@@ -429,8 +423,6 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 
 		CreateSubTaskDialog createSubTaskDialog;
 		createSubTaskDialog.setModal(true);
-
-
 		createSubTaskDialog.SetText(QString(subTask->GetText().c_str()));
 
 		int result = createSubTaskDialog.exec();
@@ -443,7 +435,6 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 
 			tdManager.SaveToJson(filePath);
 		}
-
 		ShowTaskInfo(taskListItem);
 	}
 }
@@ -453,7 +444,7 @@ void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 
-	if (taskListItem != NULL)
+	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
 	{
 		AddCommentDialog dialog;
 		dialog.setModal(true);
@@ -483,7 +474,7 @@ void TaskManagerMainWindow::on_actionRemove_Comment_triggered()
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 
-	if (taskListItem != NULL)
+	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
 	{
 		auto commentListItem = ui.listWidgetComments->item(ui.listWidgetComments->currentRow());
 
@@ -504,68 +495,64 @@ void TaskManagerMainWindow::on_actionRemove_Comment_triggered()
 
 void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchText)
 {
-	auto text = searchText.toStdString();
+	ui.listWidgetCompletedTasks->clear();
+	ui.listWidgetUncompletedTasks->clear();
+	ui.listWidgetLists->clearSelection();
 
-	std::list<std::shared_ptr<Task> > result = std::list<std::shared_ptr<Task> >();
+	auto pairs = tdManager.Find(searchText.toStdString());
 
-
-
-		ui.listWidgetCompletedTasks->clear();
-		ui.listWidgetUncompletedTasks->clear();
-		ui.listWidgetLists->clearSelection();
-	//ui.listWidgetLists->setCurrentRow(100);
-
-	if (!text.empty())
+	if (pairs.size() > 0)
 	{
-		auto todoLists = tdManager.GetToDoLists();
+		bool isListCompltetedAdded = false;
+		bool isListUncompltetedAdded = false;
 
-		for (auto tdListIterator = todoLists.begin(); tdListIterator != todoLists.end(); tdListIterator++)
+		std::shared_ptr<ToDoList> previousList = NULL;
+
+		for (auto pairIterator = pairs.begin(); pairIterator != pairs.end(); pairIterator++)
 		{
-			auto tdList = *tdListIterator;
-			auto taskList = tdList->GetAllTasks();
-			bool isListCompltetedAdded = false;
-			bool isListUncompltetedAdded = false;
+			auto task = (*pairIterator).task;
+			auto list = (*pairIterator).list;
 
-			for (auto taskIterator = taskList.begin(); taskIterator != taskList.end(); taskIterator++)
+			if (previousList != list)
 			{
-				auto task = *taskIterator;
-				if (task->title.find(text) != std::string::npos)
-				{
-					TaskWidgetItem *taskItem = new TaskWidgetItem(task);
-
-					if (task->isCompleted)
-					{
-						if (!isListCompltetedAdded)
-						{
-							std::stringstream stringStream;
-							stringStream << tdList->listName << ":";
-
-							QListWidgetItem *listNameItem = new QListWidgetItem(QString(stringStream.str().c_str()));
-							ui.listWidgetCompletedTasks->addItem(listNameItem);
-							isListCompltetedAdded = true;
-						}
-
-						ui.listWidgetCompletedTasks->addItem(taskItem);
-					}
-					else
-					{
-						if (!isListUncompltetedAdded)
-						{
-							std::stringstream stringStream;
-							stringStream << tdList->listName << ":";
-
-							QListWidgetItem *listNameItem = new QListWidgetItem(QString(stringStream.str().c_str()));
-							ui.listWidgetUncompletedTasks->addItem(listNameItem);
-							isListUncompltetedAdded = true;
-						}
-
-						ui.listWidgetUncompletedTasks->addItem(taskItem);
-					}
-				}
+				isListCompltetedAdded = false;
+				isListUncompltetedAdded = false;
 			}
+
+			TaskWidgetItem *taskItem = new TaskWidgetItem(task);
+
+			if (task->isCompleted)
+			{
+				if (!isListCompltetedAdded)
+				{
+					std::stringstream stringStream;
+					stringStream << list->listName << ":";
+
+					QListWidgetItem *listNameItem = new QListWidgetItem(QString(stringStream.str().c_str()));
+					ui.listWidgetCompletedTasks->addItem(listNameItem);
+					isListCompltetedAdded = true;
+				}
+
+				ui.listWidgetCompletedTasks->addItem(taskItem);
+			}
+			else
+			{
+				if (!isListUncompltetedAdded)
+				{
+					std::stringstream stringStream;
+					stringStream << list->listName << ":";
+
+					QListWidgetItem *listNameItem = new QListWidgetItem(QString(stringStream.str().c_str()));
+					ui.listWidgetUncompletedTasks->addItem(listNameItem);
+					isListUncompltetedAdded = true;
+				}
+
+				ui.listWidgetUncompletedTasks->addItem(taskItem);
+			}
+
+			previousList = list;
 		}
 	}
-
 }
 
 void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
@@ -665,7 +652,6 @@ void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 			ui.listWidgetComments->addItem(new CommentWidgetItem((*commentsIterator)));
 		}
 	}
-
 }
 
 QListWidget * TaskManagerMainWindow::GetSelectedTaskList()

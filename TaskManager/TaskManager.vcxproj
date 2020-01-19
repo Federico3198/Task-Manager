@@ -159,6 +159,7 @@
     <ClInclude Include="TimeUtils.h" />
     <ClInclude Include="ToDoList.h" />
     <ClInclude Include="ToDoListManager.h" />
+    <ClInclude Include="ToDoListTaskPair.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Comment.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="TimeUtils.cpp" />
     <ClCompile Include="ToDoList.cpp" />
     <ClCompile Include="ToDoListManager.cpp" />
+    <ClCompile Include="ToDoListTaskPair.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

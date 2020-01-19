@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Task.h"
 
+
 void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 {
 	if (subTask != NULL)
@@ -12,6 +13,19 @@ void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
 {
 	subTasks.remove(subTask);
+}
+
+void Task::AddComment(std::shared_ptr<Comment> comment)
+{
+	if (comment != NULL)
+	{
+		comments.push_back(comment);
+	}
+}
+
+void Task::RemoveComment(std::shared_ptr<Comment> comment)
+{
+	comments.remove(comment);
 }
 
 std::shared_ptr<SubTask> Task::GetSubTask(int index)
@@ -31,6 +45,11 @@ std::shared_ptr<SubTask> Task::GetSubTask(int index)
 std::list<std::shared_ptr<SubTask>> Task::GetSubTasks()
 {
 	return subTasks;
+}
+
+std::list<std::shared_ptr<Comment>> Task::GetComments()
+{
+	return comments;
 }
 
 Task::Task(std::string title)

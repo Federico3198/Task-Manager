@@ -3,6 +3,7 @@
 #include "ToDoList.h"
 #include <ctime>
 #include "TimeUtils.h"
+#include "ToDoListTaskPair.h"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/foreach.hpp>
@@ -22,6 +23,7 @@ public:
 	void SaveToJson(std::string filePath);
 	void LoadFromJson(std::string filePath);
 	std::list<std::shared_ptr<ToDoList>> GetToDoLists();
+	std::list<ToDoListTaskPair> Find(std::string searchString);
 	ToDoListManager();
 	ToDoListManager(std::list<std::shared_ptr<ToDoList> > toDoLists);
 	~ToDoListManager();

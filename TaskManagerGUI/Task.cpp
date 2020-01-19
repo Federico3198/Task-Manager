@@ -4,7 +4,10 @@
 
 void Task::AddSubTask(std::shared_ptr<SubTask> subTask)
 {
-	subTasks.push_back(subTask);
+	if (subTask != NULL)
+	{
+		subTasks.push_back(subTask);
+	}
 }
 
 void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
@@ -14,7 +17,10 @@ void Task::RemoveSubTask(std::shared_ptr<SubTask> subTask)
 
 void Task::AddComment(std::shared_ptr<Comment> comment)
 {
-	comments.push_back(comment);
+	if (comment != NULL)
+	{
+		comments.push_back(comment);
+	}
 }
 
 void Task::RemoveComment(std::shared_ptr<Comment> comment)
@@ -24,9 +30,16 @@ void Task::RemoveComment(std::shared_ptr<Comment> comment)
 
 std::shared_ptr<SubTask> Task::GetSubTask(int index)
 {
-	auto iterator = subTasks.begin();
-	std::advance(iterator, index);
-	return *iterator;
+	if (index > -1 && index < subTasks.size())
+	{
+		auto iterator = subTasks.begin();
+		std::advance(iterator, index);
+		return *iterator;
+	}
+	else
+	{
+		return NULL;
+	}
 }
 
 std::list<std::shared_ptr<SubTask>> Task::GetSubTasks()
