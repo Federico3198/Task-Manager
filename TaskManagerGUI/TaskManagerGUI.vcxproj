@@ -228,6 +228,20 @@
     <ClCompile Include="ToDoListManager.cpp" />
     <ClCompile Include="ToDoListTaskPair.cpp" />
     <ClCompile Include="ToDoListWidgetItem.cpp" />
+    <ClCompile Include="UIAddCommentObserver.cpp" />
+    <ClCompile Include="UIAddSubTaskObserver.cpp" />
+    <ClCompile Include="UIAddTaskObserver.cpp" />
+    <ClCompile Include="UICreateListObserver.cpp" />
+    <ClCompile Include="UIModifyListObserver.cpp" />
+    <ClCompile Include="UIModifySubTaskObserver.cpp" />
+    <ClCompile Include="UIObserver.cpp" />
+    <ClCompile Include="UIRemoveCommentObserver.cpp" />
+    <ClCompile Include="UIRemoveListObserver.cpp" />
+    <ClCompile Include="UIRemoveSubTaskObserver.cpp" />
+    <ClCompile Include="UIRemoveTaskObserver.cpp" />
+    <ClCompile Include="UISetSubTaskCompletionObserver.cpp" />
+    <ClCompile Include="UISubTaskObserver.cpp" />
+    <ClCompile Include="UITaskObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -317,6 +331,20 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
       <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtUiTools;$(QTDIR)\include\QtQuickWidgets;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtQuick;$(QTDIR)\include\QtDataVisualization;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtXmlPatterns;$(QTDIR)\include\QtQml;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtCore;\include;$(QTDIR)\mkspecs\win32-msvc</IncludePath>
       <Define Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;QT_DLL;QT_DATAVISUALIZATION_LIB;QT_QML_LIB;QT_QUICK_LIB;QT_QUICKWIDGETS_LIB;QT_SVG_LIB;QT_UITOOLS_LIB;QT_WIDGETS_LIB;QT_XMLPATTERNS_LIB;QT_NO_DEBUG;QT_GUI_LIB;QT_NETWORK_LIB;QT_CORE_LIB;NDEBUG;%(PreprocessorDefinitions)</Define>
     </QtMoc>
+    <ClInclude Include="UIAddCommentObserver.h" />
+    <ClInclude Include="UIAddSubTaskObserver.h" />
+    <ClInclude Include="UIAddTaskObserver.h" />
+    <ClInclude Include="UICreateListObserver.h" />
+    <ClInclude Include="UIModifyListObserver.h" />
+    <ClInclude Include="UIModifySubTaskObserver.h" />
+    <ClInclude Include="UIObserver.h" />
+    <ClInclude Include="UIRemoveCommentObserver.h" />
+    <ClInclude Include="UIRemoveListObserver.h" />
+    <ClInclude Include="UIRemoveSubTaskObserver.h" />
+    <ClInclude Include="UIRemoveTaskObserver.h" />
+    <ClInclude Include="UISetSubTaskCompletionObserver.h" />
+    <ClInclude Include="UISubTaskObserver.h" />
+    <ClInclude Include="UITaskObserver.h" />
     <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_addcommentdialog.h" />
     <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_createtaskdialog.h" />
     <QtMoc Include="CreateSubTaskDialog.h">

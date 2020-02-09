@@ -8,4 +8,3 @@ public:
 	std::shared_ptr<ToDoList> list;
 	std::shared_ptr<Task> task;
 };
-

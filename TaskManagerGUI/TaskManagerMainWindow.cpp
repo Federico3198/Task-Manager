@@ -7,52 +7,35 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	ui.setupUi(this);
 	tdManager = ToDoListManager();
 	tdManager.LoadFromJson(filePath);
+
+	createListObserver = new UICreateListObserver(&ui, &tdManager);
+	removeListObserver = new UIRemoveListObserver(&ui, &tdManager);
+	modifyListObserver = new UIModifyListObserver(&ui, &tdManager);
+
+	//addTaskObserver = new UIAddTaskObserver(&ui, &tdManager);
+
+	addCommentObserver = new UIAddCommentObserver(&ui, &tdManager);
+	removeCommentObserver = new UIRemoveCommentObserver(&ui, &tdManager);
+
+	addSubTaskObserver = new UIAddSubTaskObserver(&ui, &tdManager);
+	removeSubTaskObserver = new UIRemoveSubTaskObserver(&ui, &tdManager);
+	modifySubTaskObserver = new UIModifySubTaskObserver(&ui, &tdManager);
+	setSubTaskCompletionObserver = new UISetSubTaskCompletionObserver(&ui, &tdManager);
+
+
+
 	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionCreateList_triggered()
 {
-	CreateListDialog createListDialog;
-	createListDialog.setModal(true);
-	int result = createListDialog.exec();
-
-	if (result == 1)
-	{
-		auto fieldlistName = createListDialog.GetFieldListName();
-		auto listName = fieldlistName->text();
-		std::shared_ptr<ToDoList> sharedTDL(new ToDoList(listName.toStdString()));
-		tdManager.AddList(sharedTDL);
-
-		auto listItem = new ToDoListWidgetItem(listName, sharedTDL->GetId());
-
-		ui.listWidgetLists->addItem(listItem);
-
-		tdManager.SaveToJson(filePath);
-	}
+	createListObserver->update();
 }
 
 void TaskManagerMainWindow::on_actionDeleteList_triggered()
 {
 	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
-
-	if (currentItem->text().compare(important) != 0)
-	{
-		currentItem = ui.listWidgetLists->takeItem(ui.listWidgetLists->currentRow());
-		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-
-		int listId = listItem->GetListId();
-
-		tdManager.RemoveList(listId);
-		delete currentItem;
-
-		if (tdManager.GetToDoLists().size() == 0)
-		{
-			ui.listWidgetCompletedTasks->clear();
-			ui.listWidgetUncompletedTasks->clear();
-			ui.listWidgetTaskInfo->clear();
-		}
-		tdManager.SaveToJson(filePath);
-	}
+	removeListObserver->update(currentItem);
 }
 
 
@@ -65,8 +48,6 @@ void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item
 
 	auto currentItem = item;
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-
-
 
 	if (listItem->text().compare(important) == 0)
 	{
@@ -103,10 +84,8 @@ void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item
 	}
 }
 
-
 void TaskManagerMainWindow::on_actionAddTask_triggered()
 {
-	
 	auto currentItem = ui.listWidgetLists->currentItem();
 	if (currentItem != NULL && ui.listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(important) != 0)
 	{
@@ -257,29 +236,8 @@ void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
-
 	auto taskListItem = listWidget->item(listWidget->currentRow());
-	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-	{
-		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-		auto task = taskItem->GetTask();
-
-		CreateSubTaskDialog createSubTaskDialog;
-		createSubTaskDialog.setModal(true);
-		int result = createSubTaskDialog.exec();
-
-		if (result == 1)
-		{
-			auto text = createSubTaskDialog.GetText()->text().toStdString();
-
-			SubTask* subTask;
-			subTask = new SubTask(text);
-			task->AddSubTask(std::shared_ptr<SubTask>(subTask));
-			ShowTaskInfo(taskListItem);
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	addSubTaskObserver->update(taskListItem);
 }
 
 void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
@@ -287,62 +245,31 @@ void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	if (taskListItem != NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
-	{
-		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
-		auto subTask = subTaskItem->GetSubTask();
-
-		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-		auto task = taskItem->GetTask();
-
-		task->RemoveSubTask(subTask);
-
-		ShowTaskInfo(taskListItem);
-		tdManager.SaveToJson(filePath);
-	}
+	removeSubTaskObserver->update(taskListItem, subTaskListItem);
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Completed_triggered()
 {
-	SetSubTaskCompleted(true);
-	tdManager.SaveToJson(filePath);
+	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	setSubTaskCompletionObserver->update(taskListItem, subTaskListItem, true);
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
 {
-	SetSubTaskCompleted(false);
-	tdManager.SaveToJson(filePath);
+	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
+	auto listWidget = GetSelectedTaskList();
+	auto taskListItem = listWidget->item(listWidget->currentRow());
+
+	setSubTaskCompletionObserver->update(taskListItem, subTaskListItem, false);
 }
 
 void TaskManagerMainWindow::on_actionModifyList_triggered()
 {
 	auto currentList = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
-	auto todoListItem = static_cast<ToDoListWidgetItem*>(currentList);
-
-	if (todoListItem->text().compare(important) != 0)
-	{
-		CreateListDialog createListDialog;
-		createListDialog.setModal(true);
-
-		int listId = todoListItem->GetListId();
-		auto todoList = tdManager.GetListByID(listId);
-
-		createListDialog.SetFieldListName(QString(todoList->listName.c_str()));
-
-		int result = createListDialog.exec();
-
-		if (result == 1)
-		{
-			auto fieldlistName = createListDialog.GetFieldListName();
-			auto listName = fieldlistName->text();
-
-			todoList->listName = listName.toStdString();
-
-			todoListItem->setText(QString(todoList->listName.c_str()));
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	modifyListObserver->update(currentList);
 }
 
 void TaskManagerMainWindow::on_actionModifyTask_triggered()
@@ -416,81 +343,21 @@ void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 
-	if (taskListItem != NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
-	{
-		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
-		auto subTask = subTaskItem->GetSubTask();
-
-		CreateSubTaskDialog createSubTaskDialog;
-		createSubTaskDialog.setModal(true);
-		createSubTaskDialog.SetText(QString(subTask->GetText().c_str()));
-
-		int result = createSubTaskDialog.exec();
-
-		if (result == 1)
-		{
-			auto text = createSubTaskDialog.GetText()->text().toStdString();
-
-			subTask->SetText(text);
-
-			tdManager.SaveToJson(filePath);
-		}
-		ShowTaskInfo(taskListItem);
-	}
+	modifySubTaskObserver->update(taskListItem, subTaskListItem);
 }
 
 void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-	{
-		AddCommentDialog dialog;
-		dialog.setModal(true);
-		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-		auto task = taskItem->GetTask();
-
-		if (dialog.exec() == 1)
-		{
-			DateTime today = DateTime::GetToday();
-			std::string  owner = dialog.GetOwnerField()->text().toStdString();
-			std::string text = dialog.GetCommentText()->toPlainText().toStdString();
-
-			std::shared_ptr<Comment> sharedComment(new Comment(owner, text, today));
-
-			task->AddComment(sharedComment);
-
-
-			ui.listWidgetComments->addItem(new CommentWidgetItem(sharedComment));
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	addCommentObserver->update(taskListItem);
 }
 
 void TaskManagerMainWindow::on_actionRemove_Comment_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
 	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-	{
-		auto commentListItem = ui.listWidgetComments->item(ui.listWidgetComments->currentRow());
-
-		if (commentListItem != NULL)
-		{
-			commentListItem = ui.listWidgetComments->takeItem(ui.listWidgetComments->currentRow());
-			auto commentItem = static_cast<CommentWidgetItem*>(commentListItem);
-
-			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-			auto task = taskItem->GetTask();
-
-			task->RemoveComment(commentItem->GetComment());
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	removeCommentObserver->update(taskListItem);
 }
 
 void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchText)
@@ -555,23 +422,6 @@ void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchTex
 	}
 }
 
-void TaskManagerMainWindow::SetSubTaskCompleted(bool isCompleted)
-{
-	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
-
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	if (taskListItem != NULL && subTaskListItem != NULL && typeid(*subTaskListItem) == typeid(SubTaskWidgetItem))
-	{
-		auto subTaskItem = static_cast<SubTaskWidgetItem *>(subTaskListItem);
-		auto subTask = subTaskItem->GetSubTask();
-
-		subTask->SetIsCompleted(isCompleted);
-
-		ShowTaskInfo(taskListItem);
-	}
-}
 
 void TaskManagerMainWindow::RefreshUI()
 {
@@ -591,7 +441,6 @@ void TaskManagerMainWindow::RefreshUI()
 		ui.listWidgetLists->addItem(listItem);
 	}
 }
-
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)
 {

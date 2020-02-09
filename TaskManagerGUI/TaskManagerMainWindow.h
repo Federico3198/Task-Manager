@@ -22,6 +22,16 @@
 #include <boost/foreach.hpp>
 #include <cassert>
 #include <exception>
+#include "UICreateListObserver.h"
+#include "UIRemoveListObserver.h"
+#include "UIModifyListObserver.h"
+#include "UIAddTaskObserver.h"
+#include "UIAddCommentObserver.h"
+#include "UIRemoveCommentObserver.h"
+#include "UIRemoveSubTaskObserver.h"
+#include "UIAddSubTaskObserver.h"
+#include "UIModifySubTaskObserver.h"
+#include "UISetSubTaskCompletionObserver.h"
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -64,4 +74,17 @@ private:
 	Ui::TaskManagerMainWindowClass ui;
 	ToDoListManager tdManager;
 	const char* important = "Importanti";
+
+	UICreateListObserver *createListObserver;
+	UIRemoveListObserver *removeListObserver;
+	UIModifyListObserver *modifyListObserver;
+//	UIAddTaskObserver *addTaskObserver;
+	UIAddCommentObserver *addCommentObserver;
+	UIRemoveCommentObserver *removeCommentObserver;
+	UIRemoveSubTaskObserver *removeSubTaskObserver;
+	UIAddSubTaskObserver *addSubTaskObserver;
+	UIModifySubTaskObserver *modifySubTaskObserver;
+
+	UISetSubTaskCompletionObserver *setSubTaskCompletionObserver;
+	//to add destuctor
 };
