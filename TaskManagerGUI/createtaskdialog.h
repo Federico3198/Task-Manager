@@ -3,7 +3,8 @@
 
 #include <QDialog>
 #include "DateTime.h"
-#include "TaskManagerMainWindow.h"
+#include "RepetitionType.cpp"
+
 namespace Ui {
 class CreateTaskDialog;
 }

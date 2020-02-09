@@ -78,8 +78,6 @@ void CreateTaskDialog::SetNotes(QString notes)
 	ui->textNotes->setText(notes);
 }
 
-
-
 CreateTaskDialog::~CreateTaskDialog()
 {
     delete ui;

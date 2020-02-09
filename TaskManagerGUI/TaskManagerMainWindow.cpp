@@ -12,9 +12,10 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	removeListObserver = new UIRemoveListObserver(&ui, &tdManager);
 	modifyListObserver = new UIModifyListObserver(&ui, &tdManager);
 
-	//addTaskObserver = new UIAddTaskObserver(&ui, &tdManager);
+	addTaskObserver = new UIAddTaskObserver(&ui, &tdManager);
 	removeTaskObserver = new UIRemoveTaskObserver(&ui, &tdManager);
 	setTaskCompletionObserver = new UISetTaskCompletionObserver(&ui, &tdManager);
+	modifyTaskObserver = new UIModifyTaskObserver(&ui, &tdManager);
 
 	addCommentObserver = new UIAddCommentObserver(&ui, &tdManager);
 	removeCommentObserver = new UIRemoveCommentObserver(&ui, &tdManager);
@@ -86,39 +87,8 @@ void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item
 void TaskManagerMainWindow::on_actionAddTask_triggered()
 {
 	auto currentItem = ui.listWidgetLists->currentItem();
-	if (currentItem != NULL && ui.listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(important) != 0)
-	{
-		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
-		int listId = listItem->GetListId();
-
-		auto todoList = tdManager.GetListByID(listId);
-
-		CreateTaskDialog createTaskDialog;
-		createTaskDialog.setModal(true);
-		int result = createTaskDialog.exec();
-
-		if (result == 1)
-		{
-			auto fieldTaskName = createTaskDialog.GetName();
-			auto taskName = fieldTaskName->text();
-			Task *task = new Task(taskName.toStdString());
-			std::shared_ptr<Task> sharedTask(task);
-
-			sharedTask->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
-			sharedTask->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
-			sharedTask->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
-			sharedTask->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
-			sharedTask->expire = createTaskDialog.GetCheckExpire()->checkState();
-
-			todoList->AddTask(sharedTask);
-			auto listItem = new TaskWidgetItem(sharedTask);
-			ui.listWidgetUncompletedTasks->addItem(listItem);
-
-			RefreshImportantList(sharedTask, ui.listWidgetUncompletedTasks, listItem);
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	addTaskObserver->update(currentItem);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
@@ -127,6 +97,7 @@ void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 	auto listWidget = GetSelectedTaskList();
 
 	removeTaskObserver->update(listWidget, listWidgetItem);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
@@ -150,11 +121,13 @@ void TaskManagerMainWindow::on_listWidgetCompletedTasks_itemClicked(QListWidgetI
 void TaskManagerMainWindow::on_actionSet_CompletedTask_triggered()
 {
 	setTaskCompletionObserver->update(true);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 {
 	setTaskCompletionObserver->update(false);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
@@ -199,45 +172,10 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 void TaskManagerMainWindow::on_actionModifyTask_triggered()
 {
 	auto listWidget = GetSelectedTaskList();
-
 	auto taskListItem = listWidget->item(listWidget->currentRow());
 
-	if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-	{
-		CreateTaskDialog createTaskDialog;
-		createTaskDialog.setModal(true);
-
-		auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-		auto task = taskItem->GetTask();
-
-		createTaskDialog.SetName(QString(task->title.c_str()));
-		createTaskDialog.SetCheckIsImportant(task->isImportant);
-		createTaskDialog.SetCheckExpire(task->expire);
-		createTaskDialog.SetRepetition(task->repetition);
-		createTaskDialog.SetNotes(QString(task->notes.c_str()));
-		createTaskDialog.SetDueDate(task->dueDate);
-
-		int result = createTaskDialog.exec();
-
-		if (result == 1)
-		{
-			auto fieldTaskName = createTaskDialog.GetName();
-			auto taskName = fieldTaskName->text();
-			task->title = taskName.toStdString();
-
-			task->isImportant = createTaskDialog.GetCheckIsImportant()->checkState();
-			task->expire = createTaskDialog.GetCheckExpire()->checkState();
-			task->repetition = RepetitionTypeUtils::ConvertItaToEnum(createTaskDialog.GetRepetition()->currentText().toStdString());
-			task->notes = createTaskDialog.GetNotes()->toPlainText().toStdString();
-			task->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
-
-			taskListItem->setText(taskName);
-			ShowTaskInfo(taskListItem);
-			RefreshImportantList(task, listWidget, taskListItem);
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	modifyTaskObserver->update(taskListItem, listWidget);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem)
@@ -351,19 +289,36 @@ void TaskManagerMainWindow::RefreshUI()
 {
 	auto toDoLists = tdManager.GetToDoLists();
 
+	auto row = ui.listWidgetLists->currentRow();
+
 	ui.listWidgetLists->clear();
 
 	if (tdManager.GetImportantTasks().size() > 0)
 	{
-		auto listItem = new ToDoListWidgetItem(QString(important), -1);
+		auto listName = important;
+		auto listItemCount = tdManager.GetImportantTasks().size();
+
+		std::stringstream stringStream;
+		stringStream << listName;// << " [" << listItemCount << "]";
+
+		auto listItem = new ToDoListWidgetItem(QString(stringStream.str().c_str()), -1);
 		ui.listWidgetLists->addItem(listItem);
 	}
 
 	for (auto todoListIterator = toDoLists.begin(); todoListIterator != toDoLists.end(); todoListIterator++)
 	{
-		auto listItem = new ToDoListWidgetItem(QString((*todoListIterator)->listName.c_str()), (*todoListIterator)->GetId());
+		auto currentToDoList = *todoListIterator;
+		auto listName = currentToDoList->listName;
+		auto listItemCount = currentToDoList->GetUncompletedTaskCount();
+
+		std::stringstream stringStream;
+		stringStream << listName << " [" << listItemCount << "]";
+
+		auto listItem = new ToDoListWidgetItem(QString(stringStream.str().c_str()), (*todoListIterator)->GetId());
 		ui.listWidgetLists->addItem(listItem);
 	}
+
+	ui.listWidgetLists->setCurrentRow(row-1);
 }
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)

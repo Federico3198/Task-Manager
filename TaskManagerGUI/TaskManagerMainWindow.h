@@ -34,6 +34,7 @@
 #include "UISetSubTaskCompletionObserver.h"
 #include "UIRemoveTaskObserver.h"
 #include "UISetTaskCompletionObserver.h"
+#include "UIModifyTaskObserver.h"
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -81,9 +82,10 @@ private:
 	UIRemoveListObserver *removeListObserver;
 	UIModifyListObserver *modifyListObserver;
 
-//	UIAddTaskObserver *addTaskObserver;
+	UIAddTaskObserver *addTaskObserver;
 	UIRemoveTaskObserver *removeTaskObserver;
 	UISetTaskCompletionObserver *setTaskCompletionObserver;
+	UIModifyTaskObserver *modifyTaskObserver;
 
 	UIAddCommentObserver *addCommentObserver;
 	UIRemoveCommentObserver *removeCommentObserver;

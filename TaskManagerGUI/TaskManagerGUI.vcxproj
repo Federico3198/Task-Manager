@@ -234,6 +234,7 @@
     <ClCompile Include="UICreateListObserver.cpp" />
     <ClCompile Include="UIModifyListObserver.cpp" />
     <ClCompile Include="UIModifySubTaskObserver.cpp" />
+    <ClCompile Include="UIModifyTaskObserver.cpp" />
     <ClCompile Include="UIObserver.cpp" />
     <ClCompile Include="UIRemoveCommentObserver.cpp" />
     <ClCompile Include="UIRemoveListObserver.cpp" />
@@ -338,6 +339,7 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
     <ClInclude Include="UICreateListObserver.h" />
     <ClInclude Include="UIModifyListObserver.h" />
     <ClInclude Include="UIModifySubTaskObserver.h" />
+    <ClInclude Include="UIModifyTaskObserver.h" />
     <ClInclude Include="UIObserver.h" />
     <ClInclude Include="UIRemoveCommentObserver.h" />
     <ClInclude Include="UIRemoveListObserver.h" />
