@@ -152,6 +152,9 @@
     <ClCompile Include="UISetSubTaskCompletionObserver.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="UISetTaskCompletionObserver.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -301,6 +304,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="UISetSubTaskCompletionObserver.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UISetTaskCompletionObserver.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

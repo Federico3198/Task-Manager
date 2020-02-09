@@ -1,6 +1,7 @@
 #pragma once
 #include "UIObserver.h"
 #include "ToDoListWidgetItem.h"
+#include "TaskWidgetItem.h"
 
 class UITaskObserver : 
 	public UIObserver
@@ -12,6 +13,6 @@ public:
 
 protected:
 
-	//void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
+	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 };
 

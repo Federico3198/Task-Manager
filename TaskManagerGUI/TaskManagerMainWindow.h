@@ -32,6 +32,8 @@
 #include "UIAddSubTaskObserver.h"
 #include "UIModifySubTaskObserver.h"
 #include "UISetSubTaskCompletionObserver.h"
+#include "UIRemoveTaskObserver.h"
+#include "UISetTaskCompletionObserver.h"
 
 class TaskManagerMainWindow : public QMainWindow
 {
@@ -66,7 +68,7 @@ private:
 	const std::string filePath = "taskData.json";
 
 	void ShowTaskInfo(QListWidgetItem * taskListItem);
-	void SetSubTaskCompleted(bool isCompleted);
+
 	void RefreshUI();
 	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 	QListWidget * GetSelectedTaskList();
@@ -78,9 +80,14 @@ private:
 	UICreateListObserver *createListObserver;
 	UIRemoveListObserver *removeListObserver;
 	UIModifyListObserver *modifyListObserver;
+
 //	UIAddTaskObserver *addTaskObserver;
+	UIRemoveTaskObserver *removeTaskObserver;
+	UISetTaskCompletionObserver *setTaskCompletionObserver;
+
 	UIAddCommentObserver *addCommentObserver;
 	UIRemoveCommentObserver *removeCommentObserver;
+
 	UIRemoveSubTaskObserver *removeSubTaskObserver;
 	UIAddSubTaskObserver *addSubTaskObserver;
 	UIModifySubTaskObserver *modifySubTaskObserver;
