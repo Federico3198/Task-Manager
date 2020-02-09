@@ -13,6 +13,8 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	modifyListObserver = new UIModifyListObserver(&ui, &tdManager);
 
 	//addTaskObserver = new UIAddTaskObserver(&ui, &tdManager);
+	removeTaskObserver = new UIRemoveTaskObserver(&ui, &tdManager);
+	setTaskCompletionObserver = new UISetTaskCompletionObserver(&ui, &tdManager);
 
 	addCommentObserver = new UIAddCommentObserver(&ui, &tdManager);
 	removeCommentObserver = new UIRemoveCommentObserver(&ui, &tdManager);
@@ -21,8 +23,6 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	removeSubTaskObserver = new UIRemoveSubTaskObserver(&ui, &tdManager);
 	modifySubTaskObserver = new UIModifySubTaskObserver(&ui, &tdManager);
 	setSubTaskCompletionObserver = new UISetSubTaskCompletionObserver(&ui, &tdManager);
-
-
 
 	RefreshUI();
 }
@@ -37,7 +37,6 @@ void TaskManagerMainWindow::on_actionDeleteList_triggered()
 	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 	removeListObserver->update(currentItem);
 }
-
 
 void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item)
 {
@@ -125,34 +124,9 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 {
 	auto listWidgetItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
+	auto listWidget = GetSelectedTaskList();
 
-	if (listWidgetItem != NULL && typeid(*listWidgetItem) == typeid(TaskWidgetItem))
-	{
-		auto todoListItem = static_cast<ToDoListWidgetItem*>(listWidgetItem);
-
-		if (todoListItem->text().compare(important) != 0)
-		{
-			int listId = todoListItem->GetListId();
-			auto todoList = tdManager.GetListByID(listId);
-
-			auto listWidget = GetSelectedTaskList();
-			auto taskListItem = listWidget->takeItem(listWidget->currentRow());
-
-			if (taskListItem != NULL)
-			{
-				auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-				auto task = taskItem->GetTask();
-
-				todoList->RemoveTask(task);
-				delete taskListItem;
-
-				ui.listWidgetTaskInfo->clear();
-				listWidget->clearSelection();
-				RefreshImportantList(task, listWidget, taskListItem);
-				tdManager.SaveToJson(filePath);
-			}
-		}
-	}
+	removeTaskObserver->update(listWidget, listWidgetItem);
 }
 
 void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
@@ -175,62 +149,12 @@ void TaskManagerMainWindow::on_listWidgetCompletedTasks_itemClicked(QListWidgetI
 
 void TaskManagerMainWindow::on_actionSet_CompletedTask_triggered()
 {
-
-	if (ui.listWidgetUncompletedTasks->selectedItems().length() > 0)
-	{
-		auto taskListItem = ui.listWidgetUncompletedTasks->item(ui.listWidgetUncompletedTasks->currentRow());
-
-		if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-		{
-			taskListItem = ui.listWidgetUncompletedTasks->takeItem(ui.listWidgetUncompletedTasks->currentRow());
-			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-			auto task = taskItem->GetTask();
-			task->isCompleted = true;
-
-			ui.listWidgetCompletedTasks->addItem(taskListItem);
-			ui.listWidgetUncompletedTasks->clearSelection();
-			ui.listWidgetCompletedTasks->clearSelection();
-			ui.listWidgetCompletedTasks->setCurrentItem(taskListItem);
-
-			if (ui.listWidgetLists->item(ui.listWidgetLists->currentRow())->text().compare(important) == 0)
-			{
-				ui.listWidgetCompletedTasks->clear();
-				ui.listWidgetTaskInfo->clear();
-			}
-			else
-			{
-				ShowTaskInfo(taskListItem);
-				RefreshImportantList(task, ui.listWidgetCompletedTasks, taskListItem);
-			}
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	setTaskCompletionObserver->update(true);
 }
 
 void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 {
-	if (ui.listWidgetCompletedTasks->selectedItems().length() > 0)
-	{
-		auto taskListItem = ui.listWidgetCompletedTasks->item(ui.listWidgetCompletedTasks->currentRow());
-		if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
-		{
-			taskListItem = ui.listWidgetCompletedTasks->takeItem(ui.listWidgetCompletedTasks->currentRow());
-
-			auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
-			auto task = taskItem->GetTask();
-			task->isCompleted = false;
-
-			ui.listWidgetUncompletedTasks->addItem(taskListItem);
-			ui.listWidgetUncompletedTasks->clearSelection();
-			ui.listWidgetCompletedTasks->clearSelection();
-			ui.listWidgetUncompletedTasks->setCurrentItem(taskListItem);
-			ShowTaskInfo(taskListItem);
-
-			RefreshImportantList(task, ui.listWidgetUncompletedTasks, taskListItem);
-
-			tdManager.SaveToJson(filePath);
-		}
-	}
+	setTaskCompletionObserver->update(false);
 }
 
 void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
