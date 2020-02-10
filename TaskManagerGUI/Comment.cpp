@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Comment.h"
 
-
 DateTime Comment::GetCreationDate()
 {
 	return creationDate;

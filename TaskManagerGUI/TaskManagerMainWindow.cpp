@@ -284,7 +284,6 @@ void TaskManagerMainWindow::on_fieldSearch_textChanged(const QString & searchTex
 	}
 }
 
-
 void TaskManagerMainWindow::RefreshUI()
 {
 	auto toDoLists = tdManager.GetToDoLists();

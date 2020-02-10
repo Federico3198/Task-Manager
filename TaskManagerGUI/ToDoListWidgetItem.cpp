@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ToDoListWidgetItem.h"
 
-
 ToDoListWidgetItem::ToDoListWidgetItem(QString name, int listId)
 {
 	setText(name);
@@ -19,7 +18,6 @@ int ToDoListWidgetItem::GetListId()
 		return 0;
 	}
 }
-
 
 ToDoListWidgetItem::~ToDoListWidgetItem()
 {

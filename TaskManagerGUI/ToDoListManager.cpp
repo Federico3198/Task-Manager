@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ToDoListManager.h"
 
-
 std::list<std::shared_ptr<Task>> ToDoListManager::GetImportantTasks()
 {
 	std::list<std::shared_ptr<Task>> importantTasks;

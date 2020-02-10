@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "UIAddCommentObserver.h"
 
-
 UIAddCommentObserver::UIAddCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UIObserver(ui,tdManager)
 {
 }

@@ -11,4 +11,3 @@ public:
 
 	void update(QListWidgetItem *currentTaskItem, QListWidgetItem  *currentSubTaskItem);
 };
-

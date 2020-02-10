@@ -1,6 +1,7 @@
 #pragma once
 #include "UITaskObserver.h"
 #include "UISubTaskObserver.h"
+
 class UISetTaskCompletionObserver :
 	public UITaskObserver
 {
@@ -11,4 +12,3 @@ public:
 
 	void update(bool isCompleted);
 };
-

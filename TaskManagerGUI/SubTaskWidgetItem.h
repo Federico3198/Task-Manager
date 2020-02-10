@@ -2,6 +2,7 @@
 #include <qlistwidget.h>
 #include "SubTask.h"
 #include <sstream>
+
 class SubTaskWidgetItem :
 	public QListWidgetItem
 {
@@ -13,4 +14,3 @@ public:
 private:
 	std::shared_ptr<SubTask> subTask;
 };
-

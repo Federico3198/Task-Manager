@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "UISetSubTaskCompletionObserver.h"
 
-
 UISetSubTaskCompletionObserver::UISetSubTaskCompletionObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UISubTaskObserver(ui, tdManager)
 {
 }
-
 
 UISetSubTaskCompletionObserver::~UISetSubTaskCompletionObserver()
 {

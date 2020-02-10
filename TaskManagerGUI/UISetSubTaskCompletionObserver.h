@@ -1,5 +1,6 @@
 #pragma once
 #include "UISubTaskObserver.h"
+
 class UISetSubTaskCompletionObserver :
 	public UISubTaskObserver
 {
@@ -9,4 +10,3 @@ public:
 
 	void update(QListWidgetItem *currentTaskItem, QListWidgetItem *currentSubTaskItem, bool isCompleted);
 };
-

@@ -1,6 +1,5 @@
 #ifndef CREATELISTDIALOG_H
 #define CREATELISTDIALOG_H
-
 #include <QDialog>
 
 namespace Ui {

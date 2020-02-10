@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "UIModifyListObserver.h"
 
-
 UIModifyListObserver::UIModifyListObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UIObserver(ui,tdManager)
 {
 }

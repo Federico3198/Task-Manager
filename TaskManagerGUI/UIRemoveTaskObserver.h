@@ -1,7 +1,6 @@
 #pragma once
 #include "UITaskObserver.h"
 
-
 class UIRemoveTaskObserver :
 	public UITaskObserver
 {

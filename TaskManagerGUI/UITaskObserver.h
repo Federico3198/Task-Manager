@@ -15,4 +15,3 @@ protected:
 
 	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 };
-

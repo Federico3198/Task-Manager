@@ -3,7 +3,6 @@
 #include "ToDoListWidgetItem.h"
 #include "CreateListDialog.h"
 
-
 class UIModifyListObserver :
 	public UIObserver
 {
@@ -14,4 +13,3 @@ public:
 
 	~UIModifyListObserver();
 };
-

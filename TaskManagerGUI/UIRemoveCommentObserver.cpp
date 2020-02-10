@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "UIRemoveCommentObserver.h"
 
-
 UIRemoveCommentObserver::UIRemoveCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) :  UIObserver(ui,tdManager)
 {
 }
-
 
 UIRemoveCommentObserver::~UIRemoveCommentObserver()
 {

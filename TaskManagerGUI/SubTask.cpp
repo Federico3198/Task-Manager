@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "SubTask.h"
 
-
 void SubTask::SetText(std::string text)
 {
 	this->text = text;
@@ -27,7 +26,6 @@ SubTask::SubTask(std::string text)
 	this->text = text;
 	this->isCompleted = false;
 }
-
 
 SubTask::~SubTask()
 {

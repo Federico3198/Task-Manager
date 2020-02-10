@@ -13,4 +13,3 @@ protected:
 	const std::string filePath = "taskData.json";
 	const char* important = "Importanti";
 };
-

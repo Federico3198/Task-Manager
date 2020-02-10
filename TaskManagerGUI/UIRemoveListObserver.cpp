@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "UIRemoveListObserver.h"
 
-
 void UIRemoveListObserver::update(QListWidgetItem * currentItem)
 {
 	if (currentItem != NULL && currentItem->text().compare(important) != 0)

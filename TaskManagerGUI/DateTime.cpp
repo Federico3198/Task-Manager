@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "DateTime.h"
 
-
 void DateTime::SetDay(int day)
 {
 	if (day <= 0)

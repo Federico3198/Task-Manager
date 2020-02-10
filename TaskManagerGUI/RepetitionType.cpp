@@ -11,7 +11,7 @@ enum RepetitionType
 };
 
 
-class BoolUtils //TODO da spostare in un suo file
+class BoolUtils
 {
 public:
 	static std::string ConvertBoolToYesNoIta(bool value)

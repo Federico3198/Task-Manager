@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "UIRemoveSubTaskObserver.h"
 
-
 UIRemoveSubTaskObserver::UIRemoveSubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UISubTaskObserver(ui,tdManager)
 {
 }
-
 
 UIRemoveSubTaskObserver::~UIRemoveSubTaskObserver()
 {

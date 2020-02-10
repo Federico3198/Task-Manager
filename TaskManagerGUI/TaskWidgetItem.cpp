@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "TaskWidgetItem.h"
 
-
 TaskWidgetItem::TaskWidgetItem(std::shared_ptr<Task> task)
 {
 	setText(QString(task->title.c_str()));

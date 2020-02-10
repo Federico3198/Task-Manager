@@ -1,6 +1,7 @@
 #pragma once
 #include <ctime>
 #include <chrono>
+
 class DateTime
 {
 public:
@@ -20,7 +21,6 @@ public:
 	bool operator <(const DateTime &other);
 	bool operator <=(const DateTime &other);
 	bool operator ==(const DateTime &other);
-
 
 	DateTime(time_t timeInSeconds);
 	DateTime();

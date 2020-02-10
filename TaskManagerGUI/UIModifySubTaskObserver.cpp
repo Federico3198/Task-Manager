@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "UIModifySubTaskObserver.h"
 
-
 UIModifySubTaskObserver::UIModifySubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager): UISubTaskObserver(ui,tdManager)
 {
 }
-
 
 UIModifySubTaskObserver::~UIModifySubTaskObserver()
 {

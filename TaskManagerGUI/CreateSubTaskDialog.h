@@ -1,6 +1,5 @@
 #ifndef CREATESUBTASKDIALOG_H
 #define CREATESUBTASKDIALOG_H
-
 #include <QDialog>
 
 namespace Ui {

@@ -11,4 +11,3 @@ public:
 
 	virtual void update();
 };
-

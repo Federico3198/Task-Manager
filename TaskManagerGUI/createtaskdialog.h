@@ -1,6 +1,5 @@
 #ifndef CREATETASKDIALOG_H
 #define CREATETASKDIALOG_H
-
 #include <QDialog>
 #include "DateTime.h"
 #include "RepetitionType.cpp"

@@ -34,4 +34,3 @@ private:
 	std::list<std::shared_ptr<SubTask>> subTasks;
 	std::list<std::shared_ptr<Comment>> comments;
 };
-

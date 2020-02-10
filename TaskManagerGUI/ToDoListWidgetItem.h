@@ -1,5 +1,6 @@
 #pragma once
 #include <qlistwidget.h>
+
 class ToDoListWidgetItem :
 	public QListWidgetItem
 {
@@ -12,4 +13,3 @@ public:
 private:
 	int listId;
 };
-
