@@ -15,7 +15,7 @@ void UIRemoveTaskObserver::update(QListWidget * currentTaskList, QListWidgetItem
 	{
 		auto todoListItem = static_cast<ToDoListWidgetItem*>(currentListItem);
 
-		if (todoListItem->text().compare(important) != 0)
+		if (!todoListItem->text().contains(important))
 		{
 			int listId = todoListItem->GetListId();
 			auto todoList = tdManager->GetListByID(listId);

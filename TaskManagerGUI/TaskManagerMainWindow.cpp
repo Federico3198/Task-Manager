@@ -37,6 +37,7 @@ void TaskManagerMainWindow::on_actionDeleteList_triggered()
 {
 	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 	removeListObserver->update(currentItem);
+	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item)
@@ -49,7 +50,7 @@ void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item
 	auto currentItem = item;
 	auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 
-	if (listItem->text().compare(important) == 0)
+	if (listItem->text().contains(important))
 	{
 		ui.listWidgetCompletedTasks->clear();
 
@@ -182,7 +183,7 @@ void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QL
 {
 	if (tdManager.GetImportantTasks().size() > 0)
 	{
-		if (ui.listWidgetLists->item(0)->text().compare(important) != 0)
+		if (!ui.listWidgetLists->item(0)->text().contains(important))
 		{
 			auto listItem = new ToDoListWidgetItem(QString(important), -1);
 			ui.listWidgetLists->insertItem(0, listItem);
@@ -193,7 +194,7 @@ void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QL
 			ui.listWidgetTaskInfo->clear();
 		}
 	}
-	else if (ui.listWidgetLists->item(0)->text().compare(important) == 0)
+	else if (ui.listWidgetLists->item(0)->text().contains(important))
 	{
 		delete ui.listWidgetLists->takeItem(0);
 	}
@@ -288,7 +289,8 @@ void TaskManagerMainWindow::RefreshUI()
 {
 	auto toDoLists = tdManager.GetToDoLists();
 
-	auto row = ui.listWidgetLists->currentRow();
+	auto tdItem = static_cast<ToDoListWidgetItem*>(ui.listWidgetLists->currentItem());
+	int id = tdItem->GetListId();
 
 	ui.listWidgetLists->clear();
 
@@ -298,7 +300,7 @@ void TaskManagerMainWindow::RefreshUI()
 		auto listItemCount = tdManager.GetImportantTasks().size();
 
 		std::stringstream stringStream;
-		stringStream << listName;// << " [" << listItemCount << "]";
+		stringStream << listName << " [" << listItemCount << "]";
 
 		auto listItem = new ToDoListWidgetItem(QString(stringStream.str().c_str()), -1);
 		ui.listWidgetLists->addItem(listItem);
@@ -311,13 +313,24 @@ void TaskManagerMainWindow::RefreshUI()
 		auto listItemCount = currentToDoList->GetUncompletedTaskCount();
 
 		std::stringstream stringStream;
-		stringStream << listName << " [" << listItemCount << "]";
+		stringStream << listName;
+		if (listItemCount > 0)
+		{
+			stringStream << " [" << listItemCount << "]";
+		}
 
 		auto listItem = new ToDoListWidgetItem(QString(stringStream.str().c_str()), (*todoListIterator)->GetId());
 		ui.listWidgetLists->addItem(listItem);
 	}
 
-	ui.listWidgetLists->setCurrentRow(row-1);
+	for (int i = 0; i < ui.listWidgetLists->count(); i++)
+	{
+		auto tdItem = static_cast<ToDoListWidgetItem*>(ui.listWidgetLists->item(i));
+		if (tdItem->GetListId() == id)
+		{
+			ui.listWidgetLists->setCurrentRow(i);
+		}
+	}
 }
 
 void TaskManagerMainWindow::ShowTaskInfo(QListWidgetItem *taskListItem)

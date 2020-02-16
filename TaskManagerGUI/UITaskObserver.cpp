@@ -13,7 +13,7 @@ void UITaskObserver::RefreshImportantList(std::shared_ptr<Task>& task, QListWidg
 {
 	if (tdManager->GetImportantTasks().size() > 0)
 	{
-		if (ui->listWidgetLists->item(0)->text().compare(important) != 0)
+		if (!ui->listWidgetLists->item(0)->text().contains(important))
 		{
 			auto listItem = new ToDoListWidgetItem(QString(important), -1);
 			ui->listWidgetLists->insertItem(0, listItem);
@@ -24,7 +24,7 @@ void UITaskObserver::RefreshImportantList(std::shared_ptr<Task>& task, QListWidg
 			ui->listWidgetTaskInfo->clear();
 		}
 	}
-	else if (ui->listWidgetLists->item(0)->text().compare(important) == 0)
+	else if (ui->listWidgetLists->item(0)->text().contains(important))
 	{
 		delete ui->listWidgetLists->takeItem(0);
 	}

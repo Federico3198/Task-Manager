@@ -31,8 +31,8 @@ void UISetTaskCompletionObserver::update(bool isCompleted)
 			listFrom->clearSelection();
 			listTo->setCurrentItem(taskListItem);
 
-
-			if (ui->listWidgetLists->item(ui->listWidgetLists->currentRow())->text().compare(important) == 0)
+			auto importantItem = ui->listWidgetLists->item(ui->listWidgetLists->currentRow());
+			if (importantItem != NULL && importantItem->text().contains(important))
 			{
 				listFrom->clear();
 				ui->listWidgetTaskInfo->clear();

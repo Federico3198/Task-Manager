@@ -3,7 +3,7 @@
 
 void UIRemoveListObserver::update(QListWidgetItem * currentItem)
 {
-	if (currentItem != NULL && currentItem->text().compare(important) != 0)
+	if (currentItem != NULL && !currentItem->text().contains(important))
 	{
 		currentItem = ui->listWidgetLists->takeItem(ui->listWidgetLists->currentRow());
 		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
