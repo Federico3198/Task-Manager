@@ -5,7 +5,7 @@ class UIRemoveSubTaskObserver :
 	public UISubTaskObserver
 {
 public:
-	UIRemoveSubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIRemoveSubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIRemoveSubTaskObserver();
 
 	void update(QListWidgetItem *currentTaskItem, QListWidgetItem *currentSubTaskItem);

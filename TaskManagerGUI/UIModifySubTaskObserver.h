@@ -6,7 +6,7 @@ class UIModifySubTaskObserver :
 	public UISubTaskObserver
 {
 public:
-	UIModifySubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIModifySubTaskObserver();
 
 	void update(QListWidgetItem *currentTaskItem, QListWidgetItem  *currentSubTaskItem);

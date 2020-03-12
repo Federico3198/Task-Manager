@@ -5,7 +5,7 @@ class UISetSubTaskCompletionObserver :
 	public UISubTaskObserver
 {
 public:
-	UISetSubTaskCompletionObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UISetSubTaskCompletionObserver(TaskManagerMainWindow *mainWindow);
 	~UISetSubTaskCompletionObserver();
 
 	void update(QListWidgetItem *currentTaskItem, QListWidgetItem *currentSubTaskItem, bool isCompleted);

@@ -8,8 +8,6 @@ class UISubTaskObserver :
 	public UIObserver
 {
 public:
-	UISubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UISubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UISubTaskObserver();
-
-	void ShowTaskInfo(QListWidgetItem *taskListItem);
 };

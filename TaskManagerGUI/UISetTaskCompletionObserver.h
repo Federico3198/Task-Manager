@@ -7,7 +7,7 @@ class UISetTaskCompletionObserver :
 {
 public:
 	UISubTaskObserver *subTaskObserver;
-	UISetTaskCompletionObserver(Ui_TaskManagerMainWindowClass *ui, ToDoListManager *tdManager);
+	UISetTaskCompletionObserver(TaskManagerMainWindow *mainWindow);
 	~UISetTaskCompletionObserver();
 
 	void update(bool isCompleted);

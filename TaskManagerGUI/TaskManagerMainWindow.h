@@ -43,6 +43,17 @@ class TaskManagerMainWindow : public QMainWindow
 public:
 	TaskManagerMainWindow(QWidget *parent = Q_NULLPTR);
 
+	const std::string filePath = "taskData.json";
+	const char* important = "Importanti";
+
+	Ui_TaskManagerMainWindowClass * GetUI();
+	ToDoListManager * GetTdManager();
+
+	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
+	void RefreshUI();
+	void ShowTaskInfo(QListWidgetItem * taskListItem);
+	QListWidget * GetSelectedTaskList();
+
 private slots:
     void on_actionCreateList_triggered();
     void on_actionDeleteList_triggered();
@@ -66,17 +77,9 @@ private slots:
 
 private:
 	boost::property_tree::ptree todoListsRoot;
-	const std::string filePath = "taskData.json";
-
-	void ShowTaskInfo(QListWidgetItem * taskListItem);
-
-	void RefreshUI();
-	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
-	QListWidget * GetSelectedTaskList();
 
 	Ui::TaskManagerMainWindowClass ui;
 	ToDoListManager tdManager;
-	const char* important = "Importanti";
 
 	UICreateListObserver *createListObserver;
 	UIRemoveListObserver *removeListObserver;
@@ -95,5 +98,4 @@ private:
 	UIModifySubTaskObserver *modifySubTaskObserver;
 
 	UISetSubTaskCompletionObserver *setSubTaskCompletionObserver;
-	//to add destuctor
 };

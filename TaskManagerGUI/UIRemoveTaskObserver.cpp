@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIRemoveTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIRemoveTaskObserver::UIRemoveTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager): UITaskObserver(ui,tdManager)
+UIRemoveTaskObserver::UIRemoveTaskObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
 {
 }
 
@@ -15,7 +16,7 @@ void UIRemoveTaskObserver::update(QListWidget * currentTaskList, QListWidgetItem
 	{
 		auto todoListItem = static_cast<ToDoListWidgetItem*>(currentListItem);
 
-		if (!todoListItem->text().contains(important))
+		if (!todoListItem->text().contains(mainWindow->important))
 		{
 			int listId = todoListItem->GetListId();
 			auto todoList = tdManager->GetListByID(listId);
@@ -32,8 +33,8 @@ void UIRemoveTaskObserver::update(QListWidget * currentTaskList, QListWidgetItem
 
 				ui->listWidgetTaskInfo->clear();
 				currentTaskList->clearSelection();
-				RefreshImportantList(task, currentTaskList, taskListItem);
-				tdManager->SaveToJson(filePath);
+				mainWindow->RefreshImportantList(task, currentTaskList, taskListItem);
+				tdManager->SaveToJson(mainWindow->filePath);
 			}
 		}
 	}

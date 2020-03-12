@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIRemoveCommentObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIRemoveCommentObserver::UIRemoveCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) :  UIObserver(ui,tdManager)
+UIRemoveCommentObserver::UIRemoveCommentObserver(TaskManagerMainWindow *mainWindow) : UIObserverListItem(mainWindow)
 {
 }
 
@@ -25,7 +26,7 @@ void UIRemoveCommentObserver::update(QListWidgetItem * currentItem)
 
 			task->RemoveComment(commentItem->GetComment());
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

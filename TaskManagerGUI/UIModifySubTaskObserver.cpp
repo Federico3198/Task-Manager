@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIModifySubTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIModifySubTaskObserver::UIModifySubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager): UISubTaskObserver(ui,tdManager)
+UIModifySubTaskObserver::UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow): UISubTaskObserver(mainWindow)
 {
 }
 
@@ -28,8 +29,8 @@ void UIModifySubTaskObserver::update(QListWidgetItem * currentTaskItem, QListWid
 
 			subTask->SetText(text);
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
-		ShowTaskInfo(currentTaskItem);
+		mainWindow->ShowTaskInfo(currentTaskItem);
 	}
 }

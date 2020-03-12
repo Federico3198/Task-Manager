@@ -8,10 +8,6 @@ class UITaskObserver :
 {
 public:
 
-	UITaskObserver(Ui_TaskManagerMainWindowClass *ui, ToDoListManager *tdManager);
+	UITaskObserver(TaskManagerMainWindow *mainWindow);
 	~UITaskObserver();
-
-protected:
-
-	void RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem);
 };

@@ -8,22 +8,24 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	tdManager = ToDoListManager();
 	tdManager.LoadFromJson(filePath);
 
-	createListObserver = new UICreateListObserver(&ui, &tdManager);
-	removeListObserver = new UIRemoveListObserver(&ui, &tdManager);
-	modifyListObserver = new UIModifyListObserver(&ui, &tdManager);
 
-	addTaskObserver = new UIAddTaskObserver(&ui, &tdManager);
-	removeTaskObserver = new UIRemoveTaskObserver(&ui, &tdManager);
-	setTaskCompletionObserver = new UISetTaskCompletionObserver(&ui, &tdManager);
-	modifyTaskObserver = new UIModifyTaskObserver(&ui, &tdManager);
+	auto window = this;
+	createListObserver = new UICreateListObserver(window);
+	removeListObserver = new UIRemoveListObserver(window);
+	modifyListObserver = new UIModifyListObserver(window);
 
-	addCommentObserver = new UIAddCommentObserver(&ui, &tdManager);
-	removeCommentObserver = new UIRemoveCommentObserver(&ui, &tdManager);
+	addTaskObserver = new UIAddTaskObserver(this);
+	removeTaskObserver = new UIRemoveTaskObserver(this);
+	setTaskCompletionObserver = new UISetTaskCompletionObserver(this);
+	modifyTaskObserver = new UIModifyTaskObserver(this);
 
-	addSubTaskObserver = new UIAddSubTaskObserver(&ui, &tdManager);
-	removeSubTaskObserver = new UIRemoveSubTaskObserver(&ui, &tdManager);
-	modifySubTaskObserver = new UIModifySubTaskObserver(&ui, &tdManager);
-	setSubTaskCompletionObserver = new UISetSubTaskCompletionObserver(&ui, &tdManager);
+	addCommentObserver = new UIAddCommentObserver(this);
+	removeCommentObserver = new UIRemoveCommentObserver(this);
+
+	addSubTaskObserver = new UIAddSubTaskObserver(this);
+	removeSubTaskObserver = new UIRemoveSubTaskObserver(this);
+	modifySubTaskObserver = new UIModifySubTaskObserver(this);
+	setSubTaskCompletionObserver = new UISetSubTaskCompletionObserver(this);
 
 	RefreshUI();
 }
@@ -177,6 +179,16 @@ void TaskManagerMainWindow::on_actionModifyTask_triggered()
 
 	modifyTaskObserver->update(taskListItem, listWidget);
 	RefreshUI();
+}
+
+Ui_TaskManagerMainWindowClass * TaskManagerMainWindow::GetUI()
+{
+	return &ui;
+}
+
+ToDoListManager * TaskManagerMainWindow::GetTdManager()
+{
+	return &tdManager;
 }
 
 void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QListWidget * listWidget, QListWidgetItem * taskListItem)

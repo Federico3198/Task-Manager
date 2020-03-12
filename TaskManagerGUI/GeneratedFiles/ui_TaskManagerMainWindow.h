@@ -212,6 +212,7 @@ public:
         menuTask_Info->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Task Info", nullptr));
         menuComment->setTitle(QCoreApplication::translate("TaskManagerMainWindowClass", "Commento", nullptr));
     } // retranslateUi
+
 };
 
 namespace Ui {

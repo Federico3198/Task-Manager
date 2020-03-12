@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIAddCommentObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIAddCommentObserver::UIAddCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UIObserver(ui,tdManager)
+UIAddCommentObserver::UIAddCommentObserver(TaskManagerMainWindow *mainWindow) : UIObserverListItem(mainWindow)
 {
 }
 
@@ -31,7 +32,7 @@ void UIAddCommentObserver::update(QListWidgetItem * currentItem)
 
 			ui->listWidgetComments->addItem(new CommentWidgetItem(sharedComment));
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UICreateListObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UICreateListObserver::UICreateListObserver(Ui_TaskManagerMainWindowClass* ui, ToDoListManager *tdManager): UIObserver(ui,tdManager)
+UICreateListObserver::UICreateListObserver(TaskManagerMainWindow *mainWindow): UIObserver(mainWindow)
 {
 }
 
@@ -22,6 +23,6 @@ void UICreateListObserver::update()
 
 		ui->listWidgetLists->addItem(listItem);
 
-		tdManager->SaveToJson(filePath);
+		tdManager->SaveToJson(mainWindow->filePath);
 	}
 }

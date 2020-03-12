@@ -1,14 +1,15 @@
 #pragma once
 #include "UIObserver.h"
 #include "ToDoListWidgetItem.h"
+#include "UIObserverListItem.h"
 
 class UIRemoveListObserver :
-	public UIObserver
+	public UIObserverListItem
 {
 public:
 
-	void update(QListWidgetItem *currentItem);
+	void update(QListWidgetItem *currentItem) override;
 
-	UIRemoveListObserver(Ui_TaskManagerMainWindowClass *ui, ToDoListManager *tdManager);
+	UIRemoveListObserver(TaskManagerMainWindow *mainWindow);
 	~UIRemoveListObserver();
 };

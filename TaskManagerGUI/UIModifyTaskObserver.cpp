@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "UIModifyTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIModifyTaskObserver::UIModifyTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UITaskObserver(ui, tdManager)
+UIModifyTaskObserver::UIModifyTaskObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
 {
-	subTaskObserver = new UISubTaskObserver(ui, tdManager);
 }
 
 UIModifyTaskObserver::~UIModifyTaskObserver()
 {
-	delete subTaskObserver;
 }
 
 void UIModifyTaskObserver::update(QListWidgetItem * currentItem, QListWidget *currentList)
@@ -43,10 +42,10 @@ void UIModifyTaskObserver::update(QListWidgetItem * currentItem, QListWidget *cu
 			task->dueDate = DateTime(createTaskDialog.GetDueDate()->dateTime().toTime_t());
 
 			currentItem->setText(taskName);
-			subTaskObserver->ShowTaskInfo(currentItem);
-			RefreshImportantList(task, currentList, currentItem);
+			mainWindow->ShowTaskInfo(currentItem);
+			mainWindow->RefreshImportantList(task, currentList, currentItem);
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

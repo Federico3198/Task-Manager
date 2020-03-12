@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIRemoveSubTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIRemoveSubTaskObserver::UIRemoveSubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UISubTaskObserver(ui,tdManager)
+UIRemoveSubTaskObserver::UIRemoveSubTaskObserver(TaskManagerMainWindow *mainWindow) : UISubTaskObserver(mainWindow)
 {
 }
 
@@ -21,7 +22,7 @@ void UIRemoveSubTaskObserver::update(QListWidgetItem * currentTaskItem, QListWid
 
 		task->RemoveSubTask(subTask);
 
-		ShowTaskInfo(currentTaskItem);
-		tdManager->SaveToJson(filePath);
+		mainWindow->ShowTaskInfo(currentTaskItem);
+		tdManager->SaveToJson(mainWindow->filePath);
 	}
 }

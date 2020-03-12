@@ -2,14 +2,15 @@
 #include "UIObserver.h"
 #include "ToDoListWidgetItem.h"
 #include "CreateListDialog.h"
+#include "UIObserverListItem.h"
 
 class UIModifyListObserver :
-	public UIObserver
+	public UIObserverListItem
 {
 public:
-	UIModifyListObserver(Ui_TaskManagerMainWindowClass *ui, ToDoListManager *tdManager);
+	UIModifyListObserver(TaskManagerMainWindow *mainWindow);
 
-	void update(QListWidgetItem * currentItem);
+	void update(QListWidgetItem * currentItem) override;
 
 	~UIModifyListObserver();
 };

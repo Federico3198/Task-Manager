@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIAddSubTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIAddSubTaskObserver::UIAddSubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UISubTaskObserver(ui, tdManager)
+UIAddSubTaskObserver::UIAddSubTaskObserver(TaskManagerMainWindow *mainWindow) : UIObserverListItem(mainWindow)
 {
 }
 
@@ -27,9 +28,9 @@ void UIAddSubTaskObserver::update(QListWidgetItem * currentItem)
 			SubTask* subTask;
 			subTask = new SubTask(text);
 			task->AddSubTask(std::shared_ptr<SubTask>(subTask));
-			ShowTaskInfo(currentItem);
+			mainWindow->ShowTaskInfo(currentItem);
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

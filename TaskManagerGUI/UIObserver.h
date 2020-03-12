@@ -2,14 +2,15 @@
 #include "ui_TaskManagerMainWindow.h"
 #include "ToDoListManager.h"
 
+class TaskManagerMainWindow;
+
 class UIObserver
 {
 public:
-	UIObserver(Ui_TaskManagerMainWindowClass* ui, ToDoListManager *tdManager);
+	UIObserver(TaskManagerMainWindow *mainWindow);
 
 protected:
 	Ui_TaskManagerMainWindowClass* ui;
 	ToDoListManager *tdManager;
-	const std::string filePath = "taskData.json";
-	const char* important = "Importanti";
+	TaskManagerMainWindow *mainWindow;
 };

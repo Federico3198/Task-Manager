@@ -3,13 +3,14 @@
 #include "TaskWidgetItem.h"
 #include "AddCommentDialog.h"
 #include "CommentWidgetItem.h"
+#include "UIObserverListItem.h"
 
 class UIAddCommentObserver :
-	public UIObserver
+	public UIObserverListItem
 {
 public:
-	UIAddCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIAddCommentObserver(TaskManagerMainWindow *mainWindow);
 	~UIAddCommentObserver();
 
-	void update(QListWidgetItem * currentItem);
+	void update(QListWidgetItem * currentItem) override;
 };

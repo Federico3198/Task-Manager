@@ -1,13 +1,14 @@
 #pragma once
 #include "UISubTaskObserver.h"
 #include "CreateSubTaskDialog.h"
+#include "UIObserverListItem.h"
 
 class UIAddSubTaskObserver :
-	public UISubTaskObserver
+	public UIObserverListItem
 {
 public:
-	UIAddSubTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIAddSubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIAddSubTaskObserver();
 
-	void update(QListWidgetItem *currentItem);
+	void update(QListWidgetItem *currentItem) override;
 };

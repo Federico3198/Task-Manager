@@ -2,13 +2,14 @@
 #include "UIObserver.h"
 #include "TaskWidgetItem.h"
 #include "CommentWidgetItem.h"
+#include "UIObserverListItem.h"
 
 class UIRemoveCommentObserver :
-	public UIObserver
+	public UIObserverListItem
 {
 public:
-	UIRemoveCommentObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIRemoveCommentObserver(TaskManagerMainWindow *mainWindow);
 	~UIRemoveCommentObserver();
 
-	void update(QListWidgetItem *currentItem);
+	void update(QListWidgetItem *currentItem) override;
 };

@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "UISetTaskCompletionObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UISetTaskCompletionObserver::UISetTaskCompletionObserver(Ui_TaskManagerMainWindowClass *ui, ToDoListManager *tdManager) : UITaskObserver(ui, tdManager)
+UISetTaskCompletionObserver::UISetTaskCompletionObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
 {
-	subTaskObserver = new UISubTaskObserver(ui, tdManager);
 }
 
 UISetTaskCompletionObserver::~UISetTaskCompletionObserver()
 {
-	delete subTaskObserver;
 }
 
 void UISetTaskCompletionObserver::update(bool isCompleted)
@@ -32,16 +31,16 @@ void UISetTaskCompletionObserver::update(bool isCompleted)
 			listTo->setCurrentItem(taskListItem);
 
 			auto importantItem = ui->listWidgetLists->item(ui->listWidgetLists->currentRow());
-			if (importantItem != NULL && importantItem->text().contains(important))
+			if (importantItem != NULL && importantItem->text().contains(mainWindow->important))
 			{
 				listFrom->clear();
 				ui->listWidgetTaskInfo->clear();
 			}
 
-			subTaskObserver->ShowTaskInfo(taskListItem);
-			RefreshImportantList(task, listTo, taskListItem);
+			mainWindow->ShowTaskInfo(taskListItem);
+			mainWindow->RefreshImportantList(task, listTo, taskListItem);
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

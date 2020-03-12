@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UISetSubTaskCompletionObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UISetSubTaskCompletionObserver::UISetSubTaskCompletionObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UISubTaskObserver(ui, tdManager)
+UISetSubTaskCompletionObserver::UISetSubTaskCompletionObserver(TaskManagerMainWindow *mainWindow) : UISubTaskObserver(mainWindow)
 {
 }
 
@@ -18,8 +19,8 @@ void UISetSubTaskCompletionObserver::update(QListWidgetItem *currentTaskItem, QL
 
 		subTask->SetIsCompleted(isCompleted);
 
-		ShowTaskInfo(currentTaskItem);
+		mainWindow->ShowTaskInfo(currentTaskItem);
 	}
 
-	tdManager->SaveToJson(filePath);
+	tdManager->SaveToJson(mainWindow->filePath);
 }

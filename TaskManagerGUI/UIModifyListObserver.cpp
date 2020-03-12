@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIModifyListObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIModifyListObserver::UIModifyListObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UIObserver(ui,tdManager)
+UIModifyListObserver::UIModifyListObserver(TaskManagerMainWindow *mainWindow) : UIObserverListItem(mainWindow)
 {
 }
 
@@ -9,7 +10,7 @@ void UIModifyListObserver::update(QListWidgetItem * currentItem)
 {
 	auto todoListItem = static_cast<ToDoListWidgetItem*>(currentItem);
 
-	if (todoListItem->text().compare(important) != 0)
+	if (todoListItem->text().compare(mainWindow->important) != 0)
 	{
 		CreateListDialog createListDialog;
 		createListDialog.setModal(true);
@@ -29,7 +30,7 @@ void UIModifyListObserver::update(QListWidgetItem * currentItem)
 			todoList->listName = listName.toStdString();
 
 			todoListItem->setText(QString(todoList->listName.c_str()));
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }

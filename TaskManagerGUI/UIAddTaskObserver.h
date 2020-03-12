@@ -2,13 +2,14 @@
 #include "UITaskObserver.h"
 #include "TaskWidgetItem.h"
 #include "createtaskdialog.h"
+#include "UIObserverListItem.h"
 
 class UIAddTaskObserver :
-	public UITaskObserver
+	public UIObserverListItem
 {
 public:
-	UIAddTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager);
+	UIAddTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIAddTaskObserver();
 
-	void update(QListWidgetItem *currentItem);
+	void update(QListWidgetItem *currentItem) override;
 };

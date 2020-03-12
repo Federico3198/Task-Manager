@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "UIAddTaskObserver.h"
+#include "TaskManagerMainWindow.h"
 
-UIAddTaskObserver::UIAddTaskObserver(Ui_TaskManagerMainWindowClass * ui, ToDoListManager * tdManager) : UITaskObserver(ui,tdManager)
+UIAddTaskObserver::UIAddTaskObserver(TaskManagerMainWindow *mainWindow) : UIObserverListItem(mainWindow)
 {
 }
 
@@ -11,7 +12,7 @@ UIAddTaskObserver::~UIAddTaskObserver()
 
 void UIAddTaskObserver::update(QListWidgetItem * currentItem)
 {
-	if (currentItem != NULL && ui->listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(important) != 0)
+	if (currentItem != NULL && ui->listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(mainWindow->important) != 0)
 	{
 		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 		int listId = listItem->GetListId();
@@ -39,9 +40,9 @@ void UIAddTaskObserver::update(QListWidgetItem * currentItem)
 			auto listItem = new TaskWidgetItem(sharedTask);
 			ui->listWidgetUncompletedTasks->addItem(listItem);
 
-			RefreshImportantList(sharedTask, ui->listWidgetUncompletedTasks, listItem);
+			mainWindow->RefreshImportantList(sharedTask, ui->listWidgetUncompletedTasks, listItem);
 
-			tdManager->SaveToJson(filePath);
+			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
 }
