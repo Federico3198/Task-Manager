@@ -2,7 +2,7 @@
 #include "UIRemoveTaskObserver.h"
 #include "TaskManagerMainWindow.h"
 
-UIRemoveTaskObserver::UIRemoveTaskObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
+UIRemoveTaskObserver::UIRemoveTaskObserver(TaskManagerMainWindow *mainWindow) : UIObserverEmpty(mainWindow)
 {
 }
 
@@ -10,8 +10,11 @@ UIRemoveTaskObserver::~UIRemoveTaskObserver()
 {
 }
 
-void UIRemoveTaskObserver::update(QListWidget * currentTaskList, QListWidgetItem *currentListItem)
+void UIRemoveTaskObserver::update()
 {
+	auto currentListItem = ui->listWidgetLists->item(ui->listWidgetLists->currentRow());
+	auto currentTaskList = mainWindow->GetSelectedTaskList();
+
 	if (currentListItem != NULL && typeid(*currentListItem) == typeid(ToDoListWidgetItem))
 	{
 		auto todoListItem = static_cast<ToDoListWidgetItem*>(currentListItem);

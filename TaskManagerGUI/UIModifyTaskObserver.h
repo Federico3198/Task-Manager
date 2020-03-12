@@ -1,14 +1,14 @@
 #pragma once
-#include "UITaskObserver.h"
+#include "UIObserverEmpty.h"
 #include "createtaskdialog.h"
 #include "UISubTaskObserver.h"
 
 class UIModifyTaskObserver :
-	public UITaskObserver
+	public UIObserverEmpty
 {
 public:
 	UIModifyTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIModifyTaskObserver();
 
-	void update(QListWidgetItem *currentItem, QListWidget *currentList);
+	void update() override;
 };

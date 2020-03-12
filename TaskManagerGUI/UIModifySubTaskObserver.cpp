@@ -10,8 +10,12 @@ UIModifySubTaskObserver::~UIModifySubTaskObserver()
 {
 }
 
-void UIModifySubTaskObserver::update(QListWidgetItem * currentTaskItem, QListWidgetItem * currentSubTaskItem)
+void UIModifySubTaskObserver::update()
 {
+	auto currentSubTaskItem = ui->listWidgetTaskInfo->item(ui->listWidgetTaskInfo->currentRow());
+	auto listWidget = mainWindow->GetSelectedTaskList();
+	auto currentTaskItem = listWidget->item(listWidget->currentRow());
+
 	if (currentTaskItem != NULL && currentSubTaskItem != NULL && typeid(*currentSubTaskItem) == typeid(SubTaskWidgetItem))
 	{
 		auto subTaskItem = static_cast<SubTaskWidgetItem *>(currentSubTaskItem);

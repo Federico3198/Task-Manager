@@ -2,7 +2,7 @@
 #include "UICreateListObserver.h"
 #include "TaskManagerMainWindow.h"
 
-UICreateListObserver::UICreateListObserver(TaskManagerMainWindow *mainWindow): UIObserver(mainWindow)
+UICreateListObserver::UICreateListObserver(TaskManagerMainWindow *mainWindow): UIObserverEmpty(mainWindow)
 {
 }
 

@@ -1,12 +1,12 @@
 #pragma once
-#include "UITaskObserver.h"
+#include "UIObserverEmpty.h"
 
 class UIRemoveTaskObserver :
-	public UITaskObserver
+	public UIObserverEmpty
 {
 public:
 	UIRemoveTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIRemoveTaskObserver();
 
-	void update(QListWidget * currentTaskList, QListWidgetItem *currentListItem);
+	void update() override;
 };

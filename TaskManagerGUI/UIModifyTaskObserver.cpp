@@ -2,7 +2,7 @@
 #include "UIModifyTaskObserver.h"
 #include "TaskManagerMainWindow.h"
 
-UIModifyTaskObserver::UIModifyTaskObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
+UIModifyTaskObserver::UIModifyTaskObserver(TaskManagerMainWindow *mainWindow) : UIObserverEmpty(mainWindow)
 {
 }
 
@@ -10,8 +10,10 @@ UIModifyTaskObserver::~UIModifyTaskObserver()
 {
 }
 
-void UIModifyTaskObserver::update(QListWidgetItem * currentItem, QListWidget *currentList)
+void UIModifyTaskObserver::update()
 {
+	auto currentList = mainWindow->GetSelectedTaskList();
+	auto currentItem = currentList->item(currentList->currentRow());
 	if (currentItem != NULL && typeid(*currentItem) == typeid(TaskWidgetItem))
 	{
 		CreateTaskDialog createTaskDialog;

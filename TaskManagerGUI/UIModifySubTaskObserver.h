@@ -9,5 +9,5 @@ public:
 	UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIModifySubTaskObserver();
 
-	void update(QListWidgetItem *currentTaskItem, QListWidgetItem  *currentSubTaskItem);
+	void update();
 };

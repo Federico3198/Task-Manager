@@ -96,10 +96,7 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 {
-	auto listWidgetItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
-	auto listWidget = GetSelectedTaskList();
-
-	removeTaskObserver->update(listWidget, listWidgetItem);
+	removeTaskObserver->update();
 	RefreshUI();
 }
 
@@ -142,10 +139,7 @@ void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
 
 void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 {
-	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-	removeSubTaskObserver->update(taskListItem, subTaskListItem);
+	removeSubTaskObserver->update();
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Completed_triggered()
@@ -174,10 +168,8 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 
 void TaskManagerMainWindow::on_actionModifyTask_triggered()
 {
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
 
-	modifyTaskObserver->update(taskListItem, listWidget);
+	modifyTaskObserver->update();
 	RefreshUI();
 }
 
@@ -214,11 +206,7 @@ void TaskManagerMainWindow::RefreshImportantList(std::shared_ptr<Task> &task, QL
 
 void TaskManagerMainWindow::on_actionModify_Sub_Task_triggered()
 {
-	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	modifySubTaskObserver->update(taskListItem, subTaskListItem);
+	modifySubTaskObserver->update();
 }
 
 void TaskManagerMainWindow::on_actionAdd_Comment_triggered()
