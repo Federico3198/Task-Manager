@@ -45,4 +45,6 @@ void UIAddTaskObserver::update(QListWidgetItem * currentItem)
 			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
+
+	mainWindow->RefreshUI();
 }

@@ -9,10 +9,9 @@ TaskManagerMainWindow::TaskManagerMainWindow(QWidget *parent)
 	tdManager.LoadFromJson(filePath);
 
 
-	auto window = this;
-	createListObserver = new UICreateListObserver(window);
-	removeListObserver = new UIRemoveListObserver(window);
-	modifyListObserver = new UIModifyListObserver(window);
+	createListObserver = new UICreateListObserver(this);
+	removeListObserver = new UIRemoveListObserver(this);
+	modifyListObserver = new UIModifyListObserver(this);
 
 	addTaskObserver = new UIAddTaskObserver(this);
 	removeTaskObserver = new UIRemoveTaskObserver(this);
@@ -39,7 +38,6 @@ void TaskManagerMainWindow::on_actionDeleteList_triggered()
 {
 	auto currentItem = ui.listWidgetLists->item(ui.listWidgetLists->currentRow());
 	removeListObserver->update(currentItem);
-	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_listWidgetLists_itemClicked(QListWidgetItem *item)
@@ -91,13 +89,11 @@ void TaskManagerMainWindow::on_actionAddTask_triggered()
 {
 	auto currentItem = ui.listWidgetLists->currentItem();
 	addTaskObserver->update(currentItem);
-	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionRemoveTask_triggered()
 {
 	removeTaskObserver->update();
-	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_listWidgetUncompletedTasks_itemClicked(QListWidgetItem * listWidgetItem)
@@ -121,13 +117,11 @@ void TaskManagerMainWindow::on_listWidgetCompletedTasks_itemClicked(QListWidgetI
 void TaskManagerMainWindow::on_actionSet_CompletedTask_triggered()
 {
 	setTaskCompletionObserver->update(true);
-	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionSet_UncompletedTask_triggered()
 {
 	setTaskCompletionObserver->update(false);
-	RefreshUI();
 }
 
 void TaskManagerMainWindow::on_actionAdd_Sub_Task_triggered()
@@ -144,20 +138,12 @@ void TaskManagerMainWindow::on_actionRemove_Sub_Task_triggered()
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Completed_triggered()
 {
-	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	setSubTaskCompletionObserver->update(taskListItem, subTaskListItem, true);
+	setSubTaskCompletionObserver->update(true);
 }
 
 void TaskManagerMainWindow::on_actionSet_Sub_Task_Uncompleted_triggered()
 {
-	auto subTaskListItem = ui.listWidgetTaskInfo->item(ui.listWidgetTaskInfo->currentRow());
-	auto listWidget = GetSelectedTaskList();
-	auto taskListItem = listWidget->item(listWidget->currentRow());
-
-	setSubTaskCompletionObserver->update(taskListItem, subTaskListItem, false);
+	setSubTaskCompletionObserver->update(false);
 }
 
 void TaskManagerMainWindow::on_actionModifyList_triggered()
@@ -168,9 +154,7 @@ void TaskManagerMainWindow::on_actionModifyList_triggered()
 
 void TaskManagerMainWindow::on_actionModifyTask_triggered()
 {
-
 	modifyTaskObserver->update();
-	RefreshUI();
 }
 
 Ui_TaskManagerMainWindowClass * TaskManagerMainWindow::GetUI()

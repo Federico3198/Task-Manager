@@ -2,7 +2,7 @@
 #include "UISetTaskCompletionObserver.h"
 #include "TaskManagerMainWindow.h"
 
-UISetTaskCompletionObserver::UISetTaskCompletionObserver(TaskManagerMainWindow *mainWindow) : UITaskObserver(mainWindow)
+UISetTaskCompletionObserver::UISetTaskCompletionObserver(TaskManagerMainWindow *mainWindow) : UIObserverBool(mainWindow)
 {
 }
 
@@ -43,4 +43,6 @@ void UISetTaskCompletionObserver::update(bool isCompleted)
 			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
+
+	mainWindow->RefreshUI();
 }

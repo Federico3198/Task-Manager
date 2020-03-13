@@ -1,13 +1,13 @@
 #pragma once
-#include "UISubTaskObserver.h"
+#include "UIObserverEmpty.h"
 #include "CreateSubTaskDialog.h"
 
 class UIModifySubTaskObserver :
-	public UISubTaskObserver
+	public UIObserverEmpty
 {
 public:
 	UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow);
 	~UIModifySubTaskObserver();
 
-	void update();
+	void update() override;
 };

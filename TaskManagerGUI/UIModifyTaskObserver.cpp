@@ -50,4 +50,6 @@ void UIModifyTaskObserver::update()
 			tdManager->SaveToJson(mainWindow->filePath);
 		}
 	}
+
+	mainWindow->RefreshUI();
 }

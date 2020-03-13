@@ -1,14 +1,12 @@
 #pragma once
-#include "UITaskObserver.h"
-#include "UISubTaskObserver.h"
+#include "UIObserverBool.h"
 
 class UISetTaskCompletionObserver :
-	public UITaskObserver
+	public UIObserverBool
 {
 public:
-	UISubTaskObserver *subTaskObserver;
 	UISetTaskCompletionObserver(TaskManagerMainWindow *mainWindow);
 	~UISetTaskCompletionObserver();
 
-	void update(bool isCompleted);
+	void update(bool isCompleted) override;
 };

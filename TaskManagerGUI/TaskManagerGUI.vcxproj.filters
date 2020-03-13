@@ -125,9 +125,6 @@
     <ClCompile Include="UIAddTaskObserver.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="UITaskObserver.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="UIRemoveTaskObserver.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -141,9 +138,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="UIRemoveCommentObserver.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UISubTaskObserver.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="UIModifySubTaskObserver.cpp">
@@ -162,6 +156,9 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="UIObserverEmpty.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIObserverBool.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -288,9 +285,6 @@
     <ClInclude Include="UIAddTaskObserver.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="UITaskObserver.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="UIRemoveTaskObserver.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
@@ -304,9 +298,6 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="UIRemoveCommentObserver.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UISubTaskObserver.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="UIModifySubTaskObserver.h">
@@ -325,6 +316,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="UIObserverEmpty.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIObserverBool.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

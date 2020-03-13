@@ -1,12 +1,12 @@
 #pragma once
-#include "UISubTaskObserver.h"
+#include "UIObserverBool.h"
 
 class UISetSubTaskCompletionObserver :
-	public UISubTaskObserver
+	public UIObserverBool
 {
 public:
 	UISetSubTaskCompletionObserver(TaskManagerMainWindow *mainWindow);
 	~UISetSubTaskCompletionObserver();
 
-	void update(QListWidgetItem *currentTaskItem, QListWidgetItem *currentSubTaskItem, bool isCompleted);
+	void update(bool isCompleted) override;
 };

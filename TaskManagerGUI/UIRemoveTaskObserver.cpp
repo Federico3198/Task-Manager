@@ -41,4 +41,6 @@ void UIRemoveTaskObserver::update()
 			}
 		}
 	}
+
+	mainWindow->RefreshUI();
 }

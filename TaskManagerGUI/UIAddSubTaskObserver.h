@@ -1,5 +1,4 @@
 #pragma once
-#include "UISubTaskObserver.h"
 #include "CreateSubTaskDialog.h"
 #include "UIObserverListItem.h"
 

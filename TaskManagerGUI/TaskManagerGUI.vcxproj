@@ -236,6 +236,7 @@
     <ClCompile Include="UIModifySubTaskObserver.cpp" />
     <ClCompile Include="UIModifyTaskObserver.cpp" />
     <ClCompile Include="UIObserver.cpp" />
+    <ClCompile Include="UIObserverBool.cpp" />
     <ClCompile Include="UIObserverEmpty.cpp" />
     <ClCompile Include="UIObserverListItem.cpp" />
     <ClCompile Include="UIRemoveCommentObserver.cpp" />
@@ -244,8 +245,6 @@
     <ClCompile Include="UIRemoveTaskObserver.cpp" />
     <ClCompile Include="UISetSubTaskCompletionObserver.cpp" />
     <ClCompile Include="UISetTaskCompletionObserver.cpp" />
-    <ClCompile Include="UISubTaskObserver.cpp" />
-    <ClCompile Include="UITaskObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="TaskManagerMainWindow.h">
@@ -343,6 +342,7 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
     <ClInclude Include="UIModifySubTaskObserver.h" />
     <ClInclude Include="UIModifyTaskObserver.h" />
     <ClInclude Include="UIObserver.h" />
+    <ClInclude Include="UIObserverBool.h" />
     <ClInclude Include="UIObserverEmpty.h" />
     <ClInclude Include="UIObserverListItem.h" />
     <ClInclude Include="UIRemoveCommentObserver.h" />
@@ -351,8 +351,6 @@ echo #include "stdafx.h"&gt;&gt;stdafx.h.cpp</Command>
     <ClInclude Include="UIRemoveTaskObserver.h" />
     <ClInclude Include="UISetSubTaskCompletionObserver.h" />
     <ClInclude Include="UISetTaskCompletionObserver.h" />
-    <ClInclude Include="UISubTaskObserver.h" />
-    <ClInclude Include="UITaskObserver.h" />
     <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_addcommentdialog.h" />
     <ClInclude Include="..\build-TaskManagerGUI-Desktop_Qt_5_13_0_MSVC2017_32bit-Debug\GeneratedFiles\ui_createtaskdialog.h" />
     <QtMoc Include="CreateSubTaskDialog.h">

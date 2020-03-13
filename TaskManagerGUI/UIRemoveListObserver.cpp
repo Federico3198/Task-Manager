@@ -23,6 +23,7 @@ void UIRemoveListObserver::update(QListWidgetItem * currentItem)
 		tdManager->SaveToJson(mainWindow->filePath);
 	}
 
+	mainWindow->RefreshUI();
 }
 
 

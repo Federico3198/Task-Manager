@@ -2,7 +2,7 @@
 #include "UIModifySubTaskObserver.h"
 #include "TaskManagerMainWindow.h"
 
-UIModifySubTaskObserver::UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow): UISubTaskObserver(mainWindow)
+UIModifySubTaskObserver::UIModifySubTaskObserver(TaskManagerMainWindow *mainWindow): UIObserverEmpty(mainWindow)
 {
 }
 

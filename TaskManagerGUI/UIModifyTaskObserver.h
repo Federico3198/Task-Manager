@@ -1,7 +1,6 @@
 #pragma once
 #include "UIObserverEmpty.h"
 #include "createtaskdialog.h"
-#include "UISubTaskObserver.h"
 
 class UIModifyTaskObserver :
 	public UIObserverEmpty
