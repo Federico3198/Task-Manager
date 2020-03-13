@@ -12,7 +12,7 @@ UIAddTaskObserver::~UIAddTaskObserver()
 
 void UIAddTaskObserver::update(QListWidgetItem * currentItem)
 {
-	if (currentItem != NULL && ui->listWidgetLists->isItemSelected(currentItem) && currentItem->text().compare(mainWindow->important) != 0)
+	if (currentItem != NULL && ui->listWidgetLists->isItemSelected(currentItem) && !currentItem->text().contains(mainWindow->important))
 	{
 		auto listItem = static_cast<ToDoListWidgetItem*>(currentItem);
 		int listId = listItem->GetListId();
