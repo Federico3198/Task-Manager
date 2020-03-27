@@ -26,7 +26,7 @@ void UIRemoveTaskObserver::update()
 
 			auto taskListItem = currentTaskList->takeItem(currentTaskList->currentRow());
 
-			if (taskListItem != NULL)
+			if (taskListItem != NULL && typeid(*taskListItem) == typeid(TaskWidgetItem))
 			{
 				auto taskItem = static_cast<TaskWidgetItem*>(taskListItem);
 				auto task = taskItem->GetTask();

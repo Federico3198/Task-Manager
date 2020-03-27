@@ -19,10 +19,10 @@ void UIRemoveListObserver::update(QListWidgetItem * currentItem)
 			ui->listWidgetCompletedTasks->clear();
 			ui->listWidgetUncompletedTasks->clear();
 			ui->listWidgetTaskInfo->clear();
+			ui->listWidgetComments->clear();
 		}
 		tdManager->SaveToJson(mainWindow->filePath);
 	}
-
 	mainWindow->RefreshUI();
 }
 
